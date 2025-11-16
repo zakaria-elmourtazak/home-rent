@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/MyMvcAuthProject.props" />
+</Project>

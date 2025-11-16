@@ -1,0 +1,355 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+    <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+        <!-- Sidebar -->
+          <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Dashboard" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="AdminListings" class="flex items-center p-3 bg-primary text-white rounded-lg">
+                            <i class="fas fa-home mr-3"></i>
+                            <span>My Listings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Saved" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-heart mr-3"></i>
+                            <span>Saved Properties</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Messages" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Profile" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-cog mr-3"></i>
+                            <span>Profile Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-sign-out-alt mr-3"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div>
+                        <h1 class="text-2xl font-bold mb-2">My Property Listings</h1>
+                        <p class="text-gray-600">Manage your property listings</p>
+                    </div>
+                    <button id="add-property-btn" class="mt-4 md:mt-0 bg-accent hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition flex items-center">
+                        <i class="fas fa-plus mr-2"></i> Add New Property
+                    </button>
+                </div>
+
+                <!-- Properties Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Property</th>
+                                <th class="py-3 px-6 text-left">Type</th>
+                                <th class="py-3 px-6 text-left">Price</th>
+                                <th class="py-3 px-6 text-left">Status</th>
+                                <th class="py-3 px-6 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="mr-4">
+                                            <img class="w-16 h-16 rounded-lg object-cover" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Property">
+                                        </div>
+                                        <div class="font-medium">Modern Apartment Downtown</div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Apartment</span>
+                                </td>
+                                <td class="py-3 px-6 text-left">$1,200/mo</td>
+                                <td class="py-3 px-6 text-left">
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <div class="flex item-center justify-center">
+                                        <button class="edit-btn w-4 mr-4 transform hover:text-primary hover:scale-110">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="delete-btn w-4 mr-4 transform hover:text-red-500 hover:scale-110">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button class="view-btn w-4 transform hover:text-blue-500 hover:scale-110">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="mr-4">
+                                            <img class="w-16 h-16 rounded-lg object-cover" src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Property">
+                                        </div>
+                                        <div class="font-medium">Suburban Family Home</div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    <span class="bg-accent text-white text-xs px-2 py-1 rounded-full">House</span>
+                                </td>
+                                <td class="py-3 px-6 text-left">$2,100/mo</td>
+                                <td class="py-3 px-6 text-left">
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <div class="flex item-center justify-center">
+                                        <button class="edit-btn w-4 mr-4 transform hover:text-primary hover:scale-110">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="delete-btn w-4 mr-4 transform hover:text-red-500 hover:scale-110">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button class="view-btn w-4 transform hover:text-blue-500 hover:scale-110">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="mr-4">
+                                            <img class="w-16 h-16 rounded-lg object-cover" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Property">
+                                        </div>
+                                        <div class="font-medium">Cozy Studio Apartment</div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Studio</span>
+                                </td>
+                                <td class="py-3 px-6 text-left">$850/mo</td>
+                                <td class="py-3 px-6 text-left">
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Pending</span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <div class="flex item-center justify-center">
+                                        <button class="edit-btn w-4 mr-4 transform hover:text-primary hover:scale-110">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="delete-btn w-4 mr-4 transform hover:text-red-500 hover:scale-110">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button class="view-btn w-4 transform hover:text-blue-500 hover:scale-110">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add/Edit Property Form (Hidden by default) -->
+            <div id="property-form-container" class="bg-white rounded-lg shadow-md p-6 hidden">
+                <h2 id="form-title" class="text-2xl font-bold mb-6">Add New Property</h2>
+                
+                <form id="property-form" class="space-y-8">
+                    <input type="hidden" id="property-id">
+                    <!-- Property Information -->
+                    <div>
+                        <h2 class="text-xl font-bold mb-4">Property Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 font-medium mb-2">Property Title</label>
+                                <input type="text" id="property-title" placeholder="e.g. Modern Apartment Downtown" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 font-medium mb-2">Description</label>
+                                <textarea id="property-description" placeholder="Describe your property in detail..." class="w-full p-3 border rounded-lg h-32" required></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Property Type</label>
+                                <select id="property-type" class="w-full p-3 border rounded-lg" required>
+                                    <option value="">Select Property Type</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="House">House</option>
+                                    <option value="Condo">Condo</option>
+                                    <option value="Studio">Studio</option>
+                                    <option value="Townhouse">Townhouse</option>
+                                    <option value="Loft">Loft</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Price per Month ($)</label>
+                                <input type="number" id="property-price" placeholder="e.g. 1200" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Bedrooms</label>
+                                <select id="property-bedrooms" class="w-full p-3 border rounded-lg" required>
+                                    <option value="">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5+">5+</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Bathrooms</label>
+                                <select id="property-bathrooms" class="w-full p-3 border rounded-lg" required>
+                                    <option value="">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="2">2</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="3">3</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="4+">4+</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Square Feet</label>
+                                <input type="number" id="property-sqft" placeholder="e.g. 900" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Available Date</label>
+                                <input type="date" id="property-date" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Address -->
+                    <div>
+                        <h2 class="text-xl font-bold mb-4">Address</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label class="block text-gray-700 font-medium mb-2">Street Address</label>
+                                <input type="text" id="property-street" placeholder="e.g. 123 Main Street" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">City</label>
+                                <input type="text" id="property-city" placeholder="e.g. New York" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">State</label>
+                                <select id="property-state" class="w-full p-3 border rounded-lg" required>
+                                    <option value="">Select State</option>
+                                    <option value="NY">NY</option>
+                                    <option value="CA">CA</option>
+                                    <option value="TX">TX</option>
+                                    <option value="FL">FL</option>
+                                    <option value="IL">IL</option>
+                                    <option value="WA">WA</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">ZIP Code</label>
+                                <input type="text" id="property-zip" placeholder="e.g. 10001" class="w-full p-3 border rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Country</label>
+                                <input type="text" id="property-country" value="United States" class="w-full p-3 border rounded-lg bg-gray-100" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Amenities -->
+                    <div>
+                        <h2 class="text-xl font-bold mb-4">Amenities</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="wifi" class="mr-2">
+                                <label for="wifi">WiFi</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="parking" class="mr-2">
+                                <label for="parking">Parking</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="ac" class="mr-2">
+                                <label for="ac">Air Conditioning</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="pet-friendly" class="mr-2">
+                                <label for="pet-friendly">Pet Friendly</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="pool" class="mr-2">
+                                <label for="pool">Pool</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="gym" class="mr-2">
+                                <label for="gym">Gym</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="kitchen" class="mr-2">
+                                <label for="kitchen">Kitchen</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cable" class="mr-2">
+                                <label for="cable">Cable TV</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="laundry" class="mr-2">
+                                <label for="laundry">Laundry</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Images -->
+                    <div>
+                        <h2 class="text-xl font-bold mb-4">Property Images</h2>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600 mb-4">Drag & drop images here or click to browse</p>
+                            <input type="file" id="image-upload" class="hidden" accept="image/*" multiple>
+                            <button type="button" class="bg-primary hover:bg-secondary text-white px-6 py-2 rounded-lg transition" onclick="document.getElementById('image-upload').click()">
+                                Select Images
+                            </button>
+                            <p class="text-gray-500 text-sm mt-2">Maximum file size: 5MB. Supported formats: JPG, PNG, GIF</p>
+                        </div>
+                        
+                        <div id="image-preview" class="image-preview mt-4"></div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="flex justify-end space-x-4 pt-6">
+                        <button type="button" id="cancel-btn" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                            Cancel
+                        </button>
+                        <button type="submit" class="bg-accent hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition font-semibold">
+                            <i class="fas fa-save mr-2"></i> Save Property
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>

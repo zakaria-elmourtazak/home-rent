@@ -1,0 +1,87 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MyMvcAuthProject
+build_property.RootNamespace = MyMvcAuthProject
+build_property.ProjectDir = /home/zik0_/Documents/files/my-projects/MyMvcAuthProject/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/zik0_/Documents/files/my-projects/MyMvcAuthProject
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/about.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9hYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/adminListings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9hZG1pbkxpc3RpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9kYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9pbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/listings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9saXN0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/messages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9tZXNzYWdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9wcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/propertyDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9wcm9wZXJ0eURldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/saved.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9zYXZlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-luk7p5074a

@@ -1,0 +1,248 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+     
+   
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-4 py-4">
+        <nav class="text-sm breadcrumbs">
+            <ul class="flex space-x-2">
+                <li><a href="index.html" class="text-gray-600 hover:text-primary">Home</a></li>
+                <li class="before:content-['/'] before:mx-2 text-gray-400"><a href="listings.html" class="text-gray-600 hover:text-primary">Listings</a></li>
+                <li class="before:content-['/'] before:mx-2 text-gray-900">Modern Apartment Downtown</li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Property Images -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <!-- Main Image -->
+                    <div class="relative">
+                        <img id="main-image" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Modern Apartment" class="w-full h-96 object-cover rounded-lg">
+                    </div>
+                    
+                    <!-- Thumbnails -->
+                    <div class="image-gallery">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Living Room" onclick="changeImage(this.src)">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Kitchen" onclick="changeImage(this.src)">
+                        <img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Bedroom" onclick="changeImage(this.src)">
+                        <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Bathroom" onclick="changeImage(this.src)">
+                    </div>
+                </div>
+                
+                <!-- Property Description -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <h2 class="text-2xl font-bold mb-4">Description</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Beautiful modern apartment located in the heart of downtown with stunning city views. This spacious 2-bedroom, 1-bathroom unit features contemporary finishes throughout, including hardwood floors, granite countertops, and stainless steel appliances. 
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mt-4">
+                        The open-concept living and dining area is perfect for entertaining, while the private balcony offers a peaceful retreat overlooking the city skyline. Building amenities include a fitness center, rooftop terrace, and 24-hour concierge service.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mt-4">
+                        Located just minutes from shopping, dining, and entertainment options, this apartment offers the perfect blend of urban convenience and comfortable living.
+                    </p>
+                </div>
+                
+                <!-- Amenities -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <h2 class="text-2xl font-bold mb-4">Amenities</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-wifi text-primary mr-2"></i>
+                            <span>WiFi</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-car text-primary mr-2"></i>
+                            <span>Parking</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-snowflake text-primary mr-2"></i>
+                            <span>Air Conditioning</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-paw text-primary mr-2"></i>
+                            <span>Pet Friendly</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-swimming-pool text-primary mr-2"></i>
+                            <span>Pool</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-dumbbell text-primary mr-2"></i>
+                            <span>Gym</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-utensils text-primary mr-2"></i>
+                            <span>Kitchen</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-tv text-primary mr-2"></i>
+                            <span>Cable TV</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <h2 class="text-2xl font-bold mb-4">Location</h2>
+                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+                        <p class="text-gray-500">Map Placeholder - New York, NY</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Property Details & Contact -->
+            <div>
+                <!-- Property Info -->
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h1 class="text-2xl font-bold">Modern Apartment Downtown</h1>
+                        <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Apartment</span>
+                    </div>
+                    
+                    <div class="flex items-center text-gray-600 mb-6">
+                        <i class="fas fa-map-marker-alt text-red-500 mr-2"></i>
+                        <span>123 Main Street, New York, NY 10001</span>
+                    </div>
+                    
+                    <div class="text-3xl font-bold text-primary mb-6">$1,200<span class="text-lg text-gray-600">/month</span></div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-bed text-primary mr-2"></i>
+                            <span><strong>2</strong> Bedrooms</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-bath text-primary mr-2"></i>
+                            <span><strong>1</strong> Bathroom</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-ruler-combined text-primary mr-2"></i>
+                            <span><strong>900</strong> sqft</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt text-primary mr-2"></i>
+                            <span>Available Now</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold mb-4">
+                        <i class="fas fa-heart mr-2"></i> Save Property
+                    </button>
+                    
+                    <button class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg transition font-semibold">
+                        Schedule Tour
+                    </button>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <h2 class="text-2xl font-bold mb-4">Contact Landlord</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Name</label>
+                            <input type="text" class="w-full p-3 border rounded-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full p-3 border rounded-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Phone</label>
+                            <input type="tel" class="w-full p-3 border rounded-lg">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Message</label>
+                            <textarea class="w-full p-3 border rounded-lg h-32" required>I'm interested in this property. Please let me know when I can schedule a viewing.</textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Similar Properties -->
+        <div class="mt-16">
+            <h2 class="text-3xl font-bold mb-8">Similar Properties</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Property Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden 
+     transition-all duration-300 ease-out 
+     hover:-translate-y-2 hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Suburban House" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold">$2,100/month</h3>
+                            <span class="bg-accent text-white text-sm px-3 py-1 rounded-full">House</span>
+                        </div>
+                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>Austin, TX</p>
+                        <div class="flex justify-between mt-4 text-gray-700">
+                            <span><i class="fas fa-bed mr-1"></i> 4 Beds</span>
+                            <span><i class="fas fa-bath mr-1"></i> 3 Baths</span>
+                            <span><i class="fas fa-ruler-combined mr-1"></i> 2200 sqft</span>
+                        </div>
+                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Property Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden 
+     transition-all duration-300 ease-out 
+     hover:-translate-y-2 hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cozy Studio" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold">$850/month</h3>
+                            <span class="bg-purple-500 text-white text-sm px-3 py-1 rounded-full">Studio</span>
+                        </div>
+                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>San Francisco, CA</p>
+                        <div class="flex justify-between mt-4 text-gray-700">
+                            <span><i class="fas fa-bed mr-1"></i> 1 Bed</span>
+                            <span><i class="fas fa-bath mr-1"></i> 1 Bath</span>
+                            <span><i class="fas fa-ruler-combined mr-1"></i> 500 sqft</span>
+                        </div>
+                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Property Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden 
+     transition-all duration-300 ease-out 
+     hover:-translate-y-2 hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Condo" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold">$2,800/month</h3>
+                            <span class="bg-green-500 text-white text-sm px-3 py-1 rounded-full">Condo</span>
+                        </div>
+                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>Miami, FL</p>
+                        <div class="flex justify-between mt-4 text-gray-700">
+                            <span><i class="fas fa-bed mr-1"></i> 3 Beds</span>
+                            <span><i class="fas fa-bath mr-1"></i> 2 Baths</span>
+                            <span><i class="fas fa-ruler-combined mr-1"></i> 1500 sqft</span>
+                        </div>
+                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
+            <span class="close absolute top-4 right-8 text-white text-4xl cursor-pointer" onclick="closeModal()">&times;</span>
+            <img id="modal-image" src="" alt="Property Image">
+        </div>
+    </div>
+
+  
