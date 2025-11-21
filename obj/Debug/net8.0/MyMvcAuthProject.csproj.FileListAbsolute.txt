@@ -142,3 +142,5 @@
 /home/zik0_/Documents/files/my-projects/MyMvcAuthProject/obj/Debug/net8.0/MyMvcAuthProject.pdb
 /home/zik0_/Documents/files/my-projects/MyMvcAuthProject/obj/Debug/net8.0/MyMvcAuthProject.genruntimeconfig.cache
 /home/zik0_/Documents/files/my-projects/MyMvcAuthProject/obj/Debug/net8.0/ref/MyMvcAuthProject.dll
+/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/obj/Debug/net8.0/MyMvcAuthProject.sourcelink.json
+/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/bin/Debug/net8.0/Newtonsoft.Json.dll

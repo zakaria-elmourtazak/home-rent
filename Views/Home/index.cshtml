@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@model List<MyMvcAuthProject.Models.Property>
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-blue-500 to-indigo-700 text-white py-16">
         <div class="container mx-auto px-4 text-center">
@@ -51,69 +52,38 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Property Card 1 -->
+                @{
+                    var properties = Model ?? new List<MyMvcAuthProject.Models.Property>();
+                    properties = properties.Take(3).ToList();
+                }
+                @foreach (var p in properties) {
                 <div class="bg-white rounded-lg shadow-md overflow-hidden 
      transition-all duration-300 ease-out 
      hover:-translate-y-2 hover:shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Modern Apartment" class="w-full h-56 object-cover">
+     @if (p.PropertyImages != null && p.PropertyImages.Any())
+    {
+        <img src="@p.PropertyImages.First().ImageUrl" alt="Property Image" class="w-full h-56 object-cover">
+    } else {
+        <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No Image Available" class="w-full h-56 object-cover">
+    }   
                     <div class="p-6">
                         <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold">$1,200/month</h3>
-                            <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Apartment</span>
+                            <h3 class="text-xl font-bold">@p.PricePerMonth.ToString("C")/month</h3>
+                            <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">@p.PropertyType</span>
                         </div>
-                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>New York, NY</p>
+                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>@p.City, @p.State</p>
                         <div class="flex justify-between mt-4 text-gray-700">
-                            <span><i class="fas fa-bed mr-1"></i> 2 Beds</span>
-                            <span><i class="fas fa-bath mr-1"></i> 1 Bath</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 900 sqft</span>
+                            <span><i class="fas fa-bed mr-1"></i> @p.Bedrooms Beds</span>
+                            <span><i class="fas fa-bath mr-1"></i> @p.Bathrooms Baths</span>
+                            <span><i class="fas fa-ruler-combined mr-1"></i> @p.SquareFeet sqft</span>
                         </div>
-                        <p class="mt-4 text-gray-600">Beautiful modern apartment in the heart of downtown with amazing city views.</p>
+                        <p class="mt-4 text-gray-600">@p.Description</p>
                         <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
                     </div>
                 </div>
-                
-                <!-- Property Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden 
-     transition-all duration-300 ease-out 
-     hover:-translate-y-2 hover:shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Suburban House" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold">$2,100/month</h3>
-                            <span class="bg-accent text-white text-sm px-3 py-1 rounded-full">House</span>
-                        </div>
-                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>Austin, TX</p>
-                        <div class="flex justify-between mt-4 text-gray-700">
-                            <span><i class="fas fa-bed mr-1"></i> 4 Beds</span>
-                            <span><i class="fas fa-bath mr-1"></i> 3 Baths</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 2200 sqft</span>
-                        </div>
-                        <p class="mt-4 text-gray-600">Spacious family home in quiet neighborhood with large backyard and garage.</p>
-                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
-                    </div>
-                </div>
-                
-                <!-- Property Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden 
-     transition-all duration-300 ease-out 
-     hover:-translate-y-2 hover:shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cozy Studio" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold">$850/month</h3>
-                            <span class="bg-purple-500 text-white text-sm px-3 py-1 rounded-full">Studio</span>
-                        </div>
-                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>San Francisco, CA</p>
-                        <div class="flex justify-between mt-4 text-gray-700">
-                            <span><i class="fas fa-bed mr-1"></i> 1 Bed</span>
-                            <span><i class="fas fa-bath mr-1"></i> 1 Bath</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 500 sqft</span>
-                        </div>
-                        <p class="mt-4 text-gray-600">Cozy studio apartment near downtown with modern amenities and great access to public transport.</p>
-                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
-                    </div>
-                </div>
+                }
+               
             </div>
-            
             <div class="text-center mt-12">
                 <a href="listings.html" class="inline-block bg-primary hover:bg-secondary text-white px-8 py-3 rounded-lg transition font-semibold">View All Properties</a>
             </div>
@@ -200,8 +170,8 @@
             <h2 class="text-3xl font-bold mb-4">Ready to Find Your New Home?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of satisfied tenants who found their perfect rental through HomeRent</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="listings.html" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition">Browse Properties</a>
-                <a href="add-property.html" class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold transition">Post Your Property</a>
+                <a class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition" asp-area="" asp-controller="Home" asp-action="Listings">Browse Properties</a>
+                <a class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold transition" asp-area="" asp-controller="Home" asp-action="Dashboard">Post Your Property</a>
             </div>
         </div>
     </section>

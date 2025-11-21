@@ -17,6 +17,46 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/1308322 (2).png",
+      "PackagePath": "staticwebassets/images/1308322 (2).png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/1311991.jpeg",
+      "PackagePath": "staticwebassets/images/1311991.jpeg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/1346089 (1).png",
+      "PackagePath": "staticwebassets/images/1346089 (1).png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/88f59dbdc859df9c163af54045e46db58a68ad94_high.webp",
+      "PackagePath": "staticwebassets/images/88f59dbdc859df9c163af54045e46db58a68ad94_high.webp"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Anime - Landscape.jpeg",
+      "PackagePath": "staticwebassets/images/Anime - Landscape.jpeg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Anime-Girl-Night-Sky.jpg",
+      "PackagePath": "staticwebassets/images/Anime-Girl-Night-Sky.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Anime-Japan-Street.png",
+      "PackagePath": "staticwebassets/images/Anime-Japan-Street.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Balcony-ja.png",
+      "PackagePath": "staticwebassets/images/Balcony-ja.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Candle-Photo.png",
+      "PackagePath": "staticwebassets/images/Candle-Photo.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Concept-Japanese house.png",
+      "PackagePath": "staticwebassets/images/Concept-Japanese house.png"
+    },
+    {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

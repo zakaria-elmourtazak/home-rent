@@ -221,6 +221,10 @@ document.head.appendChild(style);
 //                 }
 //             }
 //         }
+ document.getElementById("sortBySelectForm").addEventListener("change", function() {
+            // Submit the form when sort option changes
+            document.getElementById("filter-sort-form").submit();
+        });
      document.getElementById('image-upload').addEventListener('change', function(e) {
             const files = e.target.files;
             const previewContainer = document.getElementById('image-preview');
@@ -259,17 +263,56 @@ document.head.appendChild(style);
         
         // Form submission
         document.getElementById('property-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // e.preventDefault();
             
             // In a real application, you would send the form data to a server here
-            alert('Property submitted successfully! In a real application, this would be sent to our servers.');
             
             // Reset form
-            this.reset();
-            document.getElementById('image-preview').innerHTML = '';
-
-
+            // this.reset();
+            // document.getElementById('image-preview').innerHTML = '';
         });
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        if (!id) return;
+        if (!confirm('Are you sure you want to delete this property?')) return;
+
+        // get antiforgery token from page
+        const tokenEl = document.querySelector('input[name="__RequestVerificationToken"]');
+        const token = tokenEl ? tokenEl.value : '';
+
+        try {
+            const formData = new FormData();
+            formData.append('id', id);
+            // include the antiforgery token
+            if (token) formData.append('__RequestVerificationToken', token);
+
+            const res = await fetch('/Property/Delete', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData
+            });
+
+            if (!res.ok) throw new Error('Delete failed');
+
+            const data = await res.json().catch(() => null);
+            // if JSON response, remove row from DOM; otherwise reload
+            if (data && data.success) {
+                // try remove the table row containing this button
+                const row = btn.closest('tr');
+                if (row) row.remove();
+                else location.reload();
+            } else {
+                location.reload();
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Failed to delete property.');
+        }
+    });
+});
          const addPropertyBtn = document.getElementById('add-property-btn');
         const propertyFormContainer = document.getElementById('property-form-container');
         const formTitle = document.getElementById('form-title');
@@ -329,70 +372,164 @@ document.head.appendChild(style);
         });
         
         // Form submission
-        propertyForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // propertyForm.addEventListener('submit', function(e) {
+        //     e.preventDefault();
             
-            // Get form data
-            const propertyId = document.getElementById('property-id').value;
-            const title = document.getElementById('property-title').value;
-            const description = document.getElementById('property-description').value;
-            const type = document.getElementById('property-type').value;
-            const price = document.getElementById('property-price').value;
-            const bedrooms = document.getElementById('property-bedrooms').value;
-            const bathrooms = document.getElementById('property-bathrooms').value;
-            const sqft = document.getElementById('property-sqft').value;
-            const date = document.getElementById('property-date').value;
-            const street = document.getElementById('property-street').value;
-            const city = document.getElementById('property-city').value;
-            const state = document.getElementById('property-state').value;
-            const zip = document.getElementById('property-zip').value;
+        //     // Get form data
+        //     const propertyId = document.getElementById('property-id').value;
+        //     const title = document.getElementById('property-title').value;
+        //     const description = document.getElementById('property-description').value;
+        //     const type = document.getElementById('property-type').value;
+        //     const price = document.getElementById('property-price').value;
+        //     const bedrooms = document.getElementById('property-bedrooms').value;
+        //     const bathrooms = document.getElementById('property-bathrooms').value;
+        //     const sqft = document.getElementById('property-sqft').value;
+        //     const date = document.getElementById('property-date').value;
+        //     const street = document.getElementById('property-street').value;
+        //     const city = document.getElementById('property-city').value;
+        //     const state = document.getElementById('property-state').value;
+        //     const zip = document.getElementById('property-zip').value;
             
-            // In a real application, you would send this data to a server
-            if (propertyId) {
-                // Update existing property
-                alert(`Property "${title}" updated successfully!`);
-            } else {
-                // Add new property
-                alert(`Property "${title}" added successfully!`);
-            }
+        //     // In a real application, you would send this data to a server
+        //     if (propertyId) {
+        //         // Update existing property
+        //         alert(`Property "${title}" updated successfully!`);
+        //     } else {
+        //         // Add new property
+        //         alert(`Property "${title}" added successfully!`);
+        //     }
             
-            // Hide form
-            propertyFormContainer.classList.add('hidden');
+        //     // Hide form
+        //     propertyFormContainer.classList.add('hidden');
+        // });
+          try { loadProducts(); } catch (e) { console.error('loadProducts error', e); }
+    try { loadCart(); } catch (e) { console.error('loadCart error', e); }
+
+
+    // helper to render previews
+    function renderPreviews(files, target) {
+        if (!target) return;
+        target.innerHTML = '';
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!file.type.match('image.*')) continue;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'image-preview-item inline-block mr-2 mb-2';
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Property Image';
+                img.className = 'w-24 h-24 object-cover rounded';
+                const removeBtn = document.createElement('span');
+                removeBtn.className = 'remove-image cursor-pointer text-red-500 ml-1';
+                removeBtn.innerHTML = '&times;';
+                removeBtn.onclick = function () { previewItem.remove(); };
+                previewItem.appendChild(img);
+                previewItem.appendChild(removeBtn);
+                target.appendChild(previewItem);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    if (imageUpload && imagePreview) {
+        imageUpload.addEventListener('change', function (e) {
+            renderPreviews(e.target.files, imagePreview);
         });
-        
-        // Edit property
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                formTitle.textContent = 'Edit Property';
-                propertyFormContainer.classList.remove('hidden');
-                
-                // In a real application, you would populate the form with existing data
-                document.getElementById('property-id').value = '1';
-                document.getElementById('property-title').value = 'Modern Apartment Downtown';
-                document.getElementById('property-description').value = 'Beautiful modern apartment in the heart of downtown with amazing city views.';
-                document.getElementById('property-type').value = 'Apartment';
-                document.getElementById('property-price').value = '1200';
-                document.getElementById('property-bedrooms').value = '2';
-                document.getElementById('property-bathrooms').value = '1';
-                document.getElementById('property-sqft').value = '900';
-                document.getElementById('property-date').value = '2023-06-15';
-                document.getElementById('property-street').value = '123 Main Street';
-                document.getElementById('property-city').value = 'New York';
-                document.getElementById('property-state').value = 'NY';
-                document.getElementById('property-zip').value = '10001';
-            });
+    }
+
+    if (propertyForm) {
+        // If you want default form submit to post to server, do nothing here.
+        // If you want AJAX, uncomment e.preventDefault() and implement fetch.
+        propertyForm.addEventListener('submit', function (e) {
+            // e.preventDefault();
+            // keep default submit unless you implement ajax
+            // if you see an unexpected alert or redirect, check for other scripts calling alert/redirect
         });
-        
-        // Delete property
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                if (confirm('Are you sure you want to delete this property?')) {
-                    // In a real application, you would send a delete request to the server
-                    alert('Property deleted successfully!');
+    }
+
+    if (addPropertyBtn && propertyFormContainer) {
+        addPropertyBtn.addEventListener('click', () => {
+            if (formTitle) formTitle.textContent = 'Add New Property';
+            propertyFormContainer.classList.remove('hidden');
+            if (propertyForm) propertyForm.reset();
+            if (imagePreview) imagePreview.innerHTML = '';
+            const idInput = document.getElementById('property-id');
+            if (idInput) idInput.value = '';
+        });
+    }
+
+    if (cancelBtn && propertyFormContainer) {
+        cancelBtn.addEventListener('click', () => propertyFormContainer.classList.add('hidden'));
+    }
+         // Attach edit / delete / view handlers safely (elements may be added dynamically)
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', async function () {
+            if (!button.dataset.id) return;
+            const id = button.dataset.id;
+            formTitle && (formTitle.textContent = 'Edit Property');
+            propertyFormContainer && propertyFormContainer.classList.remove('hidden');
+
+            // Fetch property data from server if endpoint exists
+            try {
+                const res = await fetch(`/Property/Get/${id}`);
+                if (!res.ok) throw new Error('Failed to fetch property');
+                const p = await res.json();
+                console.log('Fetched property:', p);
+                // populate fields if they exist
+                // const setVal = (sel, val) => { const el = document.getElementById(sel); if (el) el.value = val ?? ''; };
+                  document.getElementById('property-id').value =  p.id;
+                  document.getElementById('property-title').value =  p.title
+                  document.getElementById('property-description').value =  p.description
+                  document.getElementById('property-type').value =  p.propertyType
+                  document.getElementById('property-price').value =  p.pricePerMonth
+                  document.getElementById('property-bedrooms').value =  p.bedrooms
+                  document.getElementById('property-bathrooms').value =  p.bathrooms
+                  document.getElementById('property-sqft').value =  p.squareFeet
+                  document.getElementById('property-date').value =  p.availableDate
+                  document.getElementById('property-street').value =  p.streetAddress
+                  document.getElementById('property-city').value =  p.city
+                  document.getElementById('property-state').value =  p.state
+                  document.getElementById('property-zip').value =  +p.zipCode
+                  document.getElementById('property-country').value =  p.country
+                // show existing images
+                if (imagePreview) {
+                    imagePreview.innerHTML = '';
+                    if (p.Images && p.Images.length) {
+                        p.Images.forEach(src => {
+                            const img = document.createElement('img');
+                            img.src = src;
+                            img.className = 'inline-block w-24 h-24 object-cover mr-2 mb-2 rounded';
+                            imagePreview.appendChild(img);
+                        });
+                    }
                 }
-            });
+                // switch form action to edit (server expects /Property/Edit)
+                if (propertyForm) propertyForm.action = '/Property/Edit';
+            } catch (err) {
+                console.error(err);
+                alert('Error loading property data');
+            }
         });
-        
+    });
+
+    // document.querySelectorAll('.delete-btn').forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         if (!button.dataset.id) return;
+    //         if (!confirm('Are you sure you want to delete this property?')) return;
+    //         // implement server delete call if desired, e.g. fetch('/Property/Delete?id=ID', { method: 'POST', ...})
+    //         alert('Property deleted successfully! (stub)');
+    //     });
+    // });
+
+    document.querySelectorAll('.view-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            if (!button.dataset.id) return;
+            window.location.href = `/Home/PropertyDetail?id=${button.dataset.id}`;
+        });
+    });
+       
         // View property
         document.querySelectorAll('.view-btn').forEach(button => {
             button.addEventListener('click', function() {
@@ -435,3 +572,5 @@ document.head.appendChild(style);
                 modal.style.display = 'none';
             }
         }
+
+        

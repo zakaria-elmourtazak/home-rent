@@ -1,0 +1,15 @@
+bin/
+obj/
+.idea/
+*.log
+*.tmp
+*.nupkg
+# Uncomment if using packages folder instead of global cache
+# packages/
+*.vs/
+*.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+wwwroot/images
