@@ -6,7 +6,7 @@ namespace MyMvcAuthProject.Data;
 
 public class ApplicationDbContext : IdentityDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+  public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
@@ -37,6 +37,6 @@ public class ApplicationDbContext : IdentityDbContext
              modelBuilder.Entity<Models.Favorite>()
         .HasIndex(f => new { f.UserId, f.PropertyId })
         .IsUnique();
-        
+
     }
 }

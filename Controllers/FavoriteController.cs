@@ -8,9 +8,9 @@ using MyMvcAuthProject.Models;
 public class FavoriteController : Controller
 {
     private readonly ApplicationDbContext _db;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public FavoriteController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
+    public FavoriteController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
     {
         _db = db;
         _userManager = userManager;

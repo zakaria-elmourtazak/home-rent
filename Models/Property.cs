@@ -34,7 +34,7 @@ public class Property
 
     // Owner (Identity)
     public string UserId { get; set; } = string.Empty;
-    public IdentityUser User { get; set; }
+    public  ApplicationUser User { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

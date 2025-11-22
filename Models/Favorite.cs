@@ -7,7 +7,7 @@ public class Favorite
 
     public string? UserId { get; set; }
 
-    public IdentityUser? User { get; set; }
+    public ApplicationUser? User { get; set; }
 
     public int PropertyId { get; set; }
     public Property? Property { get; set; }

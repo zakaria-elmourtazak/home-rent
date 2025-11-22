@@ -5,15 +5,16 @@ using MyMvcAuthProject.Data;
 using MyMvcAuthProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyMvcAuthProject.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-   private readonly ApplicationDbContext _db;
-    private readonly UserManager<IdentityUser> _userManager;
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<IdentityUser> userManager)
+    private readonly ApplicationDbContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
     {
         _logger = logger;
         _db = db;
@@ -22,153 +23,153 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-         var properties = _db.Properties
-            .Include(p => p.Amenities)
-            .Include(p => p.PropertyImages)
-            .ToList();
+        var properties = _db.Properties
+           .Include(p => p.Amenities)
+           .Include(p => p.PropertyImages)
+           .ToList();
 
         return View(properties);
     }
-[HttpPost]
-public IActionResult FilterListings(
-    int pageNumber = 1,
-    int pageSize = 8,
-    string sortBy = "newest",
-    Dictionary<string, string> filters = null)
-{
-    // Store filters for the next request
-    if (filters != null)
+    [HttpPost]
+    public IActionResult FilterListings(
+        int pageNumber = 1,
+        int pageSize = 8,
+        string sortBy = "newest",
+        Dictionary<string, string> filters = null)
     {
-        TempData["filters"] = JsonConvert.SerializeObject(filters);
+        // Store filters for the next request
+        if (filters != null)
+        {
+            TempData["filters"] = JsonConvert.SerializeObject(filters);
+        }
+        TempData["sortBy"] = sortBy;
+        // Redirect to the Listings page
+        return RedirectToAction("Listings", new
+        {
+            pageNumber = pageNumber,
+            pageSize = pageSize,
+            sortBy = sortBy
+        });
     }
-    TempData["sortBy"] = sortBy;
-    // Redirect to the Listings page
-    return RedirectToAction("Listings", new
-    {
-        pageNumber = pageNumber,
-        pageSize = pageSize,
-        sortBy = sortBy
-    });
-}
 
 
     public IActionResult Listings(int pageNumber = 1, int pageSize = 8, string sortBy = "newest")
     {
-         IQueryable<Property> query = _db.Properties
-        .Include(p => p.Amenities)
-        .Include(p => p.PropertyImages)
-        .AsQueryable();
+        IQueryable<Property> query = _db.Properties
+       .Include(p => p.Amenities)
+       .Include(p => p.PropertyImages)
+       .AsQueryable();
 
-    Dictionary<string, string> filters = null;
+        Dictionary<string, string> filters = null;
 
-    if (TempData["filters"] != null)
-    {
-        filters = JsonConvert.DeserializeObject<Dictionary<string, string>>(
-            TempData["filters"].ToString()
-        );
-    }
-
-    // Apply filters
-    if (filters != null)
-    {
-        foreach (var filter in filters)
+        if (TempData["filters"] != null)
         {
-            var key = filter.Key;
-            var value = filter.Value;
+            filters = JsonConvert.DeserializeObject<Dictionary<string, string>>(
+                TempData["filters"].ToString()
+            );
+        }
 
-            if (string.IsNullOrEmpty(value))
-                continue;
-
-            switch (key)
+        // Apply filters
+        if (filters != null)
+        {
+            foreach (var filter in filters)
             {
-                case "Location":
-                    query = query.Where(p => p.City.Contains(value));
-                    break;
+                var key = filter.Key;
+                var value = filter.Value;
 
-                case "PriceMin":
-                    if (int.TryParse(value, out int min))
-                        query = query.Where(p => p.PricePerMonth >= min);
-                    break;
+                if (string.IsNullOrEmpty(value))
+                    continue;
 
-                case "PriceMax":
-                    if (int.TryParse(value, out int max))
-                        query = query.Where(p => p.PricePerMonth <= max);
-                    break;
+                switch (key)
+                {
+                    case "Location":
+                        query = query.Where(p => p.City.Contains(value));
+                        break;
 
-                case "Bedrooms":
-                    if (value != "Any" && int.TryParse(value, out int bdr))
-                        query = query.Where(p => p.Bedrooms == bdr);
-                    break;
+                    case "PriceMin":
+                        if (int.TryParse(value, out int min))
+                            query = query.Where(p => p.PricePerMonth >= min);
+                        break;
+
+                    case "PriceMax":
+                        if (int.TryParse(value, out int max))
+                            query = query.Where(p => p.PricePerMonth <= max);
+                        break;
+
+                    case "Bedrooms":
+                        if (value != "Any" && int.TryParse(value, out int bdr))
+                            query = query.Where(p => p.Bedrooms == bdr);
+                        break;
 
                     case "Bathrooms":
-                    if (value != "Any" && int.TryParse(value, out int bth))
-                        query = query.Where(p => p.Bathrooms == bth);
-                    break;
+                        if (value != "Any" && int.TryParse(value, out int bth))
+                            query = query.Where(p => p.Bathrooms == bth);
+                        break;
 
-                case "PropertyType":
-                    query = query.Where(p => p.PropertyType == value);
-                    break;
+                    case "PropertyType":
+                        query = query.Where(p => p.PropertyType == value);
+                        break;
+                }
             }
         }
+
+        query = sortBy switch
+        {
+            "newest" => query.OrderByDescending(p => p.CreatedAt),
+            "oldest" => query.OrderBy(p => p.CreatedAt),
+            "price_low" => query.OrderBy(p => p.PricePerMonth),
+            "price_high" => query.OrderByDescending(p => p.PricePerMonth),
+            _ => query.OrderByDescending(p => p.CreatedAt)
+        };
+
+
+        int totalCount = query.Count();
+
+        var properties = query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var vm = new
+        {
+            Properties = properties,
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+        };
+
+        return View(vm);
     }
-
-     query = sortBy switch
-    {
-        "newest"       => query.OrderByDescending(p => p.CreatedAt),
-        "oldest"       => query.OrderBy(p => p.CreatedAt),
-        "price_low"    => query.OrderBy(p => p.PricePerMonth),
-        "price_high"   => query.OrderByDescending(p => p.PricePerMonth),
-        _ => query.OrderByDescending(p => p.CreatedAt)
-    };
-
-
-    int totalCount = query.Count();
-
-    var properties = query
-        .Skip((pageNumber - 1) * pageSize)
-        .Take(pageSize)
-        .ToList();
-
-    var vm = new 
-    {
-        Properties = properties,
-        CurrentPage = pageNumber,
-        PageSize = pageSize,
-        TotalCount = totalCount
-    };
-
-    return View(vm);
-    }
-       public IActionResult About()
+    public IActionResult About()
     {
         return View();
     }
-       public IActionResult AdminListings(int pageNumber = 1, int pageSize = 5)
+    public IActionResult AdminListings(int pageNumber = 1, int pageSize = 5)
     {
-         IQueryable<Property> query = _db.Properties
-        .Include(p => p.Amenities)
-        .Include(p => p.PropertyImages)
-        .AsQueryable();
+        IQueryable<Property> query = _db.Properties
+       .Include(p => p.Amenities)
+       .Include(p => p.PropertyImages)
+       .AsQueryable();
 
-    int totalCount = query.Count();
-    // query = query.OrderByDescending(p => p.CreatedAt);
-    var properties = query
-        .Skip((pageNumber - 1) * pageSize)
-        .Take(pageSize)
-        .ToList();
+        int totalCount = query.Count();
+        // query = query.OrderByDescending(p => p.CreatedAt);
+        var properties = query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
 
-    var vm = new ListingProperty
-    {
-        Properties = properties,
-        CurrentPage = pageNumber,
-        PageSize = pageSize,
-        TotalCount = totalCount
-    };
-    return View(vm);
-}
+        var vm = new ListingProperty
+        {
+            Properties = properties,
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+        };
+        return View(vm);
+    }
 
 
-         public IActionResult Contact()
+    public IActionResult Contact()
     {
         return View();
     }
@@ -185,15 +186,15 @@ public IActionResult FilterListings(
         {
             return NotFound();
         }
-bool isFavorite = false;
-var userId = "user " + id;
-    // if (User.Identity.IsAuthenticated)
-    // {
+        bool isFavorite = false;
+        var userId = "user " + id;
+        // if (User.Identity.IsAuthenticated)
+        // {
         // var user = await _userManager.GetUserAsync(User);
 
         isFavorite = await _db.Favorites
             .AnyAsync(f => f.UserId == userId && f.PropertyId == id);
-    // }
+        // }
         var vm = new PropertyDetailsViewModel
         {
             Property = property,
@@ -202,30 +203,50 @@ var userId = "user " + id;
         return View(vm);
     }
 
-    
 
-    public IActionResult Dashboard(){
+
+    public IActionResult Dashboard()
+    {
 
         return View();
     }
-   
-       public async Task<IActionResult> Saved(){
-    // var user = await _userManager.GetUserAsync(User);
 
-    var favorites = _db.Favorites
-        // .Where(f => f.UserId == user.Id)
-        .Include(f => f.Property)
-        .ThenInclude(p => p.PropertyImages)
-        .ToList();
+    public async Task<IActionResult> Saved()
+    {
+        // var user = await _userManager.GetUserAsync(User);
 
-    return View(favorites);
+        var favorites = _db.Favorites
+            // .Where(f => f.UserId == user.Id)
+            .Include(f => f.Property)
+            .ThenInclude(p => p.PropertyImages)
+            .ToList();
+
+        return View(favorites);
 
     }
-       public IActionResult Messages(){
+    public IActionResult Messages()
+    {
         return View();
     }
-    public IActionResult Profile(){
-        return View();
+    [Authorize]
+    public async Task<IActionResult> Profile()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return Challenge();
+        }
+        var model = new ProfileViewModel
+        {
+            UserName = user.UserName,
+            TimeZone = user.TimeZone,
+            Bio = user.Bio,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+            ProfileImageUrl = user.ProfileImageUrl
+        };
+
+        return View(model);
     }
 
     [HttpPost]

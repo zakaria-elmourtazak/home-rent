@@ -1,170 +1,183 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-    <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-         <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
-            <nav>
-                <ul class="space-y-2">
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Dashboard" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-tachometer-alt mr-3"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="AdminListings" class="flex items-center p-3 bg-primary text-white rounded-lg">
-                            <i class="fas fa-home mr-3"></i>
-                            <span>My Listings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Saved" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-heart mr-3"></i>
-                            <span>Saved Properties</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Messages" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-envelope mr-3"></i>
-                            <span>Messages</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Profile" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-cog mr-3"></i>
-                            <span>Profile Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-sign-out-alt mr-3"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="flex-1 space-y-8">
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-2xl font-bold mb-6">Profile Overview</h2>
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="flex flex-col items-center text-center">
-                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 rounded-full border-4 border-primary shadow" alt="Admin">
-                        <button class="mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Change Photo</button>
+@model  MyMvcAuthProject.Models.ProfileViewModel
+<div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+    <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
+        <nav>
+            <ul class="space-y-2">
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Dashboard"
+                        class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="AdminListings"
+                        class="flex items-center p-3 bg-primary text-white rounded-lg">
+                        <i class="fas fa-home mr-3"></i>
+                        <span>My Listings</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Saved"
+                        class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-heart mr-3"></i>
+                        <span>Saved Properties</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Messages"
+                        class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-envelope mr-3"></i>
+                        <span>Messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Profile"
+                        class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-cog mr-3"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index"
+                        class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    @{
+        var user = Model;
+    }
+    <main class="flex-1 space-y-8">
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-2xl font-bold mb-6">Profile Overview</h2>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex flex-col items-center text-center">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80"
+                        class="w-32 h-32 rounded-full border-4 border-primary shadow" alt="Admin">
+                    <button class="mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Change
+                        Photo</button>
+                </div>
+                <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-gray-500 text-sm">User Name</p>
+                        <p class="text-lg font-semibold">@user.UserName</p>
                     </div>
-                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <p class="text-gray-500 text-sm">Full Name</p>
-                            <p class="text-lg font-semibold">John Doe</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Email</p>
-                            <p class="text-lg font-semibold">admin@homerent.com</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Phone</p>
-                            <p class="text-lg font-semibold">(123) 456-7890</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Role</p>
-                            <p class="text-lg font-semibold">Administrator</p>
-                        </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Email</p>
+                        <p class="text-lg font-semibold">@user.Email</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Phone</p>
+                        <p class="text-lg font-semibold">@user.PhoneNumber</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Role</p>
+                        <p class="text-lg font-semibold">Administrator</p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-2xl font-bold mb-6">Edit Profile</h2>
-                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">Full Name</label>
-                        <input type="text" class="w-full border rounded-lg p-3 mt-2" value="John Doe">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">Email Address</label>
-                        <input type="email" class="w-full border rounded-lg p-3 mt-2" value="admin@homerent.com">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">Phone Number</label>
-                        <input type="tel" class="w-full border rounded-lg p-3 mt-2" value="(123) 456-7890">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">Time Zone</label>
-                        <select class="w-full border rounded-lg p-3 mt-2">
-                            <option>Eastern Time (EST)</option>
-                            <option>Central Time (CST)</option>
-                            <option>Pacific Time (PST)</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="text-sm font-medium text-gray-600">Bio</label>
-                        <textarea class="w-full border rounded-lg p-3 mt-2 h-24">Experienced property manager with over 10 years in the rental market.</textarea>
-                    </div>
-                    <div class="md:col-span-2 flex justify-end gap-4">
-                        <button type="button" class="px-6 py-3 border border-gray-300 rounded-lg">Cancel</button>
-                        <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Save Changes</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-2xl font-bold mb-6">Security Settings</h2>
-                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">Current Password</label>
-                        <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">New Password</label>
-                        <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium text-gray-600">Confirm New Password</label>
-                        <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" id="two-factor" class="rounded">
-                        <label for="two-factor" class="text-gray-700">Enable Two-Factor Authentication</label>
-                    </div>
-                    <div class="md:col-span-2 flex justify-end">
-                        <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Update Security</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-2xl font-bold mb-6">Notification Preferences</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <label class="flex items-center justify-between p-4 border rounded-lg">
-                        <div>
-                            <h3 class="font-semibold">New Messages</h3>
-                            <p class="text-sm text-gray-500">Get notified when you receive a new message</p>
-                        </div>
-                        <input type="checkbox" class="toggle" checked>
-                    </label>
-                    <label class="flex items-center justify-between p-4 border rounded-lg">
-                        <div>
-                            <h3 class="font-semibold">Property Updates</h3>
-                            <p class="text-sm text-gray-500">Alerts for changes on your properties</p>
-                        </div>
-                        <input type="checkbox" class="toggle" checked>
-                    </label>
-                    <label class="flex items-center justify-between p-4 border rounded-lg">
-                        <div>
-                            <h3 class="font-semibold">Weekly Summary</h3>
-                            <p class="text-sm text-gray-500">Receive weekly performance reports</p>
-                        </div>
-                        <input type="checkbox" class="toggle">
-                    </label>
-                    <label class="flex items-center justify-between p-4 border rounded-lg">
-                        <div>
-                            <h3 class="font-semibold">System Alerts</h3>
-                            <p class="text-sm text-gray-500">Important updates about your account</p>
-                        </div>
-                        <input type="checkbox" class="toggle" checked>
-                    </label>
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-2xl font-bold mb-6">Edit Profile</h2>
+            <form asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="text-sm font-medium text-gray-600">User Name</label>
+                    <input name="UserName" type="text" class="w-full border rounded-lg p-3 mt-2" value="@user.UserName">
                 </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Email Address</label>
+                    <input name="Email" type="email" class="w-full border rounded-lg p-3 mt-2" value="@user.Email">
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Phone Number</label>
+                    <input name="PhoneNumber" type="tel" class="w-full border rounded-lg p-3 mt-2" value="@user.PhoneNumber">
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Time Zone</label>
+                    <select name="TimeZone" class="w-full border rounded-lg p-3 mt-2" value="@user.TimeZone">
+                        <option>Eastern Time (EST)</option>
+                        <option>Central Time (CST)</option>
+                        <option>Pacific Time (PST)</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="text-sm font-medium text-gray-600">Bio</label>
+                    <textarea name="Bio"
+                        class="w-full border rounded-lg p-3 mt-2 h-24">@user.Bio</textarea>
+                </div>
+                <div class="md:col-span-2 flex justify-end gap-4">
+                    <button type="button" class="px-6 py-3 border border-gray-300 rounded-lg">Cancel</button>
+                    <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-2xl font-bold mb-6">Security Settings</h2>
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Current Password</label>
+                    <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-600">New Password</label>
+                    <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-600">Confirm New Password</label>
+                    <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="two-factor" class="rounded">
+                    <label for="two-factor" class="text-gray-700">Enable Two-Factor Authentication</label>
+                </div>
+                <div class="md:col-span-2 flex justify-end">
+                    <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Update
+                        Security</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-2xl font-bold mb-6">Notification Preferences</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label class="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                        <h3 class="font-semibold">New Messages</h3>
+                        <p class="text-sm text-gray-500">Get notified when you receive a new message</p>
+                    </div>
+                    <input type="checkbox" class="toggle" checked>
+                </label>
+                <label class="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                        <h3 class="font-semibold">Property Updates</h3>
+                        <p class="text-sm text-gray-500">Alerts for changes on your properties</p>
+                    </div>
+                    <input type="checkbox" class="toggle" checked>
+                </label>
+                <label class="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                        <h3 class="font-semibold">Weekly Summary</h3>
+                        <p class="text-sm text-gray-500">Receive weekly performance reports</p>
+                    </div>
+                    <input type="checkbox" class="toggle">
+                </label>
+                <label class="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                        <h3 class="font-semibold">System Alerts</h3>
+                        <p class="text-sm text-gray-500">Important updates about your account</p>
+                    </div>
+                    <input type="checkbox" class="toggle" checked>
+                </label>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+</div>

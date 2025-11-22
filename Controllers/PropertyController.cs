@@ -12,10 +12,10 @@ public class PropertyController : Controller
 {
 
     private readonly ApplicationDbContext _db;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly ILogger<HomeController> _logger;
 
-    public PropertyController(ApplicationDbContext db, UserManager<IdentityUser> userManager, ILogger<HomeController> logger)
+    public PropertyController(ApplicationDbContext db, UserManager<ApplicationUser> userManager, ILogger<HomeController> logger)
     {
         _logger = logger;
         _db = db;
