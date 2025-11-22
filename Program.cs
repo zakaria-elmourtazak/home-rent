@@ -71,7 +71,22 @@ using (var scope = app.Services.CreateScope())
      
         db.Properties.Add(property);
     }
-    db.SaveChanges();
+    
+     db.SaveChanges();
+
+     var propertiesWithImages = db.Properties
+        .Include(p => p.PropertyImages)
+        .ToList();
+        foreach (var prop in propertiesWithImages)
+        {
+            var favorite = new Favorite
+            {
+                PropertyId = prop.Id,
+                UserId = "user "+prop.Id 
+            };
+            db.Favorites.Add(favorite);
+        }
+        db.SaveChanges();
 }
 
 // Configure the HTTP request pipeline.

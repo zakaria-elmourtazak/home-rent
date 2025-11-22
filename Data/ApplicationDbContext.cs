@@ -14,6 +14,8 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Amenity> Amenities { get; set; }
     public DbSet<PropertyImage> PropertyImages { get; set; }
 
+    public DbSet<Favorite> Favorites { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -31,5 +33,10 @@ public class ApplicationDbContext : IdentityDbContext
             .WithOne(i => i.Property)
             .HasForeignKey(i => i.PropertyId)
             .OnDelete(DeleteBehavior.Cascade);
+
+             modelBuilder.Entity<Models.Favorite>()
+        .HasIndex(f => new { f.UserId, f.PropertyId })
+        .IsUnique();
+        
     }
 }

@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@model List<MyMvcAuthProject.Models.Favorite>
     <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
         <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
             <nav>
@@ -71,35 +72,58 @@
                     </div>
                 </div>
             </div>
-
+@{
+    var properties = Model.Select(f => f.Property).ToList() ??  new List<MyMvcAuthProject.Models.Property>();
+}
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            @foreach (Property p in properties)
+            {
                 <div class="bg-white rounded-xl shadow p-4 border hover:border-primary transition">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?auto=format&fit=crop&w=600&q=80" alt="Property" class="rounded-lg h-52 w-full object-cover">
+                      @if (p.PropertyImages.Any())
+                        {
+                            <img src="@p.PropertyImages.First().ImageUrl"  alt="Property" class="rounded-lg h-52 w-full object-cover"/>
+                        }
                         <button class="absolute top-3 right-3 bg-white text-red-500 rounded-full p-2 shadow">
                             <i class="fas fa-heart"></i>
                         </button>
                     </div>
                     <div class="mt-4">
                         <div class="flex justify-between items-center">
-                            <h3 class="text-xl font-semibold">Modern Apartment</h3>
-                            <span class="text-primary font-bold">$1,900/mo</span>
+                            <h3 class="text-xl font-semibold"> @p.Title</h3>
+                            <span class="text-primary font-bold">$@p.PricePerMonth/mo</span>
                         </div>
                         <p class="text-gray-500 mt-1 flex items-center">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-2"></i> New York, NY
+                            <i class="fas fa-map-marker-alt text-red-500 mr-2"></i> @p.City, @p.State
                         </p>
                         <div class="flex items-center gap-4 text-gray-600 mt-3">
-                            <span><i class="fas fa-bed mr-1"></i> 2 Beds</span>
-                            <span><i class="fas fa-bath mr-1"></i> 2 Baths</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 1200 sqft</span>
+                            <span><i class="fas fa-bed mr-1"></i> @p.Bedrooms Beds</span>
+                            <span><i class="fas fa-bath mr-1"></i> @p.Bathrooms Baths</span>
+                            <span><i class="fas fa-ruler-combined mr-1"></i> @p.SquareFeet sqft</span>
                         </div>
                         <div class="mt-4 flex gap-3">
-                            <button class="flex-1 bg-primary text-white py-2 rounded-lg hover:bg-secondary transition">View Details</button>
-                            <button class="flex-1 border border-gray-300 py-2 rounded-lg hover:bg-gray-50">Remove</button>
+                       <a asp-controller="Home"
+       asp-action="PropertyDetail"
+       asp-route-id="@p.Id"
+       class="flex-1 bg-primary text-white text-center pt-2 mb-3 rounded-lg hover:bg-secondary transition">
+        View Details
+    </a>
+
+    <form asp-controller="Favorite"
+          asp-action="RemoveFavorite"
+          asp-route-id="@p.Id"
+          method="post"
+          class="flex-1">
+        <button class="w-full border border-gray-300 py-2 rounded-lg hover:bg-gray-50">
+            Remove
+        </button>
+    </form>
+
                         </div>
                     </div>
                 </div>
-
+            }
+@* 
                 <div class="bg-white rounded-xl shadow p-4 border hover:border-primary transition">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?auto=format&fit=crop&w=600&q=80" alt="Property" class="rounded-lg h-52 w-full object-cover">
@@ -152,7 +176,7 @@
                             <button class="flex-1 border border-gray-300 py-2 rounded-lg hover:bg-gray-50">Remove</button>
                         </div>
                     </div>
-                </div>
+                </div> *@
             </div>
         </main>
     </div>

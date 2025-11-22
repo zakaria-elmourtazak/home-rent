@@ -174,7 +174,7 @@ public IActionResult FilterListings(
     }
 
 
-    public IActionResult PropertyDetail(int id)
+    public async Task<IActionResult> PropertyDetail(int id)
     {
         var property = _db.Properties
             .Include(p => p.Amenities)
@@ -185,8 +185,21 @@ public IActionResult FilterListings(
         {
             return NotFound();
         }
+bool isFavorite = false;
+var userId = "user " + id;
+    // if (User.Identity.IsAuthenticated)
+    // {
+        // var user = await _userManager.GetUserAsync(User);
 
-        return View(property);
+        isFavorite = await _db.Favorites
+            .AnyAsync(f => f.UserId == userId && f.PropertyId == id);
+    // }
+        var vm = new PropertyDetailsViewModel
+        {
+            Property = property,
+            IsFavorite = isFavorite
+        };
+        return View(vm);
     }
 
     
@@ -196,8 +209,17 @@ public IActionResult FilterListings(
         return View();
     }
    
-       public IActionResult Saved(){
-        return View();
+       public async Task<IActionResult> Saved(){
+    // var user = await _userManager.GetUserAsync(User);
+
+    var favorites = _db.Favorites
+        // .Where(f => f.UserId == user.Id)
+        .Include(f => f.Property)
+        .ThenInclude(p => p.PropertyImages)
+        .ToList();
+
+    return View(favorites);
+
     }
        public IActionResult Messages(){
         return View();
