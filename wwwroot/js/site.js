@@ -573,4 +573,12 @@ document.head.appendChild(style);
             }
         }
 
-        
+        document.querySelector(".profile-trigger").addEventListener("click", () => {
+    document.querySelector(".profile-dropdown").classList.toggle("open");
+});
+
+document.addEventListener("click", function (e) {
+    if (!document.querySelector(".profile-menu").contains(e.target)) {
+        document.querySelector(".profile-dropdown").style.display = "none";
+    }
+});

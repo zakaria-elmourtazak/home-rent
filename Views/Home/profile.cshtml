@@ -2,8 +2,43 @@
     ViewData["Title"] = "Home Page";
 }
 @model  MyMvcAuthProject.Models.ProfileViewModel
+@{
+    var errors = TempData["Errors"] as string;
+    var success = TempData["Success"] as string;
+}
+ @{
+        var user = Model;
+}
+<div id="profile-image-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-lg p-6 z-10">
+        <h3 class="text-lg font-semibold mb-4">Change Profile Photo</h3>
+
+        <form id="profile-image-form" asp-controller="Profile" asp-action="ChangeImage" method="post" enctype="multipart/form-data" class="space-y-4">
+            @Html.AntiForgeryToken()
+            <input type="file" id="popup-profile-image-upload" name="profileImage" accept="image/*" class="hidden" />
+            <div class="flex items-center gap-4">
+                <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img id="popup-profile-image-preview"  src="@(!string.IsNullOrWhiteSpace(user.ProfileImageUrl) ? user.ProfileImageUrl : "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80")" alt="Preview" class="w-full h-full object-cover" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="popup-profile-image-upload" class="inline-block px-4 py-2 border rounded-lg cursor-pointer bg-white hover:bg-gray-50 text-sm">
+                        Select Image
+                    </label>
+                    <small class="text-gray-500">Supported: JPG, PNG, GIF — Max 5MB</small>
+                    <div id="popup-profile-image-errors" class="text-sm text-red-600"></div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-4">
+                <button type="button" id="popup-cancel-btn" class="px-4 py-2 border rounded-lg">Cancel</button>
+                <button type="submit" id="popup-save-btn" class="px-4 py-2 bg-primary text-white rounded-lg">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-    <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
+    @* <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
         <nav>
             <ul class="space-y-2">
                 <li>
@@ -50,20 +85,41 @@
                 </li>
             </ul>
         </nav>
-    </aside>
-    @{
-        var user = Model;
-    }
+    </aside> *@
+    @await Html.PartialAsync("_AccountSidebar")
     <main class="flex-1 space-y-8">
+      @if (!string.IsNullOrEmpty(success))
+            {
+                <div class="alert alert-success">@success</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(errors))
+            {
+                var list = errors.Split('|');
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach (var err in list)
+                        {
+                            <li>@err</li>
+                        }
+                    </ul>
+                </div>
+            }
         <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold mb-6">Profile Overview</h2>
             <div class="flex flex-col md:flex-row gap-6">
-                <div class="flex flex-col items-center text-center">
+                @* <div class="flex flex-col items-center text-center">
                     <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80"
                         class="w-32 h-32 rounded-full border-4 border-primary shadow" alt="Admin">
                     <button class="mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Change
                         Photo</button>
-                </div>
+                </div> *@
+                <div class="flex flex-col items-center text-center">
+  
+          <img id="popup-profile-image-preview"          src="@(!string.IsNullOrWhiteSpace(user.ProfileImageUrl) ? user.ProfileImageUrl : "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80")"
+ alt="Preview"
+       style="width:112px; height:112px; object-fit:cover; display:block; max-width:none;"  class="rounded-full border-4 border-primary shadow"/>
+    <button id="open-change-photo" type="button" class="mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Change Photo</button>
+</div>
                 <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-gray-500 text-sm">User Name</p>
@@ -117,36 +173,34 @@
                     <button type="button" class="px-6 py-3 border border-gray-300 rounded-lg">Cancel</button>
                     <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Save Changes</button>
                 </div>
+                
             </form>
         </div>
 
         <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold mb-6">Security Settings</h2>
-            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form  asp-action="ChangePassword" method="post"  asp-controller="Profile" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="text-sm font-medium text-gray-600">Current Password</label>
-                    <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                    <input type="password" name="OldPassword" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">New Password</label>
-                    <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                    <input type="password" name="NewPassword" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">Confirm New Password</label>
-                    <input type="password" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                    <input type="password" name="ConfirmPassword" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
                 </div>
-                <div class="flex items-center space-x-2">
-                    <input type="checkbox" id="two-factor" class="rounded">
-                    <label for="two-factor" class="text-gray-700">Enable Two-Factor Authentication</label>
-                </div>
+                
                 <div class="md:col-span-2 flex justify-end">
-                    <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Update
+                    <button  type="submit"  class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Update
                         Security</button>
                 </div>
             </form>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        @* <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold mb-6">Notification Preferences</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label class="flex items-center justify-between p-4 border rounded-lg">
@@ -178,6 +232,118 @@
                     <input type="checkbox" class="toggle" checked>
                 </label>
             </div>
-        </div>
+        </div> *@
     </main>
 </div>
+
+
+@section Scripts {
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const openBtn = document.getElementById('open-change-photo');
+    const modal = document.getElementById('profile-image-modal');
+    const fileInput = document.getElementById('popup-profile-image-upload');
+    const preview = document.getElementById('popup-profile-image-preview');
+    const cancelBtn = document.getElementById('popup-cancel-btn');
+    const form = document.getElementById('profile-image-form');
+    const errDiv = document.getElementById('popup-profile-image-errors');
+    const currentImg = document.getElementById('current-profile-image');
+
+    function showModal() {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        errDiv.textContent = '';
+    }
+
+    function hideModal() {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+        // clear selection & preview (revert to current image)
+        fileInput.value = '';
+        preview.src = currentImg.src;
+        errDiv.textContent = '';
+    }
+
+    if (openBtn) openBtn.addEventListener('click', showModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', hideModal);
+
+    // preview selected file
+    if (fileInput) {
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            // basic validation
+            if (!file.type.startsWith('image/')) {
+                errDiv.textContent = 'Please select an image file.';
+                e.target.value = '';
+                return;
+            }
+            const maxBytes = 5 * 1024 * 1024;
+            if (file.size > maxBytes) {
+                errDiv.textContent = 'Maximum file size is 5 MB.';
+                e.target.value = '';
+                return;
+            }
+            errDiv.textContent = '';
+            const reader = new FileReader();
+            reader.onload = function (ev) {
+                preview.src = ev.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // submit via AJAX to new UploadProfileImage endpoint
+    if (form) {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            errDiv.textContent = '';
+
+            const file = fileInput.files && fileInput.files[0];
+            if (!file) {
+                errDiv.textContent = 'Please select a file to upload.';
+                return;
+            }
+
+            // get antiforgery token from the form input
+            const tokenElem = form.querySelector('input[name="__RequestVerificationToken"]');
+            const token = tokenElem ? tokenElem.value : '';
+
+            const fd = new FormData();
+            fd.append('profileImage', file);
+            if (token) fd.append('__RequestVerificationToken', token);
+
+            try {
+                const resp = await fetch('/Profile/ChangeImage', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    body: fd
+                });
+
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && data.success) {
+                    
+                       location.reload(); // simple way to refresh
+
+                        return;
+                    }
+                    console.log('Unexpected response data', data);
+                }
+
+                // parse error json if available
+                const errJson = await resp.json().catch(() => null);
+                if (errJson && errJson.errors && errJson.errors.length > 0) {
+                    errDiv.textContent = errJson.errors.join(' ');
+                } else {
+                    errDiv.textContent = 'Failed to upload. Try again.';
+                }
+            } catch (err) {
+                console.error(err);
+                errDiv.textContent = 'Failed to upload. Check console for details.';
+            }
+        });
+    }
+});
+</script>
+}

@@ -3,48 +3,8 @@
 }
 @model List<MyMvcAuthProject.Models.Favorite>
     <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-        <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
-            <nav>
-                <ul class="space-y-2">
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Dashboard" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-tachometer-alt mr-3"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="AdminListings" class="flex items-center p-3 bg-primary text-white rounded-lg">
-                            <i class="fas fa-home mr-3"></i>
-                            <span>My Listings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Saved" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-heart mr-3"></i>
-                            <span>Saved Properties</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Messages" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-envelope mr-3"></i>
-                            <span>Messages</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Profile" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-cog mr-3"></i>
-                            <span>Profile Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                            <i class="fas fa-sign-out-alt mr-3"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+          @await Html.PartialAsync("_AccountSidebar")
+
         <main class="flex-1">
             <div class="bg-white rounded-lg shadow p-6 mb-6">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

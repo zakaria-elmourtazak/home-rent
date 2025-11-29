@@ -5,7 +5,55 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
+      
+     var user = UserManager.GetUserAsync(User).Result ?? new ApplicationUser();
+    <li class="nav-item dropdown">
+    <a class="nav-link d-flex align-items-center" href="#" id="profileDropdown"
+       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="@(!string.IsNullOrWhiteSpace(user.ProfileImageUrl) ? user.ProfileImageUrl : "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80")"
+             class="rounded-circle border border-primary"
+             width="42" height="42" style="object-fit:cover;">
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end profile-menu shadow-lg"
+        aria-labelledby="profileDropdown">
+
+        <li class="px-3 py-2 d-flex align-items-center profile-header">
+            <img src="@(!string.IsNullOrWhiteSpace(user.ProfileImageUrl) ? user.ProfileImageUrl : "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80")"
+                 class="rounded-circle me-2"
+                 width="45" height="45" style="object-fit:cover;">
+            <div>
+                <div class="fw-semibold  ">@user.UserName </div>
+                <small class="text-muted">@user.Email</small>
+            </div>
+        </li>
+        <li ><a class="dropdown-item profile-item " asp-area="" asp-controller="Home" asp-action="Dashboard">
+            Dashboard
+        </a></li>
+
+        <li><a class="dropdown-item profile-item" asp-area="" asp-controller="Home" asp-action="AdminListings">
+            My Listings
+        </a></li>
+        <li><a class="dropdown-item profile-item" asp-area="" asp-controller="Home" asp-action="Saved">
+            Saved Properties
+        </a></li>
+        <li><a class="dropdown-item profile-item" asp-area="" asp-controller="Home" asp-action="Messages">
+            Messages
+        </a></li>
+        <li><a class="dropdown-item profile-item" asp-area="" asp-controller="Home" asp-action="Profile">
+            Profile
+        </a></li>
+        <li>
+        <a class="dropdown-item profile-item logout text-danger fw-semibold" >
+             <form asp-area="Identity" asp-page="/Account/Logout"
+                asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" >Logout</button>
+            </form>
+        </a></li>
+    </ul>
+</li>
+
+        @* <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello
                 @User.Identity?.Name!</a>
         </li>
@@ -14,7 +62,7 @@
                 asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
-        </li>
+        </li> *@
     }
     else
     {

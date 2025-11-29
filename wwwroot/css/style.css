@@ -212,3 +212,51 @@
         .btn-primary:hover::after {
             transform: rotate(30deg) translate(20%, 20%);
         }
+
+
+        /* Dropdown container */
+.profile-menu {
+    background: #ffffff !important; /* dark navy */
+    border-radius: 12px !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 260px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+/* Header section */
+.profile-header {
+    background:  #e5e5e5; /* bootstrap blue */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-header img {
+    border: 2px solid #0d6efd; /* bootstrap blue */
+}
+
+/* Menu items */
+.profile-item {
+    color: #121212 !important; /* light gray */
+    padding: 16px 16px;
+    transition: background 0.2s ease;
+    border-radius: 6px;
+    border-bottom: #eeeeee 0.1px solid;
+}
+
+.profile-item:hover {
+    background: rgb(244, 244, 244) !important; /* blue hover */
+    color: #0057da !important; /* bootstrap blue */
+    /* color: #fff !important; */
+}
+
+/* Logout */
+.logout:hover {
+    /* background: rgba(239, 68, 68, 0.15) !important; */
+}
+
+/* Remove default BS background */
+.dropdown-menu {
+    /* background: transparent !important; */
+    /* border: none !important; */
+}

@@ -57,6 +57,14 @@
       "PackagePath": "staticwebassets/images/Concept-Japanese house.png"
     },
     {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.jpg",
+      "PackagePath": "staticwebassets/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.png",
+      "PackagePath": "staticwebassets/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.png"
+    },
+    {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
