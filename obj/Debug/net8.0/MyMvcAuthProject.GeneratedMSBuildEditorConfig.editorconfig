@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Account/login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9sb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Account/register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9yZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/about.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9hYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -203,7 +203,7 @@ public class HomeController : Controller
         return View(vm);
     }
 
-
+ 
 
     public IActionResult Dashboard()
     {
@@ -273,4 +273,5 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
 }
