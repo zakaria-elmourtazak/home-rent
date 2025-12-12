@@ -26,33 +26,35 @@ public class AccountController : Controller
     // [ValidateAntiForgeryToken]
     public async Task<IActionResult> LoginAccount(LoginViewModel model)
     {
-
-        if (ModelState.IsValid)
+if (model == null || !ModelState.IsValid)
         {
-            // 1. Find the user by email
-            var user = await _userManager.FindByEmailAsync(model.Email);
-
-            // 2. Check if user exists and password is correct
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            TempData["LoginError"] = "Please correct the form errors and try again.";
+            TempData["Email"] = model?.Email;
+            return RedirectToAction("Login");
+        }
+        // try to find user and sign in using SignInManager (handles lockout/2fa)
+        var user = await _userManager.FindByEmailAsync(model.Email);
+         if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+try{
 
-                // 3. If all checks pass, sign the user in
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                _logger.LogInformation("User logged in.");
-
-                // 4. Redirect to the original page or home page
+            await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                // If login fails, tell the user
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View(model);
-            }
+                _logger.LogInformation("User logged in.");
+}catch(Exception ex)
+{
+                TempData["LoginError"] = "Invalid email or password.";
+}
+        }
+        else
+        {
+            // don't reveal whether the email exists
+            TempData["LoginError"] = "Invalid email or password.";
         }
 
-        // If we got this far, something failed, redisplay form
-        return View(model);
+        // preserve entered email so login view can re-populate the field
+        TempData["Email"] = model.Email;
+        return RedirectToAction("Login");
     }
 
     public IActionResult Login()
@@ -67,10 +69,24 @@ public class AccountController : Controller
 
     [HttpPost]
     [AllowAnonymous]
-    public IActionResult RegisterAccount(RegisterViewModel model)
+    public async Task<IActionResult> RegisterAccount(RegisterViewModel model)
     {
-        // if (ModelState.IsValid)
-        // {
+        if (model == null)
+        {
+            _logger.LogWarning("RegisterAccount called with null model.");
+            ModelState.AddModelError(string.Empty, "Invalid registration data.");
+            TempData["RegisterError"] = "Invalid registration data.";
+            return View("Register", model);
+        }
+
+        if (!ModelState.IsValid)
+        {
+            TempData["RegisterError"] = "Please correct the form errors and try again.";
+            return View("Register", model);
+        }
+
+        try
+        {
             var user = new ApplicationUser
             {
                 UserName = model.Username,
@@ -78,26 +94,31 @@ public class AccountController : Controller
                 PhoneNumber = model.PhoneNumber
             };
 
-            var result = _userManager.CreateAsync(user, model.Password).Result;
-
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");
-
-                // Optionally sign the user in after registration
-                _signInManager.SignInAsync(user, isPersistent: false).Wait();
+                await _signInManager.SignInAsync(user, isPersistent: false);
                 _logger.LogInformation("User logged in after registration.");
-
                 return RedirectToAction("Index", "Home");
             }
-            else
+
+            // add identity errors to ModelState so view shows them
+            foreach (var error in result.Errors)
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                ModelState.AddModelError(string.Empty, error.Description);
             }
-            return View(model);
+
+            TempData["RegisterError"] = "Registration failed. See errors below.";
+            return View("Register", model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Exception during registration.");
+            ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+            TempData["RegisterError"] = "An unexpected error occurred. Please try again later.";
+            return View("Register", model);
+        }
         }
 
         // // If we got this far, something failed, redisplay form

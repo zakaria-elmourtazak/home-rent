@@ -1,99 +1,13 @@
-@* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - HomeRent</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6',
-                        secondary: '#1e40af',
-                        accent: '#f97316'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        .input-group {
-            position: relative;
-        }
-        .input-group input:focus + label,
-        .input-group input:not(:placeholder-shown) + label {
-            transform: translateY(-1.5rem) scale(0.85);
-            color: #3b82f6;
-        }
-        .input-group label {
-            position: absolute;
-            left: 0.75rem;
-            top: 0.75rem;
-            transition: all 0.3s ease;
-            pointer-events: none;
-            color: #9ca3af;
-        }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .social-btn {
-            transition: all 0.3s ease;
-        }
-        .social-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50 transition-all duration-300 hover:shadow-xl">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-home text-primary text-2xl mr-2 animate-bounce"></i>
-                <h1 class="text-2xl font-bold text-gray-800 tracking-tight">HomeRent</h1>
-            </div>
-            
-            <nav class="hidden md:flex space-x-8">
-                <a href="index.html" class="text-gray-600 hover:text-primary transition duration-300">Home</a>
-                <a href="listings.html" class="text-gray-600 hover:text-primary transition duration-300">Listings</a>
-                <a href="about.html" class="text-gray-600 hover:text-primary transition duration-300">About</a>
-                <a href="contact.html" class="text-gray-600 hover:text-primary transition duration-300">Contact</a>
-                <a href="admin-dashboard.html" class="text-gray-600 hover:text-primary transition duration-300">Admin</a>
-            </nav>
-            
-            <div class="flex items-center space-x-4">
-                <a href="signin.html" class="hidden md:block bg-primary hover:bg-secondary text-white px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">Sign In</a>
-                <a href="signup.html" class="hidden md:block border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105">Sign Up</a>
-                <button class="md:hidden text-gray-600">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </header> *@
+@{
+    var errors = ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+    var loginError = TempData["LoginError"] as string;
+}
 
     <!-- Breadcrumb -->
     <div class="container mx-auto px-4 pt-4">
         <nav class="text-sm breadcrumbs">
             <ul class="flex space-x-2">
-                <li><a href="index.html" class="text-gray-600 hover:text-primary">Home</a></li>
+                <li><a  class="text-gray-600 hover:text-primary">Home</a></li>
                 <li class="before:content-['/'] before:mx-2 text-gray-400">Sign In</li>
             </ul>
         </nav>
@@ -110,7 +24,31 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
                 <p class="text-gray-600">Sign in to your account to continue</p>
             </div>
+    @if (!string.IsNullOrEmpty(loginError))
+            {
+                <div class="alert alert-danger alert-dismissible fade show mb-6" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <strong>Login Failed</strong>
+                    <p class="mb-0">@loginError</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
 
+            @* Model state summary *@
+            @if (ViewData.ModelState.Any(m => m.Value.Errors.Count > 0))
+            {
+                <div class="alert alert-warning alert-dismissible fade show mb-6" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Please fix the following errors:</strong>
+                    <ul class="mb-0 mt-2">
+                        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@err.ErrorMessage</li>
+                        }
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             <!-- Sign In Card -->
             <div class="bg-white rounded-xl shadow-xl card-hover p-8">
                 <form id="signin-form" asp-controller="Account"  asp-action="LoginAccount" method="post" class="space-y-6">
@@ -153,10 +91,10 @@
 
                 <!-- Social Sign In -->
                 <div class="space-y-3">
-                    <button class="w-full social-btn bg-white border border-gray-300 text-gray-700 py-3 rounded-lg flex items-center justify-center hover:bg-gray-50">
+                    @* <button class="w-full social-btn bg-white border border-gray-300 text-gray-700 py-3 rounded-lg flex items-center justify-center hover:bg-gray-50">
                         <i class="fab fa-google text-red-500 mr-3"></i>
                         Continue with Google
-                    </button>
+                    </button> *@
                     @* <button class="w-full social-btn bg-white border border-gray-300 text-gray-700 py-3 rounded-lg flex items-center justify-center hover:bg-gray-50">
                         <i class="fab fa-facebook text-blue-600 mr-3"></i>
                         Continue with Facebook

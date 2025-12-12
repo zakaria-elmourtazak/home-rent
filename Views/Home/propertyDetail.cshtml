@@ -5,6 +5,9 @@
 @{
     var p = Model.Property ;
     var isFavorite = Model.IsFavorite;
+    var lat = Model.MapLatitude;
+    var lon = Model.MapLongitude;
+    var similarProperties = Model.similarProperties;
 }
     <!-- Breadcrumb -->
     <div class="container mx-auto px-4 py-4">
@@ -101,8 +104,38 @@
                 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
                     <h2 class="text-2xl font-bold mb-4">Location</h2>
                     <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
-                        <p class="text-gray-500">Map Placeholder - @p.StreetAddress</p>
-                    </div>
+    @if (lat != null && lon != null)
+    {
+        var delta = 0.02; // adjust zoom: smaller = more zoom
+        var lonMin = lon.Value - delta;
+        var latMin = lat.Value - delta;
+        var lonMax = lon.Value + delta;
+        var latMax = lat.Value + delta;
+        var iframeSrc = $"https://www.openstreetmap.org/export/embed.html?bbox={lonMin.ToString()}%2C{latMin.ToString()}%2C{lonMax.ToString()}%2C{latMax.ToString()}&layer=mapnik&marker={lat.Value.ToString()}%2C{lon.Value.ToString()}";
+        <div class="w-full h-64 rounded-xl overflow-hidden border-2 border-dashed">
+            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                    src="@iframeSrc" style="border:0;"></iframe>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">
+            <a href="https://www.openstreetmap.org/?mlat=@lat&amp;mlon=@lon#map=14/@lat/@lon" target="_blank" class="text-primary hover:underline">Open in OpenStreetMap</a>
+        </p>
+    }
+    else
+    {
+        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+           <iframe
+        width="100%"
+        height="100%"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-7.65%2C33.55%2C-7.55%2C33.63&amp;layer=mapnik&amp;marker=33.589886%2C-7.603869"
+        style="border:0;">
+    </iframe>
+            @* <p class="text-gray-500">Map not available for this address (@p.StreetAddress)</p> *@
+        </div>
+    }           </div>
                 </div>
             </div>
             
@@ -160,7 +193,45 @@
                         Schedule Tour
                     </button>
                 </div>
-                
+                <div>
+               
+               @* contact info  *@
+                 <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
+                    
+                    <div class="space-y-6">
+                        
+                        <div class="flex">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-green-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">Phone Number</h3>
+                                <p class="text-gray-600">(123) 456-7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">Email Address</h3>
+                                <p class="text-gray-600">info@homerent.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-clock text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">Tour Hours</h3>
+                                <p class="text-gray-600">Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Contact Form -->
                 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
                     <h2 class="text-2xl font-bold mb-4">Contact Landlord</h2>
@@ -190,70 +261,44 @@
         </div>
         
         <!-- Similar Properties -->
-        <div class="mt-16">
+       
+                
+            </div>
+             <div class="mt-16">
             <h2 class="text-3xl font-bold mb-8">Similar Properties</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Property Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden 
-     transition-all duration-300 ease-out 
-     hover:-translate-y-2 hover:shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Suburban House" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold">$2,100/month</h3>
-                            <span class="bg-accent text-white text-sm px-3 py-1 rounded-full">House</span>
+                  @foreach (Property sp in similarProperties)
+                {
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden 
+                 transition-all duration-300 ease-out 
+                 hover:-translate-y-2 hover:shadow-lg">
+                        @if (sp.PropertyImages.Any())
+                        {
+                            <img src="@sp.PropertyImages.First().ImageUrl" alt="Modern Apartment"
+                                class="w-full h-48 object-cover" />
+                        }
+                        <div class="p-6">
+                            <div class="flex justify-between items-start">
+
+                                <h3 class="text-xl font-bold">$ @sp.PricePerMonth /month </h3>
+                                <span class="bg-accent text-white text-sm px-3 py-1 rounded-full"> @sp.PropertyType</span>
+                            </div>
+                            <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>@sp.City</p>
+                            <div class="flex justify-between mt-4 text-gray-700">
+                                <span><i class="fas fa-bed mr-1"></i>@sp.Bedrooms Beds</span>
+                                <span><i class="fas fa-bath mr-1"></i> @sp.Bathrooms Bath</span>
+                                <span><i class="fas fa-ruler-combined mr-1"></i> @sp.SquareFeet sqft</span>
+                            </div>
+                            <p class="mt-4 text-gray-600">@sp.Description</p>
+                            <a asp-controller="Home" asp-action="PropertyDetail" asp-route-id="@sp.Id"> <button
+                                    class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition"
+                                    >View Details</button>
+                            </a>
                         </div>
-                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>Austin, TX</p>
-                        <div class="flex justify-between mt-4 text-gray-700">
-                            <span><i class="fas fa-bed mr-1"></i> 4 Beds</span>
-                            <span><i class="fas fa-bath mr-1"></i> 3 Baths</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 2200 sqft</span>
-                        </div>
-                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
                     </div>
-                </div>
-                
-                <!-- Property Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden 
-     transition-all duration-300 ease-out 
-     hover:-translate-y-2 hover:shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cozy Studio" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold">$850/month</h3>
-                            <span class="bg-purple-500 text-white text-sm px-3 py-1 rounded-full">Studio</span>
-                        </div>
-                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>San Francisco, CA</p>
-                        <div class="flex justify-between mt-4 text-gray-700">
-                            <span><i class="fas fa-bed mr-1"></i> 1 Bed</span>
-                            <span><i class="fas fa-bath mr-1"></i> 1 Bath</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 500 sqft</span>
-                        </div>
-                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
-                    </div>
-                </div>
-                
-                <!-- Property Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden 
-     transition-all duration-300 ease-out 
-     hover:-translate-y-2 hover:shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Condo" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold">$2,800/month</h3>
-                            <span class="bg-green-500 text-white text-sm px-3 py-1 rounded-full">Condo</span>
-                        </div>
-                        <p class="text-gray-600 mt-2"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>Miami, FL</p>
-                        <div class="flex justify-between mt-4 text-gray-700">
-                            <span><i class="fas fa-bed mr-1"></i> 3 Beds</span>
-                            <span><i class="fas fa-bath mr-1"></i> 2 Baths</span>
-                            <span><i class="fas fa-ruler-combined mr-1"></i> 1500 sqft</span>
-                        </div>
-                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
-                    </div>
-                </div>
-            </div>
+                }
         </div>
     </main>
 

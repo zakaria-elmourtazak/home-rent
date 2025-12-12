@@ -50,4 +50,27 @@ body {
             align-items: center;
             justify-content: center;
             cursor: pointer;
+        } 
+
+          #global-loader {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(2px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        #global-loader.hidden { display: none; }
+        .loader-spinner {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 6px solid rgba(0,0,0,0.08);
+            border-top-color: var(--primary, #2563eb);
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-text { margin-top: 10px; color: #374151; font-size: 13px; text-align:center; }
+   

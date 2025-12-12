@@ -582,3 +582,19 @@ document.addEventListener("click", function (e) {
         document.querySelector(".profile-dropdown").style.display = "none";
     }
 });
+
+function togglePassword(id, btn) {
+    const input = document.getElementById(id);
+    if (!input) return;
+    const icon = btn && btn.querySelector('i');
+    if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) { icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+        btn && btn.setAttribute('aria-pressed', 'true');
+    } else {
+        input.type = 'password';
+        if (icon) { icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+        btn && btn.setAttribute('aria-pressed', 'false');
+    }
+}
+

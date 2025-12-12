@@ -77,9 +77,10 @@
                             <span><i class="fas fa-bath mr-1"></i> @p.Bathrooms Baths</span>
                             <span><i class="fas fa-ruler-combined mr-1"></i> @p.SquareFeet sqft</span>
                         </div>
-                        <p class="mt-4 text-gray-600">@p.Description</p>
-                        <button class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition">View Details</button>
-                    </div>
+                      <a asp-controller="Home" asp-action="PropertyDetail" asp-route-id="@p.Id"> <button
+                                    class="mt-6 w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg transition"
+                                    >View Details</button>
+                            </a>   </div>
                 </div>
                 }
                

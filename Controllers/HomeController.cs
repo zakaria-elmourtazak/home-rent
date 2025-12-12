@@ -6,6 +6,8 @@ using MyMvcAuthProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using System.Globalization;
+using System.Text.Json;
 
 namespace MyMvcAuthProject.Controllers;
 
@@ -144,6 +146,8 @@ public class HomeController : Controller
     {
         return View();
     }
+        [Authorize]
+
     public IActionResult AdminListings(int pageNumber = 1, int pageSize = 5)
     {
         IQueryable<Property> query = _db.Properties
@@ -180,6 +184,7 @@ public class HomeController : Controller
         var property = _db.Properties
             .Include(p => p.Amenities)
             .Include(p => p.PropertyImages)
+            // .Include(p => p.User)
             .FirstOrDefault(p => p.Id == id);
 
         if (property == null)
@@ -198,18 +203,76 @@ public class HomeController : Controller
         var vm = new PropertyDetailsViewModel
         {
             Property = property,
-            IsFavorite = isFavorite
+            IsFavorite = isFavorite,
+            similarProperties = _db.Properties
+                .Include(p => p.PropertyImages)
+                .Where(p => p.Id != id && p.PropertyType == property.PropertyType)
+                .Take(3)
+                .ToList()
         };
+
+        // use explicit map location field if present, otherwise address
+        var locationSource = $"{property.StreetAddress}, {property.City}, {property.State}, {property.ZipCode}";
+        var coords = await ResolveLocationAsync(locationSource);
+        if (coords.lat.HasValue && coords.lon.HasValue)
+        {
+            vm.MapLatitude = coords.lat.Value;
+            vm.MapLongitude = coords.lon.Value;
+        }
+
         return View(vm);
     }
 
- 
+  private async Task<(double? lat, double? lon)> ResolveLocationAsync(string location)
+    {
+        if (string.IsNullOrWhiteSpace(location))
+            return (null, null);
+
+        // try parse "lat,lon"
+        var parts = location.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
+        if (parts.Length >= 2
+            && double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out var lat)
+            && double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out var lon))
+        {
+            return (lat, lon);
+        }
+
+        // fallback: geocode using Nominatim
+        try
+        {
+            using var http = new HttpClient();
+            http.DefaultRequestHeaders.UserAgent.ParseAdd("MyMvcAuthProject/1.0 (contact@example.com)");
+            var url = $"https://nominatim.openstreetmap.org/search?format=json&q={Uri.EscapeDataString(location)}&limit=1";
+            var json = await http.GetStringAsync(url);
+            using var doc = JsonDocument.Parse(json);
+            var arr = doc.RootElement;
+            if (arr.GetArrayLength() > 0)
+            {
+                var first = arr[0];
+                if (first.TryGetProperty("lat", out var latEl) && first.TryGetProperty("lon", out var lonEl)
+                    && double.TryParse(latEl.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var gLat)
+                    && double.TryParse(lonEl.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var gLon))
+                {
+                    return (gLat, gLon);
+                }
+            }
+        }
+        catch
+        {
+            // ignore failures, return nulls
+        }
+
+        return (null, null);
+    }
+
+    [Authorize]
 
     public IActionResult Dashboard()
     {
 
         return View();
     }
+    [Authorize]
 
     public async Task<IActionResult> Saved()
     {
@@ -224,6 +287,8 @@ public class HomeController : Controller
         return View(favorites);
 
     }
+        [Authorize]
+
     public IActionResult Messages()
     {
         return View();
@@ -250,10 +315,11 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+        [Authorize]
+
     // [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Property model)
     {
-        Console.WriteLine("Create Property called");
 
         if (!ModelState.IsValid) return RedirectToAction("AdminListings", "Home");
 

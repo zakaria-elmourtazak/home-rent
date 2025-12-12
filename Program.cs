@@ -21,6 +21,15 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
     builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // change these to your custom actions
+    options.LoginPath = "/Account/Login";           // redirect here when not authenticated
+    options.AccessDeniedPath = "/Account/AccessDenied"; // redirect here when access denied
+    // optional:
+    // options.ReturnUrlParameter = "returnUrl";
+    // options.Cookie.Name = "MyMvcAuthProject.Auth";
+});
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
