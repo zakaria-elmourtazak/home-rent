@@ -221,10 +221,10 @@ document.head.appendChild(style);
 //                 }
 //             }
 //         }
- document.getElementById("sortBySelectForm").addEventListener("change", function() {
-            // Submit the form when sort option changes
-            document.getElementById("filter-sort-form").submit();
-        });
+//  document.getElementById("sortBySelectForm").addEventListener("change", function() {
+//             // Submit the form when sort option changes
+//             document.getElementById("filter-sort-form").submit();
+//         });
      document.getElementById('image-upload').addEventListener('change', function(e) {
             const files = e.target.files;
             const previewContainer = document.getElementById('image-preview');
@@ -313,7 +313,8 @@ document.head.appendChild(style);
         }
     });
 });
-         const addPropertyBtn = document.getElementById('add-property-btn');
+        const addPropertyBtn = document.getElementById('add-property-btn');
+        console.log('Add Property Button:', addPropertyBtn);
         const propertyFormContainer = document.getElementById('property-form-container');
         const formTitle = document.getElementById('form-title');
         const propertyForm = document.getElementById('property-form');
@@ -323,6 +324,7 @@ document.head.appendChild(style);
         
         // Show add property form
         addPropertyBtn.addEventListener('click', () => {
+            console.log('Add Property button clicked');
             formTitle.textContent = 'Add New Property';
             propertyFormContainer.classList.remove('hidden');
             propertyForm.reset();
@@ -405,39 +407,111 @@ document.head.appendChild(style);
           try { loadProducts(); } catch (e) { console.error('loadProducts error', e); }
     try { loadCart(); } catch (e) { console.error('loadCart error', e); }
 
+// ...existing code...
+// updated renderPreviews with idempotent guard to avoid duplicate renders
+function renderPreviews(files, target) {
+    if (!target || !files || files.length === 0) return;
 
-    // helper to render previews
-    function renderPreviews(files, target) {
-        if (!target) return;
-        target.innerHTML = '';
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            if (!file.type.match('image.*')) continue;
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const previewItem = document.createElement('div');
-                previewItem.className = 'image-preview-item inline-block mr-2 mb-2';
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = 'Property Image';
-                img.className = 'w-24 h-24 object-cover rounded';
-                const removeBtn = document.createElement('span');
-                removeBtn.className = 'remove-image cursor-pointer text-red-500 ml-1';
-                removeBtn.innerHTML = '&times;';
-                removeBtn.onclick = function () { previewItem.remove(); };
-                previewItem.appendChild(img);
-                previewItem.appendChild(removeBtn);
-                target.appendChild(previewItem);
+    // create a signature for the file list to avoid re-rendering the same files
+    const sig = Array.from(files).map(f => `${f.name}:${f.size}:${f.lastModified}`).join('|');
+    if (target.dataset.lastSig === sig) return; // already rendered same files
+    target.dataset.lastSig = sig;
+
+    target.innerHTML = '';
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!file.type.match('image.*')) continue;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'image-preview-item inline-block mr-2 mb-2';
+
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = 'Property Image';
+            img.className = 'w-24 h-24 object-cover rounded';
+
+            const removeBtn = document.createElement('span');
+            removeBtn.className = 'remove-image cursor-pointer text-red-500 ml-1';
+            removeBtn.innerHTML = '&times;';
+            removeBtn.onclick = function () {
+                previewItem.remove();
+                // update signature after removal to allow re-render if needed
+                target.dataset.lastSig = Array.from(target.querySelectorAll('img'))
+                    .map(img => img.src).join('|');
             };
-            reader.readAsDataURL(file);
-        }
+
+            previewItem.appendChild(img);
+            previewItem.appendChild(removeBtn);
+            target.appendChild(previewItem);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// attach handler only once
+(function () {
+    let imageUploadEl = document.getElementById('image-upload');
+    const imagePreviewEl = document.getElementById('image-preview');
+    if (!imageUploadEl || !imagePreviewEl) return;
+
+    // Replace the element with a clone to remove any previously attached event listeners
+    // (defensive: solves duplicate listeners if script accidentally ran more than once)
+    const newInput = imageUploadEl.cloneNode(true);
+    imageUploadEl.parentNode.replaceChild(newInput, imageUploadEl);
+    imageUploadEl = newInput;
+
+    // Debounced single handler
+    function onImageChange(e) {
+        // small debounce to collapse any rapid multiple events
+        if (imageUploadEl._previewTimeout) clearTimeout(imageUploadEl._previewTimeout);
+        imageUploadEl._previewTimeout = setTimeout(() => {
+            renderPreviews(e.target.files, imagePreviewEl);
+            imageUploadEl._previewTimeout = null;
+        }, 10);
     }
 
-    if (imageUpload && imagePreview) {
-        imageUpload.addEventListener('change', function (e) {
-            renderPreviews(e.target.files, imagePreview);
-        });
+    // Attach only once
+    if (!imageUploadEl.dataset.previewHandlerAttached) {
+        imageUploadEl.addEventListener('change', onImageChange);
+        imageUploadEl.dataset.previewHandlerAttached = '1';
     }
+})();
+// ...existing code...
+    // helper to render previews
+    // function renderPreviews(files, target) {
+    //     if (!target) return;
+    //     target.innerHTML = '';
+    //     for (let i = 0; i < files.length; i++) {
+    //         const file = files[i];
+    //         if (!file.type.match('image.*')) continue;
+    //         const reader = new FileReader();
+    //         reader.onload = function (e) {
+    //             const previewItem = document.createElement('div');
+    //             previewItem.className = 'image-preview-item inline-block mr-2 mb-2';
+    //             const img = document.createElement('img');
+    //             img.src = e.target.result;
+    //             img.alt = 'Property Image';
+    //             img.className = 'w-24 h-24 object-cover rounded';
+    //             const removeBtn = document.createElement('span');
+    //             removeBtn.className = 'remove-image cursor-pointer text-red-500 ml-1';
+    //             removeBtn.innerHTML = '&times;';
+    //             removeBtn.onclick = function () { previewItem.remove(); };
+    //             previewItem.appendChild(img);
+    //             previewItem.appendChild(removeBtn);
+    //             target.appendChild(previewItem);
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // }
+
+    // if (imageUpload && imagePreview) {
+    //     imageUpload.addEventListener('change', function (e) {
+    //         renderPreviews(e.target.files, imagePreview);
+    //     });
+    // }
 
     if (propertyForm) {
         // If you want default form submit to post to server, do nothing here.

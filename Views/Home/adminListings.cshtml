@@ -128,13 +128,10 @@
                         {
                             <a asp-action="AdminListings" asp-route-pageNumber="@(props.CurrentPage + 1)" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Next</a>
                         }
-
-                   
-                    
                 </div>
             </div>
         </div>
-
+</div>
         <!-- Add/Edit Property Form (Hidden by default) -->
         <div id="property-form-container" class="bg-white rounded-lg shadow-md p-6 hidden">
             <h2 id="form-title" class="text-2xl font-bold mb-6">Add New Property</h2>
@@ -193,11 +190,8 @@
                                         <select id="property-bathrooms" name="Bathrooms" class="w-full p-3 border rounded-lg" required>
                                     <option value="">Select</option>
                                     <option value="1">1</option>
-                                    <option value="1.5">1.5</option>
                                     <option value="2">2</option>
-                                    <option value="2.5">2.5</option>
                                     <option value="3">3</option>
-                                    <option value="3.5">3.5</option>
                                     <option value="4">4</option>
                                 </select>
                             </div>
@@ -253,51 +247,7 @@
                         </div>
                     </div>
                     
-                    <!-- Amenities -->
-                    @* <div>
-                        <h2 class="text-xl font-bold mb-4">Amenities</h2>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="wifi" class="mr-2">
-                                <label for="wifi">WiFi</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="parking" class="mr-2">
-                                <label for="parking">Parking</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="ac" class="mr-2">
-                                <label for="ac">Air Conditioning</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="pet-friendly" class="mr-2">
-                                <label for="pet-friendly">Pet Friendly</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="pool" class="mr-2">
-                                <label for="pool">Pool</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="gym" class="mr-2">
-                                <label for="gym">Gym</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="kitchen" class="mr-2">
-                                <label for="kitchen">Kitchen</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="cable" class="mr-2">
-                                <label for="cable">Cable TV</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="laundry" class="mr-2">
-                                <label for="laundry">Laundry</label>
-                            </div>
-                        </div>
-                    </div> *@
-                    
-                    <!-- Images -->
-                     <!-- Images -->
+                   
     <div>
         <h2 class="text-xl font-bold mb-4">Property Images</h2>
         <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">

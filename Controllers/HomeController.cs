@@ -146,8 +146,8 @@ public class HomeController : Controller
     {
         return View();
     }
-        [Authorize]
-
+    
+    [Authorize]
     public IActionResult AdminListings(int pageNumber = 1, int pageSize = 5)
     {
         IQueryable<Property> query = _db.Properties
@@ -156,7 +156,7 @@ public class HomeController : Controller
        .AsQueryable();
 
         int totalCount = query.Count();
-        // query = query.OrderByDescending(p => p.CreatedAt);
+        query = query.OrderByDescending(p => p.CreatedAt);
         var properties = query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
