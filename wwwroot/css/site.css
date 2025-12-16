@@ -1,5 +1,41 @@
 html {
   font-size: 14px;
+  .bg-white {
+    background-color: #bec2c6
+     /* #f5fbfa !important */
+  };
+  .primary {
+    color: #017b73 !important;
+  };
+  .bg-primary {
+    background-color: #017b73 !important;
+  };
+  .text-primary {
+    color: #017b73 !important;
+  };
+  .secondary {
+    color: #01655e !important;
+  };
+  .bg-secondary {
+    background-color: #01655e !important;
+  };
+  .text-secondary {
+    color: #01655e !important;
+  };
+  .border-primary {
+    border-color: #017b73 !important;
+  };
+  .border-secondary {
+    border-color: #01655e !important;
+  };
+  h2{
+    color: #017b73 !important;
+  }
+  .text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(167, 191, 186) !important;
+}
+
 }
 
 @media (min-width: 768px) {
@@ -74,3 +110,168 @@ body {
         @keyframes spin { to { transform: rotate(360deg); } }
         .loader-text { margin-top: 10px; color: #374151; font-size: 13px; text-align:center; }
    
+        /* =========================
+   iOS Toggle – Reusable
+   ========================= */
+
+.ios-toggle {
+  --toggle-width: 3rem;
+  --toggle-height: 1.5rem;
+  --toggle-padding: 2px;
+  --toggle-color: #019389;
+
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+  font-family: inherit;
+}
+
+.ios-toggle input {
+  display: none;
+}
+
+/* Track */
+.ios-toggle .toggle {
+  position: relative;
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  background: #e5e7eb;
+  border-radius: 999px;
+  padding: var(--toggle-padding);
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Knob */
+.ios-toggle .toggle::after {
+  content: "";
+  position: absolute;
+  width: calc(50% - var(--toggle-padding));
+  height: calc(100% - var(--toggle-padding) * 2);
+  background: white;
+  border-radius: 999px;
+  left: var(--toggle-padding);
+  top: var(--toggle-padding);
+  transition: transform 0.3s cubic-bezier(.17,.89,.32,1.2);
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+
+/* Checked */
+.ios-toggle input:checked + .toggle {
+  background: var(--toggle-color);
+}
+.ios-toggle input:checked + .toggle::after {
+  transform: translateX(100%);
+}
+
+/* Label */
+.ios-toggle .label {
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+/* =========================
+   Sizes (via attribute)
+   ========================= */
+
+.ios-toggle[data-size="sm"] {
+  --toggle-width: 2.5rem;
+  --toggle-height: 1.25rem;
+  --toggle-padding: 1.5px;
+}
+
+.ios-toggle[data-size="md"] {
+  --toggle-width: 3rem;
+  --toggle-height: 1.5rem;
+}
+
+.ios-toggle[data-size="lg"] {
+  --toggle-width: 3.6rem;
+  --toggle-height: 1.8rem;
+}
+
+/* =========================
+   Disabled
+   ========================= */
+
+.ios-toggle input:disabled + .toggle {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.ios-toggle input:disabled ~ .label {
+  opacity: 0.5;
+}
+/* ===== Custom Select ===== */
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.select-label {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+
+  background-color: #fff;
+  border: 1px solid #cbcbcb;
+  border-radius: 10px;
+  color: #a6a6a6;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Arrow */
+.select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  top: 38px;
+  /* font-size: 0.75rem; */
+  /* color: #6b7280; */
+  pointer-events: none;
+}
+
+/* Hover */
+.select:hover {
+  border-color: #9ca3af;
+}
+
+/* Focus */
+.select:focus {
+  outline: none;
+  border-color: #019389;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+/* Disabled */
+.select:disabled {
+  background-color: #f3f4f6;
+  color: #d1d5db95;
+  cursor: not-allowed;
+}
+
+.input:hover {
+  border-color: #9ca3af !important;
+}
+
+.input:focus {
+  outline: none !important;
+  border-color: #019389 !important;
+  box-shadow: 0 0 0 3px rgba(1, 123, 115, 0.15) !important;
+}
+
+.button:hover {
+  background-color: #01655e !important;
+}

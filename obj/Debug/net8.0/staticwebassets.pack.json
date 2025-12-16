@@ -5,12 +5,20 @@
       "PackagePath": "staticwebassets/MyMvcAuthProject.bundle.scp.css"
     },
     {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap.min.css"
+    },
+    {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/css/style.css",
       "PackagePath": "staticwebassets/css/style.css"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/css/style1.css",
+      "PackagePath": "staticwebassets/css/style1.css"
     },
     {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/favicon.ico",
@@ -57,12 +65,144 @@
       "PackagePath": "staticwebassets/images/Concept-Japanese house.png"
     },
     {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/about.jpg",
+      "PackagePath": "staticwebassets/images/about.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/call-to-action.jpg",
+      "PackagePath": "staticwebassets/images/call-to-action.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/carousel-1.jpg",
+      "PackagePath": "staticwebassets/images/carousel-1.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/carousel-2.jpg",
+      "PackagePath": "staticwebassets/images/carousel-2.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/debcc8fd050fab7724dc64086ac0d729.jpg",
+      "PackagePath": "staticwebassets/images/debcc8fd050fab7724dc64086ac0d729.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/header.jpg",
+      "PackagePath": "staticwebassets/images/header.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-apartment.png",
+      "PackagePath": "staticwebassets/images/icon-apartment.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-building.png",
+      "PackagePath": "staticwebassets/images/icon-building.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-condominium.png",
+      "PackagePath": "staticwebassets/images/icon-condominium.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-deal.png",
+      "PackagePath": "staticwebassets/images/icon-deal.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-house.png",
+      "PackagePath": "staticwebassets/images/icon-house.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-housing.png",
+      "PackagePath": "staticwebassets/images/icon-housing.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-luxury.png",
+      "PackagePath": "staticwebassets/images/icon-luxury.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-neighborhood.png",
+      "PackagePath": "staticwebassets/images/icon-neighborhood.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-search.png",
+      "PackagePath": "staticwebassets/images/icon-search.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/icon-villa.png",
+      "PackagePath": "staticwebassets/images/icon-villa.png"
+    },
+    {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.jpg",
       "PackagePath": "staticwebassets/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.jpg"
     },
     {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.png",
       "PackagePath": "staticwebassets/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/e7e18d5f-b99e-4272-92f9-3c46872e38cf.jpg",
+      "PackagePath": "staticwebassets/images/profiles/e7e18d5f-b99e-4272-92f9-3c46872e38cf.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/property-1.jpg",
+      "PackagePath": "staticwebassets/images/property-1.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/property-2.jpg",
+      "PackagePath": "staticwebassets/images/property-2.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/property-3.jpg",
+      "PackagePath": "staticwebassets/images/property-3.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/property-4.jpg",
+      "PackagePath": "staticwebassets/images/property-4.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/property-5.jpg",
+      "PackagePath": "staticwebassets/images/property-5.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/property-6.jpg",
+      "PackagePath": "staticwebassets/images/property-6.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/team-1.jpg",
+      "PackagePath": "staticwebassets/images/team-1.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/team-2.jpg",
+      "PackagePath": "staticwebassets/images/team-2.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/team-3.jpg",
+      "PackagePath": "staticwebassets/images/team-3.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/team-4.jpg",
+      "PackagePath": "staticwebassets/images/team-4.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/testimonial-1.jpg",
+      "PackagePath": "staticwebassets/images/testimonial-1.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/testimonial-2.jpg",
+      "PackagePath": "staticwebassets/images/testimonial-2.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/testimonial-3.jpg",
+      "PackagePath": "staticwebassets/images/testimonial-3.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/testimonial-4.jpg",
+      "PackagePath": "staticwebassets/images/testimonial-4.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/windows-11-dark-background-bloom-5k-blue-background-2560x1440-8405.png",
+      "PackagePath": "staticwebassets/images/windows-11-dark-background-bloom-5k-blue-background-2560x1440-8405.png"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/js/main.js",
+      "PackagePath": "staticwebassets/js/main.js"
     },
     {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/js/site.js",
@@ -295,6 +435,334 @@
     {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_accordion.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_accordion.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_alert.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_alert.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_badge.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_badge.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_breadcrumb.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_breadcrumb.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_button-group.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_button-group.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_buttons.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_buttons.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_card.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_card.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_carousel.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_carousel.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_close.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_close.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_containers.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_containers.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_dropdown.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_dropdown.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_forms.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_forms.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_functions.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_functions.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_grid.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_grid.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_helpers.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_helpers.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_images.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_images.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_list-group.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_list-group.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_mixins.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_mixins.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_modal.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_modal.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_nav.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_nav.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_navbar.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_navbar.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_offcanvas.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_offcanvas.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_pagination.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_pagination.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_popover.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_popover.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_progress.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_progress.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_reboot.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_reboot.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_root.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_root.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_spinners.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_spinners.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_tables.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_tables.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_toasts.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_toasts.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_tooltip.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_tooltip.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_transitions.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_transitions.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_type.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_type.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_utilities.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_utilities.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/_variables.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/_variables.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/bootstrap-grid.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/bootstrap-grid.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/bootstrap-reboot.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/bootstrap-reboot.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/bootstrap-utilities.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/bootstrap-utilities.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/bootstrap.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/bootstrap.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_floating-labels.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_floating-labels.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_form-check.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_form-check.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_form-control.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_form-control.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_form-range.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_form-range.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_form-select.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_form-select.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_form-text.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_form-text.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_input-group.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_input-group.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_labels.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_labels.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/forms/_validation.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/forms/_validation.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_clearfix.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_clearfix.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_colored-links.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_colored-links.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_position.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_position.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_ratio.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_ratio.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_stretched-link.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_stretched-link.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_text-truncation.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_text-truncation.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/helpers/_visually-hidden.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/helpers/_visually-hidden.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_alert.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_alert.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_border-radius.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_border-radius.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_box-shadow.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_box-shadow.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_breakpoints.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_breakpoints.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_buttons.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_buttons.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_caret.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_caret.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_clearfix.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_clearfix.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_color-scheme.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_color-scheme.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_container.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_container.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_deprecate.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_deprecate.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_forms.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_forms.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_gradients.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_gradients.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_grid.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_grid.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_image.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_image.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_list-group.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_list-group.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_lists.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_lists.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_pagination.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_pagination.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_reset-text.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_reset-text.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_resize.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_resize.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_table-variants.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_table-variants.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_text-truncate.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_text-truncate.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_transition.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_transition.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_utilities.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_utilities.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/mixins/_visually-hidden.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/mixins/_visually-hidden.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/utilities/_api.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/utilities/_api.scss"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/scss/bootstrap/scss/vendor/_rfs.scss",
+      "PackagePath": "staticwebassets/scss/bootstrap/scss/vendor/_rfs.scss"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.MyMvcAuthProject.Microsoft.AspNetCore.StaticWebAssets.props",

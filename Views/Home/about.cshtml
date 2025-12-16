@@ -12,9 +12,9 @@
     </div> *@
 
     <!-- Hero Section -->
-    <section class="py-16 bg-gradient-to-r from-blue-500 to-indigo-700 text-white">
+    <section class="py-16 bg-gradient-green  from-green-500 to-green-600 text-white">
         <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">About HomeRent</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">About HomeRent</h1>
             <p class="text-xl max-w-3xl mx-auto">We're on a mission to simplify the rental process for tenants and landlords alike</p>
         </div>
     </section>
@@ -61,7 +61,7 @@
                     </p>
                 </div>
                 
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="bg-white p-8 rounded-lg shadow-sm text-center">
                     <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-handshake text-white text-2xl"></i>
                     </div>
@@ -169,8 +169,9 @@
             <h2 class="text-3xl font-bold mb-4">Ready to Find or List Your Property?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of satisfied users who trust HomeRent for their rental needs</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="listings.html" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition">Browse Properties</a>
-                <a href="add-property.html" class="bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold transition">Post Your Property</a>
+                <a class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition" asp-area="" asp-controller="Home" asp-action="Listings">Browse Properties</a>
+                <a class="bg-primary hover:bg-secondary text-white px-8 py-3 rounded-lg font-bold transition button" asp-area="" asp-controller="Home" asp-action="Dashboard">
+                      Post Your Property</a>
             </div>
         </div>
     </section>

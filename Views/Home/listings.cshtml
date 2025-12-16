@@ -5,147 +5,186 @@
 
 
 <!-- Breadcrumb -->
-<div class="container mx-auto px-4 py-4">
+@* <div class="container mx-auto px-4 py-4">
     <nav class="text-sm breadcrumbs">
         <ul class="flex space-x-2">
             <li><a href="index.html" class="text-gray-600 hover:text-primary">Home</a></li>
             <li class="before:content-['/'] before:mx-2 text-gray-400">Listings</li>
         </ul>
     </nav>
-</div>
+</div> *@
 
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-8">
     <div class="flex flex-col lg:flex-row gap-8">
         <!-- Filters Sidebar -->
-        <aside class="lg:w-1/4 bg-white rounded-lg shadow-md p-6 h-fit">
-            <h2 class="text-xl font-bold mb-6">Filters</h2>
+        <aside class="lg:w-1/4 bg-white rounded-2xl shadow-sm p-6 pb-4 h-fit mt-2">
+            <h2 class="text-md font-bold mb-4">Filters</h2>
+            <form id="filter-form" method="post" action="/Home/FilterListings">
 
-           <form id="filter-form" method="post" action="/Home/FilterListings">
+                <!-- Pagination hidden fields -->
+                <input type="hidden" name="pageNumber" value="@Model.CurrentPage" />
+                <input type="hidden" name="pageSize" value="@Model.PageSize" />
 
-    <!-- Pagination hidden fields -->
-    <input type="hidden" name="pageNumber" value="@Model.CurrentPage" />
-    <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                <!-- Location -->
+                <div class="mb-3">
+                    <label class="block text-gray-500 font-medium text-sm mb-2">Location</label>
+                    <input type="text" name="filters[Location]" placeholder="City, State"
+                        class="w-full p-2 border rounded-lg hover:border-gray-400 input">
+                </div>
 
-    <!-- Location -->
-    <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2">Location</label>
-        <input type="text" name="filters[Location]" placeholder="City, State" class="w-full p-3 border rounded-lg">
-    </div>
+                <!-- Price Range -->
+                <div class="mb-3">
+                    <label class="block text-gray-500 text-sm font-medium mb-2">Price Range</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <input  type="number" name="filters[PriceMin]" placeholder="Min"
+                                class="w-full p-2 border rounded-lg input">
+                        </div>
+                        <div>
+                            <input type="number" name="filters[PriceMax]" placeholder="Max"
+                                class="w-full p-2 border rounded-lg input">
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Price Range -->
-    <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2">Price Range</label>
-        <div class="grid grid-cols-2 gap-3">
-            <div>
-                <input type="number" name="filters[PriceMin]" placeholder="Min" class="w-full p-3 border rounded-lg">
-            </div>
-            <div>
-                <input type="number" name="filters[PriceMax]" placeholder="Max" class="w-full p-3 border rounded-lg">
-            </div>
-        </div>
-    </div>
+                @* <!-- Bedrooms -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Bedrooms</label>
+                    <select name="filters[Bedrooms]" class="w-full p-3 border rounded-lg">
+                        <option value="">Any</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div> *@
 
-    <!-- Bedrooms -->
-    <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2">Bedrooms</label>
-        <select name="filters[Bedrooms]" class="w-full p-3 border rounded-lg">
-            <option value="">Any</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4+</option>
-        </select>
-    </div>
-<div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2">Bathrooms</label>
-        <select name="filters[Bathrooms]" class="w-full p-3 border rounded-lg">
-            <option value="">Any</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4+</option>
-        </select>
-    </div>
-    <!-- Property Type -->
-    <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2">Property Type</label>
-        <div class="space-y-2">
-            <div class="flex items-center">
-                <input type="checkbox" name="filters[PropertyType]" value="Apartment" class="mr-2">
-                <label>Apartment</label>
-            </div>
-            <div class="flex items-center">
-                <input type="checkbox" name="filters[PropertyType]" value="House" class="mr-2">
-                <label>House</label>
-            </div>
-            <div class="flex items-center">
-                <input type="checkbox" name="filters[PropertyType]" value="Condo" class="mr-2">
-                <label>Condo</label>
-            </div>
-            <div class="flex items-center">
-                <input type="checkbox" name="filters[PropertyType]" value="Studio" class="mr-2">
-                <label>Studio</label>
-            </div>
-        </div>
-    </div>
+                <div class="select-wrapper mb-3">
+                    <label for="bedrooms" class="mb-1 text-md font-medium text-gray-500 text-sm">Bedrooms</label>
+                    <select name="filters[Bedrooms]" id="bedrooms" class="select">
+                        <option value="">Any</option>
+                        <option>1 Bedroom</option>
+                        <option>2 Bedrooms</option>
+                        <option>3 Bedrooms</option>
+                    </select>
+                </div>
 
-    <button type="submit"
-        class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold">
-        Apply Filters
-    </button>
-</form>
+                <div class="select-wrapper mb-3">
+                    <label for="bathrooms" class="mb-1 text-md font-medium text-gray-500 text-sm">Bathrooms</label>
+                    <select name="filters[Bathrooms]" id="bathrooms" class="select">
+                        <option value="">Any</option>
+                        <option>1 Bathroom</option>
+                        <option>2 Bathrooms</option>
+                        <option>3 Bathrooms</option>
+                    </select>
+                </div>
+
+
+                @* <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Bathrooms</label>
+                    <select name="filters[Bathrooms]" class="w-full p-3 border rounded-lg">
+                        <option value="">Any</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div> *@
+                <!-- Property Type -->
+                <div class="mb-6">
+                    <label class="block text-gray-500 font-medium mb-3 text-sm">Property Type</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center mb-2">
+                            @* <input type="checkbox" name="filters[PropertyType]" value="Apartment" name="filters[PropertyType]" value="Apartment" class="mr-2"> *@
+                            <label class="ios-toggle" data-size="sm">
+                                <input type="checkbox" name="filters[PropertyType]" value="Apartment" checked />
+                                <span class="toggle"></span>
+                                <span class=" text-gray-500 text-xs pl-1">Apartment</span>
+                            </label>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <label class="ios-toggle" data-size="sm">
+
+                                <input type="checkbox" name="filters[PropertyType]" value="House" />
+                                <span class="toggle"></span>
+                                <span class=" text-gray-500  text-xs pl-1">House</span>
+                            </label>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <label class="ios-toggle" data-size="sm">
+                                <input type="checkbox" name="filters[PropertyType]" value="Condo" />
+                                <span class="toggle"></span>
+                                <span class=" text-gray-500  text-xs pl-1">Condo</span>
+                            </label>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <label class="ios-toggle" data-size="sm">
+                                <input type="checkbox" name="filters[PropertyType]" value="Studio" />
+                                <span class="toggle"></span>
+                                <span class=" text-gray-500  text-xs pl-1">Studio</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="w-full mt-2 bg-primary hover:bg-secondary text-white py-3 rounded-xl transition font-semibold button">
+                    Apply Filters
+                </button>
+            </form>
 
         </aside>
 
         <!-- Property Listings -->
         <div class="lg:w-3/4">
-            <div
-                class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold mb-4 md:mb-0">Available Properties</h2>
-
-                <div class="flex flex-wrap gap-4">
-                <form id="filter-sort-form" method="post" action="/Home/FilterListings">
-    <!-- Hidden inputs for pagination -->
-    <input type="hidden" name="pageNumber" value="@Model.CurrentPage" />
-    <input type="hidden" name="pageSize" value="@Model.PageSize" />
-                    <div class="flex items-center">
-                        <label class="mr-2">Sort by:</label>
-                        <select name="sortBy" class="filter-sort-form p-2 border rounded-lg" id="sortBySelectForm">
-    <option value="newest">Newest First</option>
-    <option value="oldest">Oldest First</option>
-    <option value="price_low">Price: Low → High</option>
-    <option value="price_high">Price: High → Low</option>
-</select>
-</form>
-                   
-                    </div>
-
-                    <div class="flex items-center">
-                        <button class="p-2 border rounded-lg mr-2 active-view" title="Grid View">
-                            <i class="fas fa-th-large"></i>
-                        </button>
-                        <button class="p-2 border rounded-lg" title="List View">
-                            <i class="fas fa-list"></i>
-                        </button>
-                    </div>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="flex items-center pt-0 mt-0">
+                    <button
+                        class="p-2 mr-2 bg-primary rounded-lg active-view  hover:bg-secondary text-white transition font-semibold">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="p-2 border rounded-lg " title="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
                 </div>
+
+                <form id="filter-sort-form" method="post" action="/Home/FilterListings">
+                    <div class="flex flex-wrap gap-4">
+                        <!-- Hidden inputs for pagination -->
+                        <input type="hidden" name="pageNumber" value="@Model.CurrentPage" />
+                        <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                        <div class="flex items-center">
+                            <label class="mr-2 text-sm text-gray-500">Sort by :</label>
+                            <select name="sortBy" class="filter-sort-form p-2 border rounded-lg input text-sm text-gray-500" id="sortBySelectForm">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="price_low">Price: Low → High</option>
+                                <option value="price_high">Price: High → Low</option>
+                            </select>
+                        </div>
+                </form>
+
+
             </div>
 
-            <!-- Properties Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               @{
-    // guard against null Model to avoid NullReferenceException
-    var props = Model ?? new {
-        Properties = new List<MyMvcAuthProject.Models.Property>(),
-        CurrentPage = 1,
-        PageSize = 1,
-        TotalCount = 0
-};
-}
-                @foreach (Property p in props.Properties)
+        </div>
+
+        <hr class="mb-3 mt-3 text-gray-400 pb-1/2 ">
+
+        <!-- Properties Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @{
+                // guard against null Model to avoid NullReferenceException
+                var props = Model ?? new
                 {
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden 
+                    Properties = new List<MyMvcAuthProject.Models.Property>(),
+                    CurrentPage = 1,
+                    PageSize = 1,
+                    TotalCount = 0
+                };
+            }
+            @foreach (Property p in props.Properties)
+            {
+                @* <div class="bg-white rounded-lg shadow-md overflow-hidden 
                  transition-all duration-300 ease-out 
                  hover:-translate-y-2 hover:shadow-lg">
                         @if (p.PropertyImages.Any())
@@ -171,47 +210,138 @@
                                     >View Details </button>
                             </a>
                         </div>
+                    </div> *@
+                            <a asp-controller="Home" asp-action="PropertyDetail" asp-route-id="@p.Id"> 
+                <div
+                    class="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                    @if (p.PropertyImages.Any())
+                    {
+                        <div class="bg-cover bg-center h-56 p-3 "
+                            style="background-image: url(@p.PropertyImages.First().ImageUrl)">
+                            <div class="flex justify-end">
+                                <span
+                                    class="bg-black/35 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                                    @p.PropertyType
+                                </span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bg-cover bg-center h-56 p-3 hover:scale-103 transition-transform duration-500"
+                            style="background-image: url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
+                            <div class="flex justify-end">
+                                <span
+                                    class="bg-black/35 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                                    @p.PropertyType
+                                </span>
+                            </div>
+                        </div>
+                    }
+                    <div class="p-4 space-y-1">
+                        <p class="uppercase tracking-wide text-sm font-bold text-gray-500">
+                            @p.Title • For Rent • 5y old
+                        </p>
+
+                        <p class="text-2xl text-gray-600 "><span class="text-primary">$</span>@p.PricePerMonth <span
+                                class="text-xs text-gray-500 tracking-wide  font-bold"> / MONTH</span> </p>
+
+
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 mr-1 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
+                            </svg>
+                            @p.StreetAddress, @p.City, @p.State
+                        </div>
                     </div>
+                    <div class="flex p-4 border-t border-gray-300 text-gray-700 text-sm bg-green-50">
+                        <div class="flex-1 inline-flex items-center">
+                            <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M0 16L3 5V1a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4l3 11v5a1 1 0 0 1-1 1v2h-1v-2H2v2H1v-2a1 1 0 0 1-1-1v-5zM19 5h1V1H4v4h1V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h2V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1zm0 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V6h-2v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6H3.76L1.04 16h21.92L20.24 6H19zM1 17v4h22v-4H1zM6 4v4h4V4H6zm8 0v4h4V4h-4z">
+                                </path>
+                            </svg>
+                            <p><span class="text-gray-600 font-bold">@p.Bedrooms</span> Beds</p>
+                        </div>
+                        <div class="flex-1 inline-flex items-center">
+                            <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M17.03 21H7.97a4 4 0 0 1-1.3-.22l-1.22 2.44-.9-.44 1.22-2.44a4 4 0 0 1-1.38-1.55L.5 11h7.56a4 4 0 0 1 1.78.42l2.32 1.16a4 4 0 0 0 1.78.42h9.56l-2.9 5.79a4 4 0 0 1-1.37 1.55l1.22 2.44-.9.44-1.22-2.44a4 4 0 0 1-1.3.22zM21 11h2.5a.5.5 0 1 1 0 1h-9.06a4.5 4.5 0 0 1-2-.48l-2.32-1.15A3.5 3.5 0 0 0 8.56 10H.5a.5.5 0 0 1 0-1h8.06c.7 0 1.38.16 2 .48l2.32 1.15a3.5 3.5 0 0 0 1.56.37H20V2a1 1 0 0 0-1.74-.67c.64.97.53 2.29-.32 3.14l-.35.36-3.54-3.54.35-.35a2.5 2.5 0 0 1 3.15-.32A2 2 0 0 1 21 2v9zm-5.48-9.65l2 2a1.5 1.5 0 0 0-2-2zm-10.23 17A3 3 0 0 0 7.97 20h9.06a3 3 0 0 0 2.68-1.66L21.88 14h-7.94a5 5 0 0 1-2.23-.53L9.4 12.32A3 3 0 0 0 8.06 12H2.12l3.17 6.34z">
+                                </path>
+                            </svg>
+                            <p><span class="text-gray-600 font-bold">@p.Bathrooms</span> Baths</p>
+                        </div>
+                        <div class="flex-1 inline-flex items-center">
+                            <svg class="h-6 w-6 text-gray-600 fill-current mr-3" viewBox="0 0 24 24">
+                                <path d="M3 3h18v2H3V3zm0 14h18v2H3v-2zm2-10h14v6H5V7z" />
+                            </svg>
+                            <p>
+                                <span class="text-gray-600 font-bold">120</span> m²
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+</a>
+            }
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-12 flex justify-center">
+
+            <nav class="flex items-center space-x-2">
+                @{
+                    var totalPages = (int)Math.Ceiling((double)props.TotalCount / props.PageSize);
+                    var currentPage = props.CurrentPage;
                 }
-              
-            </div>
 
-            <!-- Pagination -->
-            <div class="mt-12 flex justify-center">
-               
-                <nav class="flex items-center space-x-2">
-                    @{
-                        var totalPages = (int)Math.Ceiling((double)props.TotalCount / props.PageSize);
-                        var currentPage = props.CurrentPage;
-                    }
+                @if (currentPage > 1)
+                {
+                    <a asp-action="Listings" asp-route-pageNumber="@(currentPage - 1)"
+                        class="px-4 py-2 rounded-lg bg-white shadow-sm text-gray-600 hover:bg-gray-100">&laquo;</a>
+                }
 
-                    @if (currentPage > 1)
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    if (i == currentPage)
                     {
-                        <a asp-action="Listings" asp-route-pageNumber="@(currentPage - 1)"
-                            class="px-4 py-2 rounded-lg bg-white shadow-md text-gray-600 hover:bg-gray-100">&laquo;</a>
+                        <a asp-action="Listings" asp-route-pageNumber="@i"
+                            class="px-4 py-2 rounded-lg bg-primary text-white">@i</a>
                     }
-
-                    @for (int i = 1; i <= totalPages; i++)
+                    else
                     {
-                        if (i == currentPage)
-                        {
-                            <a asp-action="Listings" asp-route-pageNumber="@i"
-                                class="px-4 py-2 rounded-lg bg-primary text-white">@i</a>
-                        }
-                        else
-                        {
-                            <a asp-action="Listings" asp-route-pageNumber="@i"
-                                class="px-4 py-2 rounded-lg bg-white shadow-md text-gray-600 hover:bg-gray-100">@i</a>
-                        }
+                        <a asp-action="Listings" asp-route-pageNumber="@i"
+                            class="px-4 py-2 rounded-lg bg-white shadow-sm text-gray-600 hover:bg-gray-100">@i</a>
                     }
+                }
 
-                    @if (currentPage < totalPages)
-                    {
-                        <a asp-action="Listings" asp-route-pageNumber="@(currentPage + 1)"
-                            class="px-4 py-2 rounded-lg bg-white shadow-md text-gray-600 hover:bg-gray-100">&raquo;</a>
-                    }
-                </nav>
-            </div>
+                @if (currentPage < totalPages)
+                {
+                    <a asp-action="Listings" asp-route-pageNumber="@(currentPage + 1)"
+                        class="px-4 py-2 rounded-lg bg-white shadow-sm text-gray-600 hover:bg-gray-100">&raquo;</a>
+                }
+            </nav>
         </div>
     </div>
+    </div>
 </main>
+<script>
+    function multiSelect() {
+        return {
+            open: false,
+            options: ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'],
+            selectedOptions: [],
+            toggleOption(option) {
+                if (this.selectedOptions.includes(option)) {
+                    this.selectedOptions = this.selectedOptions.filter(item => item !== option);
+                } else {
+                    this.selectedOptions.push(option);
+                }
+            }
+        }
+    }
+</script>

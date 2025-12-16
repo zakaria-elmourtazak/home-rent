@@ -5,8 +5,8 @@
 
     Func<string, string, string> navClass = (ctrl, act) =>
     {
-        var baseCls = "text-gray-600 hover:text-primary transition duration-300";
-        var activeCls = " text-primary font-semibold hover:text-secondary border-b-2 border-primary";
+        var baseCls = "text-white hover:text-primary transition duration-300";
+        var activeCls = " text-white font-semibold hover:text-secondary border-b-2 border-primary";
         var isActive = string.Equals(ctrl, currentController, System.StringComparison.OrdinalIgnoreCase)
                        && (string.IsNullOrEmpty(act) || string.Equals(act, currentAction, System.StringComparison.OrdinalIgnoreCase));
         return isActive ? baseCls + activeCls : baseCls;
@@ -20,12 +20,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MyMvcAuthProject</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MyMvcAuthProject.styles.css" asp-append-version="true" />
       <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Template Stylesheet -->
     <script>
         tailwind.config = {
             theme: {
@@ -42,22 +47,24 @@
 </head>
 <body>
     
-    <header class="bg-white shadow-lg sticky top-0 z-50 transition-all duration-300 hover:shadow-xl">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center">
+    <header class=" site-header bg-gradient-green  from-green-500 to-green-600 sticky top-0"  >
+        <div class="container mx-auto  px-4 py-3 flex justify-between items-center" >
+            <div class="flex items-center" >
         <a class="flex"  asp-controller="Home" asp-action="Index">
-                <i class="fas fa-home text-primary text-2xl mr-2 animate-bounce"></i>
-                <h1 class="text-2xl font-bold text-gray-800 tracking-tight">HomeRent</h1>
+                <i class="fas fa-home text-white text-2xl mr-2 animate-bounce"></i>
+                <h1 class="text-2xl font-bold text-gray-800 tracking-tight text-white">HomeRent</h1>
             </a>
             </div>
-            <nav class="hidden md:flex space-x-8">
-                <a  class=" @(navClass("Home", "Index"))" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                <a  class="@(navClass("Home", "Listings"))" asp-area="" asp-controller="Home" asp-action="Listings">Listings</a>
-                <a class="@(navClass("Home", "About"))" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                <a  class="@(navClass("Home", "Contact"))" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+            <nav 
+            style=""
+            class="hidden md:flex space-x-8 text-white">
+                <a style="margin:0px !important"  class="border-none @(navClass("Home", "Index"))" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a  class="border-none  @(navClass("Home", "Listings"))" asp-area="" asp-controller="Home" asp-action="Listings">Listings</a>
+                <a class="border-none  @(navClass("Home", "About"))" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                <a  class="border-none  @(navClass("Home", "Contact"))" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                 @* <a  class="@(navClass("Home", "Dashboard"))" asp-area="" asp-controller="Home" asp-action="Dashboard">Admin</a> *@
             </nav>
-                                            <partial name="_LoginPartial" />
+             <partial name="_LoginPartial" />
         </div>
     </header>
         <main role="main" class="pb-3 bg-gray-50" >
@@ -68,25 +75,26 @@
 
     <!-- Footer -->
   <!-- Footer -->
+  
     <footer class="bg-gray-800 text-white pt-16 pb-8 mt-16">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
                     <div class="flex items-center mb-6">
                         <i class="fas fa-home text-primary text-2xl mr-2"></i>
-                        <h3 class="text-2xl font-bold">HomeRent</h3>
+                        <h3 class="text-2xl font-bold text-primary">HomeRent</h3>
                     </div>
                     <p class="text-gray-400 mb-6">Finding the perfect rental property made simple and secure.</p>
                     <div class="flex space-x-4">
-                        <a class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="text-gray-400 hover:text-white text-primary"><i class="fab fa-facebook-f"></i></a>
+                        <a class="text-gray-400 hover:text-white text-primary"><i class="fab fa-twitter"></i></a>
+                        <a class="text-gray-400 hover:text-white text-primary"><i class="fab fa-instagram"></i></a>
+                        <a class="text-gray-400 hover:text-white text-primary"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <h4 class="text-lg font-bold mb-6 text-primary">Quick Links</h4>
                     <ul class="space-y-3">
                         <li><a asp-area="" asp-controller="Home" asp-action="Index" class="text-gray-400 hover:text-white">Home</a></li>
                         <li><a  asp-area="" asp-controller="Home" asp-action="Listings" class="text-gray-400 hover:text-white">Listings</a></li>
@@ -97,18 +105,18 @@
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold mb-6">Property Types</h4>
+                    <h4 class="text-lg font-bold mb-6 text-primary">Property Types</h4>
                     <ul class="space-y-3">
-                        <li><a class="text-gray-400 hover:text-white">Apartments</a></li>
-                        <li><a class="text-gray-400 hover:text-white">Houses</a></li>
-                        <li><a class="text-gray-400 hover:text-white">Condos</a></li>
-                        <li><a class="text-gray-400 hover:text-white">Studios</a></li>
-                        <li><a class="text-gray-400 hover:text-white">Townhouses</a></li>
+                        <li><a class="text-gray-400 hover:text-white text-primary">Apartments</a></li>
+                        <li><a class="text-gray-400 hover:text-white text-primary">Houses</a></li>
+                        <li><a class="text-gray-400 hover:text-white text-primary">Condos</a></li>
+                        <li><a class="text-gray-400 hover:text-white text-primary">Studios</a></li>
+                        <li><a class="text-gray-400 hover:text-white text-primary">Townhouses</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold mb-6">Contact Info</h4>
+                    <h4 class="text-lg font-bold mb-6 text-primary">Contact Info</h4>
                     <ul class="space-y-3 text-gray-400">
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
