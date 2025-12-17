@@ -35,6 +35,9 @@ html {
   --tw-text-opacity: 1;
   color: rgb(167, 191, 186) !important;
 }
+.white-button:hover{
+    background-color: #e6e7e6 !important;
+}
 
 }
 
@@ -130,6 +133,8 @@ body {
 .ios-toggle input {
   display: none;
 }
+
+
 
 /* Track */
 .ios-toggle .toggle {
@@ -274,4 +279,91 @@ body {
 
 .button:hover {
   background-color: #01655e !important;
+}
+
+
+.profile {
+    position: relative;
+    text-align: center;
+    /* margin-top: 60px */
+}
+
+.profile img {
+    /* width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid red;
+    cursor: pointer */
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 111px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: all 2s;
+  display: none;
+}
+
+/* .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block
+} */
+
+.dropdown-content a:hover {
+    background-color: #ddd
+}
+
+
+.dropdown:focus-within .dropdown-content {
+  display: block;
+}
+
+
+
+.profile ul {
+    background-color: #fff;
+    width: 200px;
+   height: 273px;
+    border-radius: 10px;
+    right: 25px;
+    top: 7px;
+    position: absolute;
+    padding: 8px;
+    transition: all 0.5s;
+    z-index: 1
+}
+
+.profile ul::before {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    height: 10px;
+    width: 10px;
+    top: -5px;
+    transform: rotate(45deg);
+    left: 134px;
+}
+
+.profile ul li {
+    list-style: none;
+    text-align: left;
+    font-size: 15px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s;
+    cursor: pointer;
+    border-radius: 4px
+}
+
+.profile ul li:hover {
+    background-color: #eee
+}
+
+.profile ul li i {
+    margin-right: 7px
 }

@@ -479,6 +479,23 @@ function renderPreviews(files, target) {
         imageUploadEl.dataset.previewHandlerAttached = '1';
     }
 })();
+
+
+document.addEventListener('click', function (e) {
+  document.querySelectorAll('.dropdown').forEach(dropdown => {
+    if (dropdown.contains(e.target)) {
+      dropdown.classList.add('open');
+    } else {
+      dropdown.classList.remove('open');
+    }
+  });
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+});
 // ...existing code...
     // helper to render previews
     // function renderPreviews(files, target) {

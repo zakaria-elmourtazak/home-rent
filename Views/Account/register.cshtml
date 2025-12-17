@@ -6,7 +6,7 @@
     if (!string.IsNullOrWhiteSpace(registerError)) allErrors.Add(registerError);
     allErrors.AddRange(errors);
 }
-    <!-- Breadcrumb -->
+    @* <!-- Breadcrumb -->
     <div class="container mx-auto px-4 py-4">
         <nav class="text-sm breadcrumbs">
             <ul class="flex space-x-2">
@@ -14,7 +14,7 @@
                 <li class="before:content-['/'] before:mx-2 text-gray-400">Sign Up</li>
             </ul>
         </nav>
-    </div>
+    </div> *@
 
     <!-- Main Content -->
     <main class="min-h-screen flex items-center justify-center px-4 py-12">
@@ -25,7 +25,7 @@
                     <i class="fas fa-home text-white text-2xl"></i>
                 </div>
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Create Account</h2>
-                <p class="text-gray-600">Join thousands of property seekers and landlords</p>
+                <p class="text-gray-500">Join thousands of property seekers and landlords</p>
             </div>
       @if (allErrors.Any())
         {
@@ -104,36 +104,36 @@
                     <span class="px-4 text-gray-500 text-sm">OR</span>
                     <div class="flex-1 border-t border-gray-300"></div>
                 </div>
-
-            </div>
-
-            <!-- Sign Up Link -->
-            <div class="text-center mt-6">
-                <p class="text-gray-600">
+<div class="text-center mt-6">
+                <p class="text-gray-500">
                     Already have an account?
                     <a asp-controller="Account" asp-action="Login" class="text-primary hover:text-secondary font-semibold transition">Sign In</a>
                 </p>
             </div>
+            </div>
+
+            <!-- Sign Up Link -->
+            
 
             <!-- Features -->
-            <div class="grid grid-cols-3 gap-4 mt-8">
+               <div class="grid grid-cols-3 gap-4 mt-16">
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i class="fas fa-shield-alt text-green-500"></i>
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-shield-alt text-primary"></i>
                     </div>
                     <h4 class="text-sm font-semibold text-gray-800">Secure</h4>
                     <p class="text-xs text-gray-600">Your data is protected</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i class="fas fa-bolt text-blue-500"></i>
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-bolt text-primary"></i>
                     </div>
                     <h4 class="text-sm font-semibold text-gray-800">Fast</h4>
                     <p class="text-xs text-gray-600">Quick access to your account</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i class="fas fa-mobile-alt text-purple-500"></i>
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-mobile-alt text-primary"></i>
                     </div>
                     <h4 class="text-sm font-semibold text-gray-800">Mobile</h4>
                     <p class="text-xs text-gray-600">Access anywhere, anytime</p>

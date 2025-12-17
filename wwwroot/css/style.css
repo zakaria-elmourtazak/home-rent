@@ -117,7 +117,7 @@
             transition: all 0.3s ease;
         }
         .card-hover:hover {
-            transform: translateY(-5px);
+            transform: translateY(-0.2px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         .input-group {
@@ -164,7 +164,7 @@
             transition: all 0.3s ease;
         }
         .card-hover:hover {
-            transform: translateY(-8px);
+            transform: translateY(-1px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
         .input-group {

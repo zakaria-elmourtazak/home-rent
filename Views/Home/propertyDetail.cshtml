@@ -3,230 +3,261 @@
 }
 @model MyMvcAuthProject.Models.PropertyDetailsViewModel
 @{
-    var p = Model.Property ;
+    var p = Model.Property;
     var isFavorite = Model.IsFavorite;
     var lat = Model.MapLatitude;
     var lon = Model.MapLongitude;
     var similarProperties = Model.similarProperties;
 }
-    <!-- Breadcrumb -->
- 
+<!-- Breadcrumb -->
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Property Images -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <!-- Main Image -->
-                    <div class="relative">
+
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Property Images -->
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <!-- Main Image -->
+                <div class="relative">
                     @if (p.PropertyImages != null && p.PropertyImages.Any())
                     {
-                        <img id="main-image" src="@p.PropertyImages.First().ImageUrl" alt="Modern Apartment" class="w-full h-96 object-cover rounded-lg">
+                        <img id="main-image" src="@p.PropertyImages.First().ImageUrl" alt="Modern Apartment"
+                            class="w-full h-96 object-cover rounded-lg">
                     }
                     else
                     {
-                        <img id="main-image" src="https://via.placeholder.com/800x600?text=No+Image+Available" alt="No Image Available" class="w-full h-96 object-cover rounded-lg">
+                        <img id="main-image" src="https://via.placeholder.com/800x600?text=No+Image+Available"
+                            alt="No Image Available" class="w-full h-96 object-cover rounded-lg">
                     }
-                    </div>
-                    
-                    <!-- Thumbnails -->
-                    <div class="image-gallery">
-                        @foreach (var image in p.PropertyImages)
-                        {
-                            <img src="@image.ImageUrl" alt="Property Image" onclick="changeImage(this.src)">
-                        }
-                    </div>
                 </div>
-                
-                <!-- Property Description -->
-                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-                    <h2 class="text-2xl font-bold mb-4">Description</h2>
-                    <p class="text-gray-700 leading-relaxed">
+
+                <!-- Thumbnails -->
+                <div class="image-gallery">
+                    @foreach (var image in p.PropertyImages)
+                    {
+                        <img src="@image.ImageUrl" alt="Property Image" onclick="changeImage(this.src)">
+                    }
+                </div>
+            </div>
+
+            <!-- Property Description -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
+                <h2 class="text-xl font-bold mb-4">Description</h2>
+                <p class="text-gray-700 leading-relaxed">
                     @p.Description
-                    </p>
-                    @* <p class="text-gray-700 leading-relaxed mt-4">
+                </p>
+                @* <p class="text-gray-700 leading-relaxed mt-4">
                         The open-concept living and dining area is perfect for entertaining, while the private balcony offers a peaceful retreat overlooking the city skyline. Building amenities include a fitness center, rooftop terrace, and 24-hour concierge service.
                     </p>
                     <p class="text-gray-700 leading-relaxed mt-4">
                         Located just minutes from shopping, dining, and entertainment options, this apartment offers the perfect blend of urban convenience and comfortable living.
                     </p> *@
-                </div>
-                
-                <!-- Amenities -->
-                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-                    <h2 class="text-2xl font-bold mb-4">Amenities</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-wifi text-primary mr-2"></i>
-                            <span>WiFi</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-car text-primary mr-2"></i>
-                            <span>Parking</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-snowflake text-primary mr-2"></i>
-                            <span>Air Conditioning</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-paw text-primary mr-2"></i>
-                            <span>Pet Friendly</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-swimming-pool text-primary mr-2"></i>
-                            <span>Pool</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-dumbbell text-primary mr-2"></i>
-                            <span>Gym</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-utensils text-primary mr-2"></i>
-                            <span>Kitchen</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-tv text-primary mr-2"></i>
-                            <span>Cable TV</span>
-                        </div>
+            </div>
+
+            <!-- Amenities -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
+                <h2 class="text-xl font-bold mb-4">Amenities</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-wifi text-primary mr-2"></i>
+                        <span>WiFi</span>
                     </div>
-                </div>
-                
-                <!-- Map -->
-                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-                    <h2 class="text-2xl font-bold mb-4">Location</h2>
-                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
-    @if (lat != null && lon != null)
-    {
-        var delta = 0.02; // adjust zoom: smaller = more zoom
-        var lonMin = lon.Value - delta;
-        var latMin = lat.Value - delta;
-        var lonMax = lon.Value + delta;
-        var latMax = lat.Value + delta;
-        var iframeSrc = $"https://www.openstreetmap.org/export/embed.html?bbox={lonMin.ToString()}%2C{latMin.ToString()}%2C{lonMax.ToString()}%2C{latMax.ToString()}&layer=mapnik&marker={lat.Value.ToString()}%2C{lon.Value.ToString()}";
-        <div class="w-full h-64 rounded-xl overflow-hidden border-2 border-dashed">
-            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                    src="@iframeSrc" style="border:0;"></iframe>
-        </div>
-        <p class="text-sm text-gray-600 mt-2">
-            <a href="https://www.openstreetmap.org/?mlat=@lat&amp;mlon=@lon#map=14/@lat/@lon" target="_blank" class="text-primary hover:underline">Open in OpenStreetMap</a>
-        </p>
-    }
-    else
-    {
-        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
-           <iframe
-        width="100%"
-        height="100%"
-        frameborder="0"
-        scrolling="no"
-        marginheight="0"
-        marginwidth="0"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-7.65%2C33.55%2C-7.55%2C33.63&amp;layer=mapnik&amp;marker=33.589886%2C-7.603869"
-        style="border:0;">
-    </iframe>
-            @* <p class="text-gray-500">Map not available for this address (@p.StreetAddress)</p> *@
-        </div>
-    }           </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-car text-primary mr-2"></i>
+                        <span>Parking</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-snowflake text-primary mr-2"></i>
+                        <span>Air Conditioning</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-paw text-primary mr-2"></i>
+                        <span>Pet Friendly</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-swimming-pool text-primary mr-2"></i>
+                        <span>Pool</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-dumbbell text-primary mr-2"></i>
+                        <span>Gym</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-primary mr-2"></i>
+                        <span>Kitchen</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tv text-primary mr-2"></i>
+                        <span>Cable TV</span>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Property Details & Contact -->
-            <div>
-                <!-- Property Info -->
-                <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h1 class="text-2xl font-bold">@p.Title</h1>
-                        <span class="bg-black/35 backdrop-blur-sm text-white uppercase font-bold text-white text-sm px-3 py-1 rounded-full">@p.PropertyType</span>
+
+            <!-- Map -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
+                <h2 class="text-xl font-bold mb-4">Location</h2>
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+                    @if (lat != null && lon != null)
+                    {
+                        var delta = 0.02; // adjust zoom: smaller = more zoom
+                        var lonMin = lon.Value - delta;
+                        var latMin = lat.Value - delta;
+                        var lonMax = lon.Value + delta;
+                        var latMax = lat.Value + delta;
+                        var iframeSrc =
+                        $"https://www.openstreetmap.org/export/embed.html?bbox={lonMin.ToString()}%2C{latMin.ToString()}%2C{lonMax.ToString()}%2C{latMax.ToString()}&layer=mapnik&marker={lat.Value.ToString()}%2C{lon.Value.ToString()}";
+                        <div class="w-full h-64 rounded-xl overflow-hidden border-2 border-dashed">
+                            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0"
+                                marginwidth="0" src="@iframeSrc" style="border:0;"></iframe>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <a href="https://www.openstreetmap.org/?mlat=@lat&amp;mlon=@lon#map=14/@lat/@lon"
+                                target="_blank" class="text-primary hover:underline">Open in OpenStreetMap</a>
+                        </p>
+                    }
+                    else
+                    {
+                        <div
+                            class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+                            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0"
+                                marginwidth="0"
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=-7.65%2C33.55%2C-7.55%2C33.63&amp;layer=mapnik&amp;marker=33.589886%2C-7.603869"
+                                style="border:0;">
+                            </iframe>
+                            @* <p class="text-gray-500">Map not available for this address (@p.StreetAddress)</p> *@
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Details & Contact -->
+        <div>
+            <!-- Property Info -->
+            <div class="bg-white rounded-lg shadow-sm p-6 sticky top-6">
+                <div class="flex justify-between items-start mb-3">
+                    <h1 class="text-2xl font-bold text-gray-700">@p.Title</h1>
+                    <span
+                        class="bg-black/35 backdrop-blur-sm text-white uppercase font-bold text-white text-xs px-3 py-1 rounded-full">@p.PropertyType</span>
+                </div>
+
+                <div class="flex items-center text-gray-600 mb-2">
+                    <i class="fas fa-map-marker-alt text-gray-500 mr-3"></i>
+                    <span>@p.StreetAddress, @p.City</span>
+                     
+                </div>
+                <div class="flex items-center text-gray-600 mb-6">
+                <p>  <i class="fas fa-flag text-gray-500 mr-3"></i><span>@p.Country @p.State @p.ZipCode</span>
+                </p>
+                </div>
+               
+
+                <div class="text-3xl font-bold text-primary mb-4 ">$@p.PricePerMonth<span class="text-lg text-gray-500">
+                        / month</span></div>
+
+                <hr class="mb-6">
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+
+                    <div class="flex items-center">
+                        <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M0 16L3 5V1a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4l3 11v5a1 1 0 0 1-1 1v2h-1v-2H2v2H1v-2a1 1 0 0 1-1-1v-5zM19 5h1V1H4v4h1V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h2V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1zm0 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V6h-2v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6H3.76L1.04 16h21.92L20.24 6H19zM1 17v4h22v-4H1zM6 4v4h4V4H6zm8 0v4h4V4h-4z">
+                            </path>
+                        </svg>
+                        <p><span class="text-gray-600 font-bold">@p.Bedrooms</span> Beds</p>
                     </div>
-                    
-                    <div class="flex items-center text-gray-600 mb-6">
-                        <i class="fas fa-map-marker-alt text-red-500 mr-2"></i>
-                        <span>@p.StreetAddress, @p.City, @p.State @p.ZipCode</span>
+                    <div class="flex items-center">
+                        <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M17.03 21H7.97a4 4 0 0 1-1.3-.22l-1.22 2.44-.9-.44 1.22-2.44a4 4 0 0 1-1.38-1.55L.5 11h7.56a4 4 0 0 1 1.78.42l2.32 1.16a4 4 0 0 0 1.78.42h9.56l-2.9 5.79a4 4 0 0 1-1.37 1.55l1.22 2.44-.9.44-1.22-2.44a4 4 0 0 1-1.3.22zM21 11h2.5a.5.5 0 1 1 0 1h-9.06a4.5 4.5 0 0 1-2-.48l-2.32-1.15A3.5 3.5 0 0 0 8.56 10H.5a.5.5 0 0 1 0-1h8.06c.7 0 1.38.16 2 .48l2.32 1.15a3.5 3.5 0 0 0 1.56.37H20V2a1 1 0 0 0-1.74-.67c.64.97.53 2.29-.32 3.14l-.35.36-3.54-3.54.35-.35a2.5 2.5 0 0 1 3.15-.32A2 2 0 0 1 21 2v9zm-5.48-9.65l2 2a1.5 1.5 0 0 0-2-2zm-10.23 17A3 3 0 0 0 7.97 20h9.06a3 3 0 0 0 2.68-1.66L21.88 14h-7.94a5 5 0 0 1-2.23-.53L9.4 12.32A3 3 0 0 0 8.06 12H2.12l3.17 6.34z">
+                            </path>
+                        </svg>
+                        <p><span class="text-gray-600 font-bold">@p.Bathrooms</span> Baths</p>
                     </div>
-                    
-                    <div class="text-3xl font-bold text-primary mb-6">$@p.PricePerMonth<span class="text-lg text-gray-600">/month</span></div>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="flex items-center">
-                            <i class="fas fa-bed text-primary mr-2"></i>
-                            <span><strong>@p.Bedrooms</strong> Bedrooms</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-bath text-primary mr-2"></i>
-                            <span><strong>@p.Bathrooms</strong> Bathroom</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-ruler-combined text-primary mr-2"></i>
-                            <span><strong>@p.SquareFeet</strong> sqft</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-calendar-alt text-primary mr-2"></i>
-                            <span>Available Now</span>
-                        </div>
+                    <div class="flex items-center">
+                        <svg class="h-6 w-6 text-gray-600 fill-current mr-3" viewBox="0 0 24 24">
+                            <path d="M3 3h18v2H3V3zm0 14h18v2H3v-2zm2-10h14v6H5V7z" />
+                        </svg>
+                        <p>
+                            <span class="text-gray-600 font-bold">@p.SquareFeet</span> m²
+                        </p>
                     </div>
-                    <form asp-controller="Favorite" method="post" asp-action="AddFavorite" asp-route-id="@p.Id">
+                    <div class="flex items-center">
+                        <i class="fas fa-clock text-gray-700 mr-3"></i>
+
+                        <p> <span>Available </span></p>
+
+                    </div>
+                </div>
+                <form asp-controller="Favorite" method="post" asp-action="AddFavorite" asp-route-id="@p.Id">
                     @if (isFavorite)
                     {
-                        <button class="w-full bg-gray-400 text-white py-3 rounded-lg transition font-semibold mb-4" disabled>
+                        <button class="w-full bg-gray-400 text-white py-3 rounded-lg transition font-semibold mt-3"
+                            disabled>
                             <i class="fas fa-heart mr-2"></i> Saved
                         </button>
                     }
                     else
                     {
-     <button class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold mb-4" >
-                        <i class="fas fa-heart mr-2"></i> Save Property
-                    </button>
+                        <button
+                            class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold mt-3 ">
+                            <i class="fas fa-heart mr-2"></i> Save Property
+                        </button>
                     }
-</form>
-                   
-                    
-                    <button class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg transition font-semibold">
-                        Schedule Tour
-                    </button>
-                </div>
-                <div>
-               
-               @* contact info  *@
-                 <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-                    <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
-                    
+                </form>
+
+
+                @* <button
+                    class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg transition font-semibold">
+                    Schedule Tour
+                </button> *@
+            </div>
+            <div>
+
+                @* contact info  *@
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8 mt-4">
+                    <h2 class="text-xl font-bold mb-6">Contact Information</h2>
+
                     <div class="space-y-6">
-                        
+
+                        <div class="flex">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 ">
+                                <i class="fas fa-phone-alt text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg  text-gray-600">Phone Number</h3>
+                                <p class="text-gray-500 text-sm">(123) 456-7890</p>
+                            </div>
+                        </div>
+
                         <div class="flex">
                             <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-phone-alt text-green-500"></i>
+                                <i class="fas fa-envelope text-primary"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-lg mb-1">Phone Number</h3>
-                                <p class="text-gray-600">(123) 456-7890</p>
+                                <h3 class="font-semibold text-lg text-gray-600">Email Address</h3>
+                                <p class="text-gray-500 text-sm">info@homerent.com</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-purple-500"></i>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-clock text-primary"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-lg mb-1">Email Address</h3>
-                                <p class="text-gray-600">info@homerent.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex">
-                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-clock text-yellow-500"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg mb-1">Tour Hours</h3>
-                                <p class="text-gray-600">Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br></p>
+                                <h3 class="font-semibold text-lg text-gray-600">Tour Hours</h3>
+                                <p class="text-gray-500 text-sm">Monday - Friday: 9am - 6pm</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Contact Form -->
-                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-                    <h2 class="text-2xl font-bold mb-4">Contact Landlord</h2>
+                <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
+                    <h2 class="text-xl font-bold mb-4">Contact Landlord</h2>
                     <form>
                         <div class="mb-4">
                             <label class="block text-gray-700 mb-2">Name</label>
@@ -242,113 +273,114 @@
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 mb-2">Message</label>
-                            <textarea class="w-full p-3 border rounded-lg h-32" required>I'm interested in this property. Please let me know when I can schedule a viewing.</textarea>
+                            <textarea class="w-full p-3 border rounded-lg h-32"
+                                required>I'm interested in this property. Please let me know when I can schedule a viewing.</textarea>
                         </div>
-                        <button type="submit" class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold">
+                        <button type="submit"
+                            class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg transition font-semibold button">
                             Send Message
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-        
+
         <!-- Similar Properties -->
-       
-                
-            </div>
-             <div class="mt-16">
-            <h2 class="text-xl font-bold mb-8">Similar Properties</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Property Card 1 -->
-                  @foreach (Property sp in similarProperties)
-                {
-                                                   <a asp-controller="Home" asp-action="PropertyDetail" asp-route-id="@p.Id"> 
-
-                 <div
-                    class="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow  duration-300">
-                    @if (p.PropertyImages.Any())
-                    {
-                        <div class="bg-cover bg-center h-56 p-3 "
-                            style="background-image: url(@p.PropertyImages.First().ImageUrl)">
-                            <div class="flex justify-end">
-                                <span
-                                    class="bg-black/35 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
-                                    @p.PropertyType
-                                </span>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="bg-cover bg-center h-56 p-3 hover:scale-103 transition-transform duration-500"
-                            style="background-image: url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
-                            <div class="flex justify-end">
-                                <span
-                                    class="bg-black/35 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
-                                    @p.PropertyType
-                                </span>
-                            </div>
-                        </div>
-                    }
-                    <div class="p-4 space-y-1">
-                        <p class="uppercase tracking-wide text-sm font-bold text-gray-500">
-                            @p.Title • For Rent • 5y old
-                        </p>
-
-                        <p class="text-2xl text-gray-600 "><span class="text-primary">$</span>@p.PricePerMonth <span
-                                class="text-xs text-gray-500 tracking-wide  font-bold"> / MONTH</span> </p>
 
 
-                        <div class="flex items-center text-sm text-gray-600">
-                            <svg class="h-4 w-4 mr-1 fill-current" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
-                            </svg>
-                            @p.StreetAddress, @p.City, @p.State
-                        </div>
-                    </div>
-                    <div class="flex p-4 border-t border-gray-300 text-gray-700 text-sm bg-green-50">
-                        <div class="flex-1 inline-flex items-center">
-                            <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M0 16L3 5V1a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4l3 11v5a1 1 0 0 1-1 1v2h-1v-2H2v2H1v-2a1 1 0 0 1-1-1v-5zM19 5h1V1H4v4h1V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h2V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1zm0 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V6h-2v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6H3.76L1.04 16h21.92L20.24 6H19zM1 17v4h22v-4H1zM6 4v4h4V4H6zm8 0v4h4V4h-4z">
-                                </path>
-                            </svg>
-                            <p><span class="text-gray-600 font-bold">@p.Bedrooms</span> Beds</p>
-                        </div>
-                        <div class="flex-1 inline-flex items-center">
-                            <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M17.03 21H7.97a4 4 0 0 1-1.3-.22l-1.22 2.44-.9-.44 1.22-2.44a4 4 0 0 1-1.38-1.55L.5 11h7.56a4 4 0 0 1 1.78.42l2.32 1.16a4 4 0 0 0 1.78.42h9.56l-2.9 5.79a4 4 0 0 1-1.37 1.55l1.22 2.44-.9.44-1.22-2.44a4 4 0 0 1-1.3.22zM21 11h2.5a.5.5 0 1 1 0 1h-9.06a4.5 4.5 0 0 1-2-.48l-2.32-1.15A3.5 3.5 0 0 0 8.56 10H.5a.5.5 0 0 1 0-1h8.06c.7 0 1.38.16 2 .48l2.32 1.15a3.5 3.5 0 0 0 1.56.37H20V2a1 1 0 0 0-1.74-.67c.64.97.53 2.29-.32 3.14l-.35.36-3.54-3.54.35-.35a2.5 2.5 0 0 1 3.15-.32A2 2 0 0 1 21 2v9zm-5.48-9.65l2 2a1.5 1.5 0 0 0-2-2zm-10.23 17A3 3 0 0 0 7.97 20h9.06a3 3 0 0 0 2.68-1.66L21.88 14h-7.94a5 5 0 0 1-2.23-.53L9.4 12.32A3 3 0 0 0 8.06 12H2.12l3.17 6.34z">
-                                </path>
-                            </svg>
-                            <p><span class="text-gray-600 font-bold">@p.Bathrooms</span> Baths</p>
-                        </div>
-                        <div class="flex-1 inline-flex items-center">
-                            <svg class="h-6 w-6 text-gray-600 fill-current mr-3" viewBox="0 0 24 24">
-                                <path d="M3 3h18v2H3V3zm0 14h18v2H3v-2zm2-10h14v6H5V7z" />
-                            </svg>
-                            <p>
-                                <span class="text-gray-600 font-bold">120</span> m²
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-                </a>
-                }
-        </div>
-    </main>
-
-    <!-- Image Modal -->
-    <div id="image-modal" class="modal">
-        <div class="modal-content">
-            <span class="close absolute top-4 right-8 text-white text-4xl cursor-pointer" onclick="closeModal()">&times;</span>
-            <img id="modal-image" src="" alt="Property Image">
-        </div>
     </div>
+    <div class="mt-16">
+        <h2 class="text-xl font-bold mb-8">Similar Properties</h2>
 
-  
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Property Card 1 -->
+            @foreach (Property sp in similarProperties)
+            {
+                <a asp-controller="Home" asp-action="PropertyDetail" asp-route-id="@p.Id">
+
+                    <div
+                        class="bg-white shadow-sm rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow  duration-300">
+                        @if (p.PropertyImages.Any())
+                        {
+                            <div class="bg-cover bg-center h-56 p-3 "
+                                style="background-image: url(@p.PropertyImages.First().ImageUrl)">
+                                <div class="flex justify-end">
+                                    <span
+                                        class="bg-black/35 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                                        @p.PropertyType
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="bg-cover bg-center h-56 p-3 hover:scale-103 transition-transform duration-500"
+                                style="background-image: url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
+                                <div class="flex justify-end">
+                                    <span
+                                        class="bg-black/35 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                                        @p.PropertyType
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                        <div class="p-4 space-y-1">
+                            <p class="uppercase tracking-wide text-sm font-bold text-gray-500">
+                                @p.Title • For Rent 
+                            </p>
+
+                            <p class="text-2xl text-gray-600 "><span class="text-primary">$</span>@p.PricePerMonth <span
+                                    class="text-xs text-gray-500 tracking-wide  font-bold"> / MONTH</span> </p>
+
+
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="h-4 w-4 mr-1 fill-current" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
+                                </svg>
+                                @p.StreetAddress, @p.City, @p.State
+                            </div>
+                        </div>
+                        <div class="flex p-4 border-t border-gray-300 text-gray-700 text-sm bg-green-50">
+                            <div class="flex-1 inline-flex items-center">
+                                <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M0 16L3 5V1a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4l3 11v5a1 1 0 0 1-1 1v2h-1v-2H2v2H1v-2a1 1 0 0 1-1-1v-5zM19 5h1V1H4v4h1V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h2V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1zm0 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V6h-2v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6H3.76L1.04 16h21.92L20.24 6H19zM1 17v4h22v-4H1zM6 4v4h4V4H6zm8 0v4h4V4h-4z">
+                                    </path>
+                                </svg>
+                                <p><span class="text-gray-600 font-bold">@p.Bedrooms</span> Beds</p>
+                            </div>
+                            <div class="flex-1 inline-flex items-center">
+                                <svg class="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M17.03 21H7.97a4 4 0 0 1-1.3-.22l-1.22 2.44-.9-.44 1.22-2.44a4 4 0 0 1-1.38-1.55L.5 11h7.56a4 4 0 0 1 1.78.42l2.32 1.16a4 4 0 0 0 1.78.42h9.56l-2.9 5.79a4 4 0 0 1-1.37 1.55l1.22 2.44-.9.44-1.22-2.44a4 4 0 0 1-1.3.22zM21 11h2.5a.5.5 0 1 1 0 1h-9.06a4.5 4.5 0 0 1-2-.48l-2.32-1.15A3.5 3.5 0 0 0 8.56 10H.5a.5.5 0 0 1 0-1h8.06c.7 0 1.38.16 2 .48l2.32 1.15a3.5 3.5 0 0 0 1.56.37H20V2a1 1 0 0 0-1.74-.67c.64.97.53 2.29-.32 3.14l-.35.36-3.54-3.54.35-.35a2.5 2.5 0 0 1 3.15-.32A2 2 0 0 1 21 2v9zm-5.48-9.65l2 2a1.5 1.5 0 0 0-2-2zm-10.23 17A3 3 0 0 0 7.97 20h9.06a3 3 0 0 0 2.68-1.66L21.88 14h-7.94a5 5 0 0 1-2.23-.53L9.4 12.32A3 3 0 0 0 8.06 12H2.12l3.17 6.34z">
+                                    </path>
+                                </svg>
+                                <p><span class="text-gray-600 font-bold">@p.Bathrooms</span> Baths</p>
+                            </div>
+                            <div class="flex-1 inline-flex items-center">
+                                <svg class="h-6 w-6 text-gray-600 fill-current mr-3" viewBox="0 0 24 24">
+                                    <path d="M3 3h18v2H3V3zm0 14h18v2H3v-2zm2-10h14v6H5V7z" />
+                                </svg>
+                                <p>
+                                    <span class="text-gray-600 font-bold">120</span> m²
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            }
+        </div>
+</main>
+
+<!-- Image Modal -->
+<div id="image-modal" class="modal">
+    <div class="modal-content">
+        <span class="close absolute top-4 right-8 text-white text-4xl cursor-pointer"
+            onclick="closeModal()">&times;</span>
+        <img id="modal-image" src="" alt="Property Image">
+    </div>
+</div>
