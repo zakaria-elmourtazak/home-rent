@@ -325,10 +325,10 @@ body {
 
 
 .profile ul {
-    background-color: #fff;
-    width: 200px;
+    background-color: #feffff;
+    width: 250px;
    height: 273px;
-    border-radius: 10px;
+    border-radius: 13px;
     right: 25px;
     top: 7px;
     position: absolute;
@@ -345,7 +345,7 @@ body {
     width: 10px;
     top: -5px;
     transform: rotate(45deg);
-    left: 134px;
+    left: 175px;
 }
 
 .profile ul li {
@@ -357,7 +357,7 @@ body {
     align-items: center;
     transition: all 0.5s;
     cursor: pointer;
-    border-radius: 4px
+    border-radius: 8px
 }
 
 .profile ul li:hover {

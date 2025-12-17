@@ -11,7 +11,7 @@
 }
 <div id="profile-image-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
     <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-lg p-6 z-10">
+    <div class="relative bg-white rounded-lg shadow-sm-sm w-full max-w-lg p-6 z-10">
         <h3 class="text-lg font-semibold mb-4">Change Profile Photo</h3>
 
         <form id="profile-image-form" asp-controller="Profile" asp-action="ChangeImage" method="post" enctype="multipart/form-data" class="space-y-4">
@@ -38,7 +38,7 @@
     </div>
 </div>
 <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-    @* <aside class="md:w-64 bg-white rounded-lg shadow-md p-6 h-fit">
+    @* <aside class="md:w-64 bg-white rounded-lg shadow-sm-md p-6 h-fit">
         <nav>
             <ul class="space-y-2">
                 <li>
@@ -104,12 +104,12 @@
                     </ul>
                 </div>
             }
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow-sm p-6">
             <h2 class="text-2xl font-bold mb-6">Profile Overview</h2>
             <div class="flex flex-col md:flex-row gap-6">
                 @* <div class="flex flex-col items-center text-center">
                     <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80"
-                        class="w-32 h-32 rounded-full border-4 border-primary shadow" alt="Admin">
+                        class="w-32 h-32 rounded-full border-4 border-primary shadow-sm" alt="Admin">
                     <button class="mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Change
                         Photo</button>
                 </div> *@
@@ -117,7 +117,7 @@
   
           <img id="popup-profile-image-preview"          src="@(!string.IsNullOrWhiteSpace(user.ProfileImageUrl) ? user.ProfileImageUrl : "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80")"
  alt="Preview"
-       style="width:112px; height:112px; object-fit:cover; display:block; max-width:none;"  class="rounded-full border-4 border-primary shadow"/>
+       style="width:112px; height:112px; object-fit:cover; display:block; max-width:none;"  class="rounded-full border-4 border-primary shadow-sm"/>
     <button id="open-change-photo" type="button" class="mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Change Photo</button>
 </div>
                 <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -141,24 +141,24 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow-sm p-6">
             <h2 class="text-2xl font-bold mb-6">Edit Profile</h2>
             <form asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="text-sm font-medium text-gray-600">User Name</label>
-                    <input name="UserName" type="text" class="w-full border rounded-lg p-3 mt-2" value="@user.UserName">
+                    <input name="UserName" type="text" class="w-full border rounded-lg p-3 mt-2 input" value="@user.UserName">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">Email Address</label>
-                    <input name="Email" type="email" class="w-full border rounded-lg p-3 mt-2" value="@user.Email">
+                    <input name="Email" type="email" class="w-full border rounded-lg p-3 mt-2 input" value="@user.Email">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">Phone Number</label>
-                    <input name="PhoneNumber" type="tel" class="w-full border rounded-lg p-3 mt-2" value="@user.PhoneNumber">
+                    <input name="PhoneNumber" type="tel" class="w-full border rounded-lg p-3 mt-2 input" value="@user.PhoneNumber">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">Time Zone</label>
-                    <select name="TimeZone" class="w-full border rounded-lg p-3 mt-2" value="@user.TimeZone">
+                    <select name="TimeZone" class="w-full border rounded-lg p-3 mt-2 input" value="@user.TimeZone">
                         <option>Eastern Time (EST)</option>
                         <option>Central Time (CST)</option>
                         <option>Pacific Time (PST)</option>
@@ -167,40 +167,40 @@
                 <div class="md:col-span-2">
                     <label class="text-sm font-medium text-gray-600">Bio</label>
                     <textarea name="Bio"
-                        class="w-full border rounded-lg p-3 mt-2 h-24">@user.Bio</textarea>
+                        class="w-full border rounded-lg p-3 mt-2 h-24 input">@user.Bio</textarea>
                 </div>
                 <div class="md:col-span-2 flex justify-end gap-4">
-                    <button type="button" class="px-6 py-3 border border-gray-300 rounded-lg">Cancel</button>
-                    <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Save Changes</button>
+                    <button type="button" class="px-6 py-3 border border-gray-300 rounded-lg white-button">Cancel</button>
+                    <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary button">Save Changes</button>
                 </div>
                 
             </form>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow-sm p-6">
             <h2 class="text-2xl font-bold mb-6">Security Settings</h2>
             <form  asp-action="ChangePassword" method="post"  asp-controller="Profile" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="text-sm font-medium text-gray-600">Current Password</label>
-                    <input type="password" name="OldPassword" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                    <input type="password" name="OldPassword" class="w-full border rounded-lg p-3 mt-2 input" placeholder="********">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">New Password</label>
-                    <input type="password" name="NewPassword" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                    <input type="password" name="NewPassword" class="w-full border rounded-lg p-3 mt-2 input" placeholder="********">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-gray-600">Confirm New Password</label>
-                    <input type="password" name="ConfirmPassword" class="w-full border rounded-lg p-3 mt-2" placeholder="********">
+                    <input type="password" name="ConfirmPassword" class="w-full border rounded-lg p-3 mt-2 input" placeholder="********">
                 </div>
                 
                 <div class="md:col-span-2 flex justify-end">
-                    <button  type="submit"  class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary">Update
+                    <button  type="submit"  class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary button">Update
                         Security</button>
                 </div>
             </form>
         </div>
 
-        @* <div class="bg-white rounded-lg shadow p-6">
+        @* <div class="bg-white rounded-lg shadow-sm p-6">
             <h2 class="text-2xl font-bold mb-6">Notification Preferences</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label class="flex items-center justify-between p-4 border rounded-lg">

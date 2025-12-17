@@ -9,14 +9,14 @@
 
     <!-- Main Content -->
     <main class="flex-1">
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="bg-white rounded-lg  shadow-sm p-6 mb-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                 <div>
-                    <h1 class="text-2xl font-bold mb-2">My Property Listings</h1>
-                    <p class="text-gray-600">Manage your property listings</p>
+                    <h1 class="text-2xl text-primary font-bold mb-2">My Property Listings</h1>
+                    <p class="text-gray-500">Manage your property listings</p>
                 </div>
                 <button id="add-property-btn"
-                    class="mt-4 md:mt-0 bg-accent hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition flex items-center">
+                    class="mt-4 md:mt-0 bg-primary hover:bg-primary-dark button text-white px-4 py-2 rounded-lg transition flex items-center">
                     <i class="fas fa-plus mr-2"></i> Add New Property
                 </button>
             </div>
@@ -69,11 +69,11 @@
                                     </td>
                                     <td class="py-3 px-6 text-left">
                                         <span
-                                            class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">@p.PropertyType</span>
+                                            class="bg-gray-200 text-gray-900 text-xs px-2 py-1 rounded-full">@p.PropertyType</span>
                                     </td>
                                     <td class="py-3 px-6 text-left">$@p.PricePerMonth/mo</td>
                                     <td class="py-3 px-6 text-left">
-                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">@p.City</span>
+                                        <span class="bg-green-100 text-primary text-xs px-2 py-1 rounded-full">@p.City</span>
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex item-center justify-center">
@@ -100,7 +100,7 @@
                 </table>
                 <div class="mt-6 flex justify-between items-center">
                 
-                    <p class="text-gray-600">Showing 1 to @props.TotalCount of @props.TotalCount entries</p>
+                    <p class="text-gray-600 text-sm cursor">Showing 1 to @props.TotalCount of @props.TotalCount entries</p>
                     @* <div class="flex space-x-2">
                         <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Previous</button>
                         <button class="px-4 py-2 bg-primary text-white rounded-lg">1</button>
@@ -111,53 +111,54 @@
                     <div class="flex space-x-2">
                         @if (props.CurrentPage > 1)
                         {
-                            <a asp-action="AdminListings" asp-route-pageNumber="@(props.CurrentPage - 1)" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Previous</a>
+                            <a asp-action="AdminListings" asp-route-pageNumber="@(props.CurrentPage - 1)" class="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">Previous</a>
                         }
                         @for (int i = 1; i <= (int)Math.Ceiling((double)props.TotalCount / props.PageSize); i++)
                         {
                             if (i == props.CurrentPage)
                             {
-                                <span class="px-4 py-2 bg-primary text-white rounded-lg">@i</span>
+                                <span class="px-4 py-2 bg-primary text-white rounded-lg button">@i</span>
                             }
                             else
                             {
-                                <a asp-action="AdminListings" asp-route-pageNumber="@i" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">@i</a>
+                                <a asp-action="AdminListings" asp-route-pageNumber="@i" class="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">@i</a>
                             }
                         }
                         @if (props.CurrentPage < (int)Math.Ceiling((double)props.TotalCount / props.PageSize))
                         {
-                            <a asp-action="AdminListings" asp-route-pageNumber="@(props.CurrentPage + 1)" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Next</a>
+                            <a asp-action="AdminListings" asp-route-pageNumber="@(props.CurrentPage + 1)" class="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">Next</a>
                         }
                 </div>
             </div>
         </div>
 </div>
         <!-- Add/Edit Property Form (Hidden by default) -->
-        <div id="property-form-container" class="bg-white rounded-lg shadow-md p-6 hidden">
-            <h2 id="form-title" class="text-2xl font-bold mb-6">Add New Property</h2>
+        <div id="property-form-container" class="bg-white rounded-lg  shadow-sm p-6 hidden">
+            <h2 id="form-title" class="text-2xl font-bold   mb-2">Add New Property</h2>
+               <p class="text-gray-500 mb-6">Property Information</p>
            <form asp-controller="Property" asp-action="Create" method="post" id="property-form" class="space-y-8" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
                 <input type="hidden" id="property-id" name="Id" value="">
 
                 <!-- Property Information -->
-                <div>
-                    <h2 class="text-xl font-bold mb-4">Property Information</h2>
+                <div >
+                    @* <p class="text-sm font-bold mb-4 text-gray-500 mt-0 pt-0"> Property Information</p> *@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="md:col-span-2">
                             <label class="block text-gray-700 font-medium mb-2">Property Title</label>
                             <input type="text" id="property-title" name="Title"
-                                placeholder="e.g. Modern Apartment Downtown" class="w-full p-3 border rounded-lg"
+                                placeholder="e.g. Modern Apartment Downtown" class="w-full p-3 border rounded-lg input"
                                 required>
                         </div>
                                                     
                             <div class="md:col-span-2">
                                 <label class="block text-gray-700 font-medium mb-2">Description</label>
-                                        <textarea id="property-description" name="Description" placeholder="Describe your property in detail..." class="w-full p-3 border rounded-lg h-32" required></textarea>
+                                        <textarea id="property-description" name="Description" placeholder="Describe your property in detail..." class="input w-full p-3 border rounded-lg h-32" required></textarea>
                             </div>
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Property Type</label>
-                                        <select id="property-type" name="PropertyType" class="w-full p-3 border rounded-lg" required>
+                                        <select id="property-type" name="PropertyType" class="input w-full p-3 border rounded-lg" required>
                                     <option value="">Select Property Type</option>
                                     <option value="Apartment">Apartment</option>
                                     <option value="House">House</option>
@@ -170,12 +171,12 @@
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Price per Month ($)</label>
-                                        <input type="number" id="property-price" name="PricePerMonth" step="0.01" placeholder="e.g. 1200" class="w-full p-3 border rounded-lg" required>
+                                        <input type="number" id="property-price" name="PricePerMonth" step="0.01" placeholder="e.g. 1200" class="input w-full p-3 border rounded-lg" required>
                             </div>
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Bedrooms</label>
-                                        <select id="property-bedrooms" name="Bedrooms" class="w-full p-3 border rounded-lg" required>
+                                        <select id="property-bedrooms" name="Bedrooms" class="input w-full p-3 border rounded-lg" required>
                                     <option value="">Select</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -187,7 +188,7 @@
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Bathrooms</label>
-                                        <select id="property-bathrooms" name="Bathrooms" class="w-full p-3 border rounded-lg" required>
+                                        <select id="property-bathrooms" name="Bathrooms" class="input w-full p-3 border rounded-lg" required>
                                     <option value="">Select</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -198,12 +199,12 @@
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Square Feet</label>
-                                        <input type="number" id="property-sqft" name="SquareFeet" placeholder="e.g. 900" class="w-full p-3 border rounded-lg" required>
+                                        <input type="number" id="property-sqft" name="SquareFeet" placeholder="e.g. 900" class="input w-full p-3 border rounded-lg" required>
                             </div>
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Available Date</label>
-                                        <input type="date" id="property-date" name="AvailableDate" class="w-full p-3 border rounded-lg" required>
+                                        <input type="date" id="property-date" name="AvailableDate" class="input w-full p-3 border rounded-lg" required>
                             </div>
                         </div>
                 </div>
@@ -214,17 +215,17 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-gray-700 font-medium mb-2">Street Address</label>
-                                <input type="text" id="property-street" name="StreetAddress" placeholder="e.g. 123 Main Street" class="w-full p-3 border rounded-lg" required>
+                                <input type="text" id="property-street" name="StreetAddress" placeholder="e.g. 123 Main Street" class="input w-full p-3 border rounded-lg" required>
                             </div>
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">City</label>
-                                <input type="text" id="property-city" name="City" placeholder="e.g. New York" class="w-full p-3 border rounded-lg" required>
+                                <input type="text" id="property-city" name="City" placeholder="e.g. New York" class="input w-full p-3 border rounded-lg" required>
                             </div>
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">State</label>
-                                <select id="property-state" name="State" class="w-full p-3 border rounded-lg" required>
+                                <select id="property-state" name="State" class="input w-full p-3 border rounded-lg" required>
                                     <option value="">Select State</option>
                                     <option value="NY">NY</option>
                                     <option value="CA">CA</option>
@@ -237,12 +238,12 @@
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">ZIP Code</label>
-                                <input type="text" id="property-zip" name="ZipCode" placeholder="e.g. 10001" class="w-full p-3 border rounded-lg" required>
+                                <input type="text" id="property-zip" name="ZipCode" placeholder="e.g. 10001" class="input w-full p-3 border rounded-lg" required>
                             </div>
                             
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Country</label>
-                                <input type="text" id="property-country" name="Country" value="United States" class="w-full p-3 border rounded-lg bg-gray-100" readonly>
+                                <input type="text" id="property-country" name="Country" value="United States" class="input w-full p-3 border rounded-lg bg-gray-100" readonly>
                             </div>
                         </div>
                     </div>
@@ -254,7 +255,7 @@
             <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
             <p class="text-gray-600 mb-4">Drag & drop images here or click to browse</p>
             <input type="file" id="image-upload" name="PropertyImages" class="hidden" accept="image/*" multiple>
-            <button type="button" class="bg-primary hover:bg-secondary text-white px-6 py-2 rounded-lg transition" onclick="document.getElementById('image-upload').click()">
+            <button type="button" class="button bg-primary hover:bg-secondary text-white px-6 py-2 rounded-lg transition" onclick="document.getElementById('image-upload').click()">
                 Select Images
             </button>
             <p class="text-gray-500 text-sm mt-2">Maximum file size: 5MB. Supported formats: JPG, PNG, GIF</p>
@@ -266,11 +267,11 @@
                     <!-- Form Actions -->
                 <div class="flex justify-end space-x-4 pt-6">
                     <button type="button" id="cancel-btn"
-                        class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                        class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition white-button">
                         Cancel
                     </button>
                     <button type="submit"
-                        class="bg-accent hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition font-semibold">
+                        class="bg-primary button text-white px-6 py-3 rounded-lg transition font-semibold button">
                         <i class="fas fa-save mr-2"></i> Save Property
                     </button>
                 </div>
