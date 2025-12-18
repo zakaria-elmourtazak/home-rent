@@ -31,11 +31,28 @@ builder.Services.ConfigureApplicationCookie(options =>
     // options.Cookie.Name = "MyMvcAuthProject.Auth";
 });
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
+
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
+    var user = new ApplicationUser
+    {
+        Id = "user1-id",
+        UserName = "user1",
+        Email = "user1@example.com"
+    };
+    db.Users.Add(user);
+    db.Users.Add(new ApplicationUser
+    {
+        Id = "user2-id",
+        UserName = "user2",
+        Email = "user2@example.com"
+    });
     for (int i = 1; i <= 10; i++)
     {
         var property = new Property
@@ -53,7 +70,8 @@ using (var scope = app.Services.CreateScope())
             State = "State",
             ZipCode = "12345",
             Country = "Country",
-            UserId = "sample-user-id" // Replace with actual user ID if needed
+            UserId = "user1-id"
+            
         };
 
         // Add some amenities
@@ -92,7 +110,7 @@ using (var scope = app.Services.CreateScope())
             var favorite = new Favorite
             {
                 PropertyId = prop.Id,
-                UserId = "user "+prop.Id 
+                UserId = "user "+prop.Id  
             };
             db.Favorites.Add(favorite);
         }
@@ -122,5 +140,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapHub<MyMvcAuthProject.Hubs.ChatHub>("/chathub");
 
 app.Run();

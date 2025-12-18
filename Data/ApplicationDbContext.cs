@@ -15,7 +15,9 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<PropertyImage> PropertyImages { get; set; }
 
     public DbSet<Favorite> Favorites { get; set; }
-
+ public DbSet<Conversation> Conversations { get; set; }
+    public DbSet<ConversationParticipant> ConversationParticipants { get; set; }
+    public DbSet<Message> Messages { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -37,6 +39,8 @@ public class ApplicationDbContext : IdentityDbContext
              modelBuilder.Entity<Models.Favorite>()
         .HasIndex(f => new { f.UserId, f.PropertyId })
         .IsUnique();
+
+        
 
     }
 }

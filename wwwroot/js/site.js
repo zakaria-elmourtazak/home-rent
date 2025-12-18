@@ -689,3 +689,61 @@ function togglePassword(id, btn) {
     }
 }
 
+//chat
+// ...existing code...
+(function () {
+  // toggle a single dropdown content element
+  function toggleDropdown(dropdown, show) {
+    const content = dropdown.querySelector('.dropdown-content');
+    const toggleEl = dropdown.querySelector('[data-toggle="dropdown"]');
+    if (!content) return;
+    if (show) {
+      content.style.display = 'block';
+      dropdown.classList.add('open');
+      if (toggleEl) toggleEl.setAttribute('aria-expanded', 'true');
+    } else {
+      content.style.display = 'none';
+      dropdown.classList.remove('open');
+      if (toggleEl) toggleEl.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  // close all dropdowns
+  function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown.open').forEach(dd => toggleDropdown(dd, false));
+  }
+
+  // delegate clicks
+  document.addEventListener('click', function (ev) {
+    const toggleClicked = ev.target.closest('[data-toggle="dropdown"]');
+    if (toggleClicked) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      const dropdown = toggleClicked.closest('.dropdown');
+      if (!dropdown) return;
+      const content = dropdown.querySelector('.dropdown-content');
+      const isOpen = dropdown.classList.contains('open');
+      // close others, then toggle this
+      closeAllDropdowns();
+      toggleDropdown(dropdown, !isOpen);
+      return;
+    }
+
+    // if clicked inside a dropdown-content, do nothing
+    if (ev.target.closest('.dropdown-content')) return;
+
+    // otherwise clicked outside — close all
+    closeAllDropdowns();
+  }, { passive: true });
+
+  // close on Escape
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') closeAllDropdowns();
+  });
+
+  // ensure dropdowns are closed on load
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.dropdown-content').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('[data-toggle="dropdown"]').forEach(btn => btn.setAttribute('aria-expanded','false'));
+  });
+})();

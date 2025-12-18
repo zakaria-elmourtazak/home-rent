@@ -129,6 +129,18 @@
       "PackagePath": "staticwebassets/images/icon-villa.png"
     },
     {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/65e678ff-deb6-4d7c-ad19-3221cc5153f5.avif",
+      "PackagePath": "staticwebassets/images/profiles/65e678ff-deb6-4d7c-ad19-3221cc5153f5.avif"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/65e678ff-deb6-4d7c-ad19-3221cc5153f5.jpg",
+      "PackagePath": "staticwebassets/images/profiles/65e678ff-deb6-4d7c-ad19-3221cc5153f5.jpg"
+    },
+    {
+      "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/65e678ff-deb6-4d7c-ad19-3221cc5153f5.png",
+      "PackagePath": "staticwebassets/images/profiles/65e678ff-deb6-4d7c-ad19-3221cc5153f5.png"
+    },
+    {
       "Id": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.jpg",
       "PackagePath": "staticwebassets/images/profiles/e40d18df-ea1b-4e36-823d-41b036b1b236.jpg"
     },
