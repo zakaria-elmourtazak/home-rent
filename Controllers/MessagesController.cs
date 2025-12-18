@@ -28,9 +28,9 @@ public class MessagesController : Controller
     {
         if (string.IsNullOrWhiteSpace(message)) return BadRequest("Message required");
 
-        // var user = await _userManager.GetUserAsync(User);
-        // if (user == null) return Unauthorized();
-var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+// var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
         var prop = await _db.Properties.FirstOrDefaultAsync(p => p.Id == propertyId);
         if (prop == null) return NotFound();
         var ownerId = prop.UserId;
@@ -86,9 +86,9 @@ var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "u
       [HttpGet]
     public async Task<IActionResult> Messages(int? currentConversationId)
     {
-        // var user = await _userManager.GetUserAsync(User);
-        // if (user == null) return Challenge(); // or RedirectToAction("Login","Account");
-var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Challenge(); // or RedirectToAction("Login","Account");
+// var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
 
         // load conversations where the user participates
         var conversations = await _db.Conversations
@@ -202,11 +202,10 @@ var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "u
     public async Task<IActionResult> SendMessage(int conversationId, string content)
     {
         if (string.IsNullOrWhiteSpace(content)) return BadRequest("Empty");
-Console.WriteLine("SendMessage called");
         // get current user (replace test user with real _userManager.GetUserAsync(User) in production)
-        // var user = await _userManager.GetUserAsync(User);
-        // if (user == null) return Unauthorized();
-var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+// var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
         var conv = await _db.Conversations.Include(c => c.Participants).FirstOrDefaultAsync(c => c.Id == conversationId);
         if (conv == null) return NotFound();
         if (!conv.Participants.Any(p => p.UserId == user.Id)) return Forbid();
