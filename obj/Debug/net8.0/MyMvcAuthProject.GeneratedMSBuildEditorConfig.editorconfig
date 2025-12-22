@@ -54,10 +54,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9saXN0aW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/messages.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9tZXNzYWdlcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9wcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -68,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Home/saved.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9zYXZlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Messages/messages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVzc2FnZXMvbWVzc2FnZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/Views/Shared/Error.cshtml]

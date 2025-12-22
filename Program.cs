@@ -70,8 +70,8 @@ using (var scope = app.Services.CreateScope())
             State = "State",
             ZipCode = "12345",
             Country = "Country",
-            UserId = "user1-id"
-            
+            UserId = "user1-id",
+            User = user
         };
 
         // Add some amenities

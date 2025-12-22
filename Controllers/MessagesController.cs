@@ -22,7 +22,7 @@ public class MessagesController : Controller
         _hub = hub;
     }
 
-   [HttpPost]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> StartConversationFromProperty(int propertyId, string message)
     {
@@ -116,8 +116,8 @@ public class MessagesController : Controller
                 vm.CurrentConversation = conv;
             }
         }
-        // the view file is under Views/Home/messages.cshtml — render it explicitly
-        return View("~/Views/Home/messages.cshtml", vm);
+        // the view file is under Views/Messages/messages.cshtml — render it explicitly
+        return View("~/Views/Messages/messages.cshtml", vm);
     }
 
     
@@ -181,7 +181,8 @@ public class MessagesController : Controller
                 senderId = m.SenderId,
                 senderName = m.SenderName,
                 content = m.Content,
-                sentAt = m.SentAt.ToString("o")
+                sentAt = m.SentAt.ToString("o"),
+                isYou = m.SenderId == user.Id
             })
             .ToList();
 
@@ -230,7 +231,8 @@ public class MessagesController : Controller
             senderId = msg.SenderId,
             senderName = msg.SenderName,
             content = msg.Content,
-            sentAt = msg.SentAt.ToString("o")
+            sentAt = msg.SentAt.ToString("o"),
+            isYou = msg.SenderId == user.Id
         };
 
         // broadcast to SignalR group

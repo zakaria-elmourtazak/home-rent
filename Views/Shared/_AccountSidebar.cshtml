@@ -19,42 +19,42 @@
             <ul class="space-y-2">
                 <li>
                     <a asp-area="" asp-controller="Home" asp-action="Dashboard"
-                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500  hover:text-green-600 rounded-lg  @(isActive("Home","Dashboard") == "active" ? "bg-primary text-white" : "") ">
-                        <i class="fas fa-tachometer-alt mr-3 text-gray-500 "></i>
+                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500  hover:text-green-800 rounded-lg  @(isActive("Home","Dashboard") == "active" ? "bg-primary text-white" : "") ">
+                        <i class="fas fa-tachometer-alt mr-3 text-gray-500   @(isActive("Home","Dashboard") == "active" ? "bg-primary text-white" : "")"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a asp-area="" asp-controller="Home" asp-action="AdminListings"
-                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-green-600    rounded-lg  @(isActive("Home","AdminListings") == "active" ? "bg-primary text-white" : "") ">
-                        <i class="fas fa-home mr-3 text-gray-500 "></i>
+                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-green-800    rounded-lg  @(isActive("Home","AdminListings") == "active" ? "bg-primary text-white" : "") ">
+                        <i class="fas fa-home mr-3 text-gray-500   @(isActive("Home","AdminListings") == "active" ? "bg-primary text-white" : "")"></i>
                         <span>My Listings</span>
                     </a>
                 </li>
                 <li>
                     <a asp-area="" asp-controller="Home" asp-action="Saved"
-                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100  text-gray-500  hover:text-green-600  rounded-lg  @(isActive("Home","Saved") == "active" ? "bg-primary text-white" : "") ">
-                        <i class="fas fa-heart mr-3 text-gray-500 " ></i>
+                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100  text-gray-500  hover:text-green-800  rounded-lg  @(isActive("Home","Saved") == "active" ? "bg-primary text-white" : "") ">
+                        <i class="fas fa-heart mr-3 text-gray-500   @(isActive("Home","Saved") == "active" ? "bg-primary text-white" : "")" ></i>
                         <span>Saved Properties</span>
                     </a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Messages"
-                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500  hover:text-green-600  rounded-lg  @(isActive("Home","Messages") == "active" ? "bg-primary text-white" : "") ">
-                        <i class="fas fa-envelope mr-3 text-gray-500 "></i>
+                    <a asp-area="" asp-controller="Messages" asp-action="Messages"
+                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500  hover:text-green-800  rounded-lg  @(isActive("Messages","Messages") == "active" ? "bg-primary text-white" : "") ">
+                        <i class="fas fa-envelope mr-3 text-gray-500   @(isActive("Messages","Messages") == "active" ? "bg-primary text-white" : "")"></i>
                         <span>Messages</span>
                     </a>
                 </li>
                 <li>
                     <a asp-area="" asp-controller="Home" asp-action="Profile"
-                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500  hover:text-green-600  rounded-lg  @(isActive("Home","Profile") == "active" ? "bg-primary text-white" : "") ">
-                        <i class="fas fa-cog mr-3 text-gray-500 "></i>
+                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500  hover:text-green-800  rounded-lg  @(isActive("Home","Profile") == "active" ? "bg-primary text-white" : "") ">
+                        <i class="fas fa-cog mr-3 text-gray-500   @(isActive("Home","Profile") == "active" ? "bg-primary text-white" : "")"></i>
                         <span>Profile Settings</span>
                     </a>
                 </li>
-                <li>
+                <li >
                     <a asp-area="" asp-controller="Home" asp-action="Index"
-                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-green-600  text-gray-600 hover:bg-gray-50 rounded-lg">
+                        class="flex items-center p-3  rounded-lg  bg-gray-50 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-red-800  text-gray-600 hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-sign-out-alt mr-3 text-gray-500 "></i>
                         <span>Logout</span>
                     </a>

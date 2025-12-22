@@ -6,7 +6,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
 
-        var user = UserManager.GetUserAsync(User).Result ?? new ApplicationUser();
+        ApplicationUser? user = UserManager.GetUserAsync(User).Result ?? new ApplicationUser();
         @* <li class="nav-item dropdown">
             <a class="nav-link d-flex align-items-center" href="#" id="profileDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
