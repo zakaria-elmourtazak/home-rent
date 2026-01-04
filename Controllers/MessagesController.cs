@@ -29,14 +29,13 @@ public class MessagesController : Controller
         if (string.IsNullOrWhiteSpace(message)) return BadRequest("Message required");
 
         var user = await _userManager.GetUserAsync(User);
-        if (user == null) return Unauthorized();
-// var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
+        if (user == null) return  RedirectToAction("Login", "Account");
+
         var prop = await _db.Properties.FirstOrDefaultAsync(p => p.Id == propertyId);
         if (prop == null) return NotFound();
         var ownerId = prop.UserId;
-        if (ownerId == user.Id) return BadRequest("Cannot message yourself");
+        if (ownerId == user.Id) return RedirectToAction("Login", "Account");
 
-        // Try to find an existing one-to-one conversation between these two users for THIS property
         var conv = await _db.Conversations
             .Include(c => c.Participants)
             .FirstOrDefaultAsync(c =>
@@ -203,10 +202,8 @@ public class MessagesController : Controller
     public async Task<IActionResult> SendMessage(int conversationId, string content)
     {
         if (string.IsNullOrWhiteSpace(content)) return BadRequest("Empty");
-        // get current user (replace test user with real _userManager.GetUserAsync(User) in production)
         var user = await _userManager.GetUserAsync(User);
         if (user == null) return Unauthorized();
-// var user = new ApplicationUser { Id = "user2-id", UserName = "user2", Email = "user2@example.com"};
         var conv = await _db.Conversations.Include(c => c.Participants).FirstOrDefaultAsync(c => c.Id == conversationId);
         if (conv == null) return NotFound();
         if (!conv.Participants.Any(p => p.UserId == user.Id)) return Forbid();

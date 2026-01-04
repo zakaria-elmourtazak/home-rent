@@ -35,17 +35,17 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult FilterListings(
         int pageNumber = 1,
-        int pageSize = 8,
+        int pageSize = 9,
         string sortBy = "newest",
         Dictionary<string, string> filters = null)
     {
-        // Store filters for the next request
+        Console.WriteLine("Filters received:", sortBy);
         if (filters != null)
         {
             TempData["filters"] = JsonConvert.SerializeObject(filters);
         }
         TempData["sortBy"] = sortBy;
-        // Redirect to the Listings page
+
         return RedirectToAction("Listings", new
         {
             pageNumber = pageNumber,
@@ -55,7 +55,7 @@ public class HomeController : Controller
     }
 
 
-    public IActionResult Listings(int pageNumber = 1, int pageSize = 8, string sortBy = "newest")
+    public IActionResult Listings(int pageNumber = 1, int pageSize = 9, string sortBy = "newest")
     {
         IQueryable<Property> query = _db.Properties
        .Include(p => p.Amenities)
@@ -85,7 +85,10 @@ public class HomeController : Controller
                 switch (key)
                 {
                     case "Location":
-                        query = query.Where(p => p.City.Contains(value));
+                        query = query.Where(p => p.City.ToLower().Contains(value.ToLower())
+                            || p.State.ToLower().Contains(value.ToLower())
+                            || p.Country.ToLower().Contains(value.ToLower())
+                            || p.StreetAddress.ToLower().Contains(value.ToLower()));
                         break;
 
                     case "PriceMin":
@@ -109,12 +112,11 @@ public class HomeController : Controller
                         break;
 
                     case "PropertyType":
-                        query = query.Where(p => p.PropertyType == value);
+                        query = query.Where(p => p.PropertyType.ToLower() == value.ToLower());
                         break;
                 }
             }
         }
-
         query = sortBy switch
         {
             "newest" => query.OrderByDescending(p => p.CreatedAt),
@@ -131,13 +133,13 @@ public class HomeController : Controller
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToList();
-
         var vm = new
         {
             Properties = properties,
             CurrentPage = pageNumber,
             PageSize = pageSize,
-            TotalCount = totalCount
+            TotalCount = totalCount,
+            sortBy = sortBy,
         };
 
         return View(vm);
@@ -146,12 +148,14 @@ public class HomeController : Controller
     {
         return View();
     }
-    
+
     [Authorize]
     public IActionResult AdminListings(int pageNumber = 1, int pageSize = 5)
     {
+        var user = _userManager.GetUserAsync(User).Result;
         IQueryable<Property> query = _db.Properties
        .Include(p => p.Amenities)
+       .Where(p => p.UserId == user.Id)
        .Include(p => p.PropertyImages)
        .AsQueryable();
 
@@ -192,10 +196,12 @@ public class HomeController : Controller
             return NotFound();
         }
         bool isFavorite = false;
-        var userId = "user " + id;
-        // if (User.Identity.IsAuthenticated)
-        // {
-        // var user = await _userManager.GetUserAsync(User);
+        var userId = "";
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            userId = user.Id;
+        }
 
         isFavorite = await _db.Favorites
             .AnyAsync(f => f.UserId == userId && f.PropertyId == id);
@@ -212,18 +218,18 @@ public class HomeController : Controller
         };
 
         // use explicit map location field if present, otherwise address
-        var locationSource = $"{property.StreetAddress}, {property.City}, {property.State}, {property.ZipCode}";
-        var coords = await ResolveLocationAsync(locationSource);
-        if (coords.lat.HasValue && coords.lon.HasValue)
-        {
-            vm.MapLatitude = coords.lat.Value;
-            vm.MapLongitude = coords.lon.Value;
-        }
+        // var locationSource = $"{property.StreetAddress}, {property.City}, {property.State}, {property.ZipCode}";
+        // var coords = await ResolveLocationAsync(locationSource);
+        // if (coords.lat.HasValue && coords.lon.HasValue)
+        // {
+        //     vm.MapLatitude = coords.lat.Value;
+        //     vm.MapLongitude = coords.lon.Value;
+        // }
 
         return View(vm);
     }
 
-  private async Task<(double? lat, double? lon)> ResolveLocationAsync(string location)
+    private async Task<(double? lat, double? lon)> ResolveLocationAsync(string location)
     {
         if (string.IsNullOrWhiteSpace(location))
             return (null, null);
@@ -269,17 +275,73 @@ public class HomeController : Controller
 
     public IActionResult Dashboard()
     {
+        var user = _userManager.GetUserAsync(User).Result;
+        if (user == null) return Challenge();
 
+        // total properties owned by the user
+        var totalProperties = _db.Properties.Count(p => p.UserId == user.Id);
+Console.WriteLine("Total Properties: " + totalProperties);
+        // total favorites for the user
+        var totalFavorites = _db.Favorites.Count(f => f.UserId == user.Id);
+
+        // total messages: try to be resilient if the DbSet name or message schema differs
+        int totalMessages = 0;
+        var messagesProp = _db.GetType().GetProperty("Messages");
+        if (messagesProp != null)
+        {
+            var messagesEnumerable = messagesProp.GetValue(_db) as IEnumerable<object>;
+            if (messagesEnumerable != null)
+            {
+                var messagesList = messagesEnumerable.ToList();
+                var candidateNames = new[] { "RecipientId", "UserId", "ToUserId", "ToId", "ReceiverId" };
+                // try common id property names first
+                foreach (var name in candidateNames)
+                {
+                    var pi = messagesList.FirstOrDefault()?.GetType().GetProperty(name);
+                    if (pi != null)
+                    {
+                        totalMessages = messagesList.Count(m =>
+                        {
+                            var val = pi.GetValue(m);
+                            return val != null && val.ToString() == user.Id;
+                        });
+                        break;
+                    }
+                }
+
+                // fallback: count items where any string property equals the user id
+                if (totalMessages == 0 && messagesList.Count > 0)
+                {
+                    foreach (var m in messagesList)
+                    {
+                        var props = m.GetType().GetProperties();
+                        foreach (var p in props)
+                        {
+                            if (p.PropertyType == typeof(string) && p.GetValue(m)?.ToString() == user.Id)
+                            {
+                                totalMessages++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // expose counts to the view
+        ViewBag.TotalProperties = totalProperties;
+        ViewBag.TotalFavorites = totalFavorites;
+        ViewBag.TotalMessages = totalMessages;
         return View();
     }
     [Authorize]
 
     public async Task<IActionResult> Saved()
     {
-        // var user = await _userManager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         var favorites = _db.Favorites
-            // .Where(f => f.UserId == user.Id)
+            .Where(f => f.UserId == user.Id)
             .Include(f => f.Property)
             .ThenInclude(p => p.PropertyImages)
             .ToList();
@@ -287,7 +349,7 @@ public class HomeController : Controller
         return View(favorites);
 
     }
-        [Authorize]
+    [Authorize]
 
     public IActionResult Messages()
     {
@@ -315,7 +377,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-        [Authorize]
+    [Authorize]
 
     // [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Property model)

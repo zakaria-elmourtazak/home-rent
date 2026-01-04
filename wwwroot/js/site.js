@@ -583,7 +583,7 @@ document.addEventListener('keydown', function (e) {
                   document.getElementById('property-city').value =  p.city
                   document.getElementById('property-state').value =  p.state
                   document.getElementById('property-zip').value =  +p.zipCode
-                  document.getElementById('property-country').value =  p.country
+                //   document.getElementById('property-country')?.value =  p?.country ?? 'Morocco';
                 // show existing images
                 if (imagePreview) {
                     imagePreview.innerHTML = '';

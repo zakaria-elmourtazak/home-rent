@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using MyMvcAuthProject.Data;
 using MyMvcAuthProject.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyMvcAuthProject.Controllers;
 
+[Authorize]
 public class PropertyController : Controller
 {
 
@@ -26,7 +28,8 @@ public class PropertyController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Property model,IFormFile[] PropertyImages)
     {       
-        Console.WriteLine("here");
+        var  user = await _userManager.GetUserAsync(User);
+        model.UserId = user.Id;
          if (model == null) return BadRequest();
 
    var imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
@@ -71,6 +74,7 @@ public class PropertyController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)
     {
+        var user  = await _userManager.GetUserAsync(User);
         var entity = await _db.Properties
                               .Include(p => p.PropertyImages)
                               .FirstOrDefaultAsync(p => p.Id == id);
@@ -112,6 +116,7 @@ public class PropertyController : Controller
      [HttpGet]
     public IActionResult Get(int id)
     {
+        var user =  _userManager.GetUserAsync(User).Result;
         var prop = _db.Properties
             .Include(p => p.PropertyImages)
             .FirstOrDefault(p => p.Id == id);

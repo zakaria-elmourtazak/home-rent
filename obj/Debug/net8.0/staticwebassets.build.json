@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LLNfCe57mLRxw//n/BYOJvXHP4sE4v+HuN5D4qyv3lQ=",
+  "Hash": "4PuGFhDJpB8YvbustdnU/GYhYJdEBSAH7RvRAVlPOqE=",
   "Source": "MyMvcAuthProject",
   "BasePath": "_content/MyMvcAuthProject",
   "Mode": "Default",
@@ -1535,6 +1535,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/carousel-2.jpg"
+    },
+    {
+      "Identity": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/ChatGPT Image Dec 17, 2025, 07_56_53 PM.png",
+      "SourceId": "MyMvcAuthProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/",
+      "BasePath": "_content/MyMvcAuthProject",
+      "RelativePath": "images/ChatGPT Image Dec 17, 2025, 07_56_53 PM.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/ChatGPT Image Dec 17, 2025, 07_56_53 PM.png"
     },
     {
       "Identity": "/home/zik0_/Documents/files/my-projects/MyMvcAuthProject/wwwroot/images/Concept-Japanese house.png",

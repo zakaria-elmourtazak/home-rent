@@ -37,4 +37,6 @@ public class Property
     public  ApplicationUser User { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public List<string> ImageUrl { get; set; } = new();
 }

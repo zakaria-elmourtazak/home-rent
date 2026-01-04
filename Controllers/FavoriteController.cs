@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyMvcAuthProject.Data;
 using MyMvcAuthProject.Models;
 
-// [Authorize]
+[Authorize]
 public class FavoriteController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -20,8 +20,12 @@ public class FavoriteController : Controller
     [HttpPost]
     public async Task<IActionResult> AddFavorite(int id)
     {
-        // var user = await _userManager.GetUserAsync(User);
-var userId = "user " + id;
+        if (User.Identity.IsAuthenticated == false)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+        var user = await _userManager.GetUserAsync(User);
+        var userId = user.Id;
         bool exists = _db.Favorites.Any(f => f.UserId == userId && f.PropertyId == id);
         if (exists)
             return RedirectToAction("Details", "Property", new { id });
@@ -42,8 +46,8 @@ var userId = "user " + id;
     [HttpPost]
     public async Task<IActionResult> RemoveFavorite(int id)
     {
-        // var user = await _userManager.GetUserAsync(User);
-var userId = "user " + id;
+        var user = await _userManager.GetUserAsync(User);
+        var userId = user.Id;
         var favorite = _db.Favorites.FirstOrDefault(f => f.UserId == userId && f.PropertyId == id);
         if (favorite != null)
         {
