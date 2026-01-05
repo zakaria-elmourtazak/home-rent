@@ -9,7 +9,7 @@
 
     <!-- Main Content -->
     <main class="flex-1">
-        <div class="bg-white rounded-lg  shadow-sm p-6 mb-8">
+        <div class="bg-white rounded-lg  shadow-sm p-6 mb-8" style="height: 700px;">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                 <div>
                     <h1 class="text-2xl text-primary font-bold mb-2">My Property Listings</h1>
@@ -100,7 +100,10 @@
                 </table>
                 <div class="mt-6 flex justify-between items-center">
                 
-                    <p class="text-gray-600 text-sm cursor">Showing 1 to @props.TotalCount of @props.TotalCount entries</p>
+                    @if (props.TotalCount > 0)
+                    {
+                        <p class="text-gray-600 text-sm cursor">Showing 1 to @props.TotalCount of @props.TotalCount entries</p>
+                    }
                     @* <div class="flex space-x-2">
                         <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Previous</button>
                         <button class="px-4 py-2 bg-primary text-white rounded-lg">1</button>

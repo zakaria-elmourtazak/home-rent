@@ -280,7 +280,6 @@ public class HomeController : Controller
 
         // total properties owned by the user
         var totalProperties = _db.Properties.Count(p => p.UserId == user.Id);
-Console.WriteLine("Total Properties: " + totalProperties);
         // total favorites for the user
         var totalFavorites = _db.Favorites.Count(f => f.UserId == user.Id);
 
